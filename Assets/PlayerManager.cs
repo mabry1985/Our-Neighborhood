@@ -1,18 +1,73 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
 {
+    public GameObject playerPrefab;
+    public Dictionary<int, PlayerModel> players = new Dictionary<int, PlayerModel>();
+    public List<int> spawnedPlayerList = new List<int>();
+
+    private Text playerName;
+ 
     // Start is called before the first frame update
     void Start()
     {
-        
+        StartCoroutine(CheckForPlayerSpawn());
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
+
+    public void AddToPlayersDictionary(PlayerModel player) {
+        players.Add(
+            player.playerID,
+            player
+        );
+    }
+
+    public void PlayerSpawn(PlayerModel player)
+    {
+        var go = Instantiate(playerPrefab, transform.position, transform.rotation);
+        playerName = go.GetComponentInChildren<Text>();
+        
+        playerName.text = player.playerName;
+        spawnedPlayerList.Add(player.playerID);
+
+    }
+    
+    public PlayerModel CreatePlayerModel(string name, int id) {
+        var player = new PlayerModel() {
+            playerName = name,
+            playerID = id,
+            playerLvl = 0,
+            playerMoney = 100,
+            playerXP = 0
+        };
+
+        return player;
+    }
+
+    public IEnumerator CheckForPlayerSpawn() {
+        while (true)
+        {
+            yield return new WaitForSeconds(5);
+
+            if (spawnedPlayerList.Count < players.Count) {
+                foreach (KeyValuePair<int, PlayerModel> player in players) {
+                    if (!spawnedPlayerList.Contains((player.Key))) {
+                        PlayerSpawn(player.Value);
+                    }
+                }
+
+            }
+
+        }
+    }
+
+    
 }

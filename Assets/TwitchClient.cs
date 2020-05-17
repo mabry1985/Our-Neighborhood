@@ -10,6 +10,8 @@ public class TwitchClient : MonoBehaviour
 {
 
     public Client client;
+    public PlayerManager playerManager;
+
     private string channelName = Secrets.CHANNEL_NAME;
 
     private void Start() {
@@ -25,7 +27,7 @@ public class TwitchClient : MonoBehaviour
         client.OnUserJoined += OnUserJoined;
         client.OnChatCommandReceived += OnChatCommandRecieved;
         client.OnMessageReceived += OnMessageReceived;
-       // client.OnWhisperCommandReceived += OnWhisperCommandRecieved;
+        client.OnWhisperCommandReceived += OnWhisperCommandRecieved;
 
     }
 
@@ -61,18 +63,22 @@ public class TwitchClient : MonoBehaviour
         }
     }
 
-/*
-// whisper functionality temp disabled on twitch because account is too new
     private void OnWhisperCommandRecieved(object sender, OnWhisperCommandReceivedArgs e)
     {
         Debug.Log(e.Command.WhisperMessage);
         Debug.Log(e.Command.CommandText);
-        Debug.Log("Argument as string" + e.Command.ArgumentsAsString.Length);
     }
-*/
+
     private void OnMessageReceived(object sender, OnMessageReceivedArgs e)
     {
         print(e.ChatMessage.UserId);
+        var id = Int32.Parse(e.ChatMessage.UserId);
+
+        if (!playerManager.players.ContainsKey(id)) {
+            var player = playerManager.CreatePlayerModel(e.ChatMessage.Username, Int32.Parse(e.ChatMessage.UserId)); 
+            playerManager.PlayerSpawn(player);
+        };
+
         Debug.Log("The bot just read a message in chat");
     }
 
