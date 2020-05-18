@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.AI;
 
-public class Worker : MonoBehaviour, IGoap
+public class Baker : MonoBehaviour, IGoap
 {
 	NavMeshAgent agent;
 	Vector3 previousDestination;
