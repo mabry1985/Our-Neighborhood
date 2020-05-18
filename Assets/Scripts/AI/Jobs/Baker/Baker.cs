@@ -12,8 +12,8 @@ public class Baker : MonoBehaviour, IGoap
 
 	void Start()
 	{
-		print (windmill);
-		agent = this.GetComponentInParent<NavMeshAgent>();
+		windmill = GameObject.FindGameObjectWithTag("Windmill").GetComponent<Inventory>();
+		agent = this.transform.parent.parent.GetComponent<NavMeshAgent>();
 		inv = this.GetComponent<Inventory>();
 	}
 

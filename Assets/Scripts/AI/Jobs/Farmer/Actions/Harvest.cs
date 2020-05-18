@@ -15,6 +15,11 @@ public class Harvest : GoapAction
         name = "Harvest";
     }
 
+    private void Start()
+    {
+        target = GameObject.FindGameObjectWithTag("Farm Door");
+    }
+
     public override void reset()
     {
         completed = false;

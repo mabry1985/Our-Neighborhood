@@ -13,6 +13,11 @@ public class DeliverBread : GoapAction {
 		addEffect ("doJob", true);
 		name = "DeliverBread";
 	}
+
+    private void Start()
+    {
+        target = GameObject.FindGameObjectWithTag("Market Door");
+    }
 	
 	public override void reset ()
 	{

@@ -4,7 +4,6 @@ using TwitchLib.Unity;
 using TwitchLib.Client.Models;
 using UnityEngine;
 using TwitchLib.Client.Events;
-using System;
 
 public class TwitchClient : MonoBehaviour
 {
@@ -45,7 +44,9 @@ public class TwitchClient : MonoBehaviour
 
 
     private void OnUserJoined(object sender, OnUserJoinedArgs e)
-    {   print(e.Username);
+    {   
+
+        print(e.Username);
         if (e.Username != "our_neighborhood_bot" || e.Username != "our_neighborhood") {
             client.SendMessage(client.JoinedChannels[0], $"Welcome, {e.Username}, type hello in the chat to join our neighborhood!");
         }
@@ -54,13 +55,13 @@ public class TwitchClient : MonoBehaviour
 
     private void OnChatCommandRecieved(object sender, OnChatCommandReceivedArgs e)
     {
-        Debug.Log(e.Command.CommandText);
-        Debug.Log(e.Command.CommandIdentifier);
+        var id = int.Parse(e.Command.ChatMessage.UserId);
         var arguments = e.Command.ArgumentsAsList;
 
-        foreach (var item in arguments)
-        {
-            Debug.Log(item);
+        if (e.Command.CommandText == "job") {
+            var player = playerManager.players[id];
+            var jobManager = player.playerObject.GetComponent<JobManager>();
+            jobManager.jobSwitch(arguments[0]);
         }
     }
 
@@ -72,13 +73,15 @@ public class TwitchClient : MonoBehaviour
 
     private void OnMessageReceived(object sender, OnMessageReceivedArgs e)
     {
-        print(e.ChatMessage.UserId);
-        var id = Int32.Parse(e.ChatMessage.UserId);
+        var id = int.Parse(e.ChatMessage.UserId);
 
         if (!playerManager.players.ContainsKey(id)) {
-            var player = playerManager.CreatePlayerModel(e.ChatMessage.Username, Int32.Parse(e.ChatMessage.UserId)); 
+            var player = playerManager.CreatePlayerModel(e.ChatMessage.Username, id);
+            playerManager.AddToPlayersDictionary(player); 
             playerManager.PlayerSpawn(player);
         };
+
+        print(e.ChatMessage);
 
         Debug.Log("The bot just read a message in chat");
     }

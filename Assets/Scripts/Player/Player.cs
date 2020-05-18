@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
@@ -9,13 +10,15 @@ public class Player : MonoBehaviour
     public Text playerNameText;
     
     private PlayerModel playerModel = new PlayerModel();
+    private JobManager jobManager;
 
-    void Awake()
+    void Awake() 
     {
-        //StartCoroutine(Wander());
-        
         var playerRenderer = gameObject.GetComponent<Renderer>();
         playerRenderer.material.SetColor("_Color", Color.black);
+
+        jobManager = gameObject.GetComponent<JobManager>();
+        
     }
 
 

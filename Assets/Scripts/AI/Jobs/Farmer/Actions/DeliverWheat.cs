@@ -17,6 +17,13 @@ public class DeliverWheat : GoapAction
         name = "DeliverWheat";
     }
 
+    private void Start()
+    {
+        
+        target = GameObject.FindGameObjectWithTag("Windmill Door");
+        inv = GameObject.FindGameObjectWithTag("Windmill").GetComponent<Inventory>();
+    }
+
     public override void reset()
     {
         completed = false;

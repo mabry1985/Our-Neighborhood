@@ -8,6 +8,10 @@ public class BakeBread : GoapAction {
     float startTime = 0;
     public float workDuration = 2;
 
+    private void Start() {
+        target = GameObject.FindGameObjectWithTag("Bakery Door");
+    }
+
     public BakeBread() 
     { 
         addPrecondition ("hasFlour", true);

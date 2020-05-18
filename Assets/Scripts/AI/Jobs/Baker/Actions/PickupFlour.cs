@@ -9,6 +9,12 @@ public class PickupFlour : GoapAction {
 	public float workDuration = 2; // seconds
 	public Inventory windmill;
 	
+	private void Start() {
+        windmill = GameObject.FindGameObjectWithTag("Windmill").GetComponent<Inventory>();
+        target = GameObject.FindGameObjectWithTag("Windmill Door");
+
+    }
+
 	public PickupFlour () {
 		addPrecondition ("hasStock", true); 
 	    addPrecondition ("hasFlour", false);
