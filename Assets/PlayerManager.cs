@@ -56,7 +56,8 @@ public class PlayerManager : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(5);
-
+print("spawned player list = " + spawnedPlayerList.Count);
+print("player list = " + players.Count);
             if (spawnedPlayerList.Count < players.Count) {
                 foreach (KeyValuePair<int, PlayerModel> player in players) {
                     if (!spawnedPlayerList.Contains((player.Key))) {

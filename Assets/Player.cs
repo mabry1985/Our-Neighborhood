@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
 
     void Awake()
     {
-        StartCoroutine(Wander());
+        //StartCoroutine(Wander());
         
         var playerRenderer = gameObject.GetComponent<Renderer>();
         playerRenderer.material.SetColor("_Color", Color.black);

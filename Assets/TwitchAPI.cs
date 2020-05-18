@@ -7,7 +7,6 @@ using System;
 
 public class TwitchAPI : MonoBehaviour
 {
-    // Start is called before the first frame update
     public TwitchClient twitchClient;
 
     public Api api;
@@ -19,7 +18,6 @@ public class TwitchAPI : MonoBehaviour
         api.Settings.ClientId = Secrets.CLIENT_ID;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha2))

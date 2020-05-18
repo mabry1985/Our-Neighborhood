@@ -45,9 +45,10 @@ public class TwitchClient : MonoBehaviour
 
 
     private void OnUserJoined(object sender, OnUserJoinedArgs e)
-    {
-        Debug.Log(e.Username);
-        client.SendMessage(client.JoinedChannels[0], $"Welcome, {e.Username}, type !help in the chat to learn how you can join our neighborhood!");
+    {   print(e.Username);
+        if (e.Username != "our_neighborhood_bot" || e.Username != "our_neighborhood") {
+            client.SendMessage(client.JoinedChannels[0], $"Welcome, {e.Username}, type hello in the chat to join our neighborhood!");
+        }
     }
 
 
