@@ -16,32 +16,32 @@ public class JobManager : MonoBehaviour
     private Job job;
 
     private void Awake() {
-        jobSwitch("Farmer");
+        JobSwitch("Farmer");
     }
 
-    public void jobSwitch(string job) {
+    public void JobSwitch(string job) {
         var jobEnum = Enum.Parse (typeof(Job), job);
 
         switch(jobEnum) {
             case Job.Idle:
-                changeJobs(job);
+                ChangeJobs(job);
                 break;
             case Job.Baker:
-                changeJobs(job);
+                ChangeJobs(job);
                 break;
             case Job.Farmer:
-                changeJobs(job);
+                ChangeJobs(job);
                 break;
             default:
                 break;
         }
     }
 
-    private void changeJobs(string job) {
+    private void ChangeJobs(string job) {
         var jobCount = Enum.GetNames(typeof(Job)).Length;
+        
         for (int i = 0; i < jobCount; i++)
         {
-            print(jobs[i].tag);
             jobs[i].SetActive(false);
     
             if (jobs[i].tag == job) {

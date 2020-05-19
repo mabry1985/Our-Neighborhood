@@ -16,6 +16,7 @@ TagManager:
   - Market Door
   - 'test '
   - Windmill
+  - Player Manager
   layers:
   - Default
   - TransparentFX

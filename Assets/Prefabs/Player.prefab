@@ -173,7 +173,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3390088593626580485
 Transform:
   m_ObjectHideFlags: 0
@@ -603,7 +603,6 @@ GameObject:
   - component: {fileID: 8703516150237974929}
   - component: {fileID: 8703516150237974926}
   - component: {fileID: 8703516150237974927}
-  - component: {fileID: 8703516150237974921}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -699,9 +698,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f22638cdf8e21140af3b3a0c8d807ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jobs:
+  - {fileID: 1321865871896950379}
+  - {fileID: 3390088594331271138}
+  - {fileID: 3390088593626580495}
   agent: {fileID: 8703516150237974926}
   playerNameCanvas: {fileID: 8703516149618601284}
   playerNameText: {fileID: 8703516150979983246}
+  playerManager: {fileID: 0}
+  idle: {fileID: 1321865871896950379}
+  baker: {fileID: 3390088594331271138}
+  farmer: {fileID: 3390088593626580495}
+  playerID: 0
 --- !u!195 &8703516150237974926
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -736,22 +744,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 207a8619d13a0cc4e8e0626a8ca42e3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8703516150237974921
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8703516150237974928}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3bafb2bd05885643aa38a2d3821b89b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jobs:
-  - {fileID: 1321865871896950379}
-  - {fileID: 3390088594331271138}
-  - {fileID: 3390088593626580495}
 --- !u!1 &8703516150979983244
 GameObject:
   m_ObjectHideFlags: 0

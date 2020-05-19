@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TwitchLib.Unity;
 using TwitchLib.Client.Models;
@@ -57,11 +58,17 @@ public class TwitchClient : MonoBehaviour
     {
         var id = int.Parse(e.Command.ChatMessage.UserId);
         var arguments = e.Command.ArgumentsAsList;
+        print(id.GetType());
+        print(playerManager.playerReferences.Keys.GetType());
+        Debug.Log(playerManager.playerReferences.ContainsKey(id));
+        foreach (int key in playerManager.playerReferences.Keys)
+        {
+            print(key);
+        }
 
         if (e.Command.CommandText == "job") {
             var player = playerManager.players[id];
-            var jobManager = player.playerObject.GetComponent<JobManager>();
-            jobManager.jobSwitch(arguments[0]);
+            playerManager.playerReferences[id].JobSwitch(arguments[0]);
         }
     }
 
@@ -80,8 +87,6 @@ public class TwitchClient : MonoBehaviour
             playerManager.AddToPlayersDictionary(player); 
             playerManager.PlayerSpawn(player);
         };
-
-        print(e.ChatMessage);
 
         Debug.Log("The bot just read a message in chat");
     }

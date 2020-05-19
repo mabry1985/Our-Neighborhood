@@ -6,8 +6,10 @@ using UnityEngine.UI;
 public class PlayerManager : MonoBehaviour
 {
     public GameObject playerPrefab;
+
     public Dictionary<int, PlayerModel> players = new Dictionary<int, PlayerModel>();
     public List<int> spawnedPlayerList = new List<int>();
+    public Dictionary<int, Player> playerReferences = new Dictionary<int, Player>();
 
     private Text playerName;
  
@@ -24,15 +26,22 @@ public class PlayerManager : MonoBehaviour
     }
 
     public void AddToPlayersDictionary(PlayerModel player) {
-        players.Add(
-            player.playerID,
-            player
-        );
+        
+        Player p = new Player();
+        players.Add(player.playerID, player);
+        print("in add player to dictionary" + player.playerID);
+        playerReferences.Add(player.playerID, p);
+        
     }
 
     public void PlayerSpawn(PlayerModel player)
     {
         var go = Instantiate(playerPrefab, transform.position, transform.rotation);
+
+
+        var playerScript = go.GetComponent<Player>();
+        playerScript.playerID = player.playerID;
+        print("in player spawn" + playerScript.playerID);
         playerName = go.GetComponentInChildren<Text>();
         
         playerName.text = player.playerName;
