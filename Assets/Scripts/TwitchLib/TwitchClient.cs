@@ -59,11 +59,6 @@ public class TwitchClient : MonoBehaviour
         var id = int.Parse(e.Command.ChatMessage.UserId);
         var arguments = e.Command.ArgumentsAsList;
 
-        foreach (int key in playerManager.playerReferences.Keys)
-        {
-            print(key);
-        }
-
         if (e.Command.CommandText == "job") {
             var player = playerManager.players[id];
             playerManager.playerReferences[id].JobSwitch(arguments[0]);

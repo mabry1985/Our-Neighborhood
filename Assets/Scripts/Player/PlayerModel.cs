@@ -11,5 +11,5 @@ public struct PlayerModel {
     public float playerEnergy;
     
 
-    public GameObject playerObject;
+    public GameObject playerPrefab;
 }

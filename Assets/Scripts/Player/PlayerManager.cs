@@ -57,7 +57,7 @@ public class PlayerManager : MonoBehaviour
             playerMoney = 100,
             playerXP = 0,
             playerEnergy = 100,
-            playerObject = playerPrefab
+            playerPrefab = playerPrefab
         };
         
         return player;
