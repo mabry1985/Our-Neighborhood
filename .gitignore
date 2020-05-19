@@ -96,4 +96,4 @@ $RECYCLE.BIN/
 *.lnk
 
 .vscode/
-Secrets.cs
+/Assets/Scripts/Util/Secrets.cs
