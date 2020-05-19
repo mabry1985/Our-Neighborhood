@@ -56,6 +56,7 @@ public class PlayerManager : MonoBehaviour
             playerLvl = 0,
             playerMoney = 100,
             playerXP = 0,
+            playerEnergy = 100,
             playerObject = playerPrefab
         };
         
