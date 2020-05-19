@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 3300000}
   - component: {fileID: 2300000}
   - component: {fileID: 6400000}
-  - component: {fileID: 1792730645}
   m_Layer: 0
   m_Name: HousePrototype16x16x24
   m_TagString: Market
@@ -95,22 +94,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 4300002, guid: ce7348d724aa0fc44aaf53391b9bae9b, type: 3}
---- !u!114 &1792730645
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1bfb8279b17cb34c9d0b728efd1313d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  flourLevel: 5
-  breadLevel: 0
-  drawOffset: 100
-  name: Windmill
 --- !u!1 &1279486380
 GameObject:
   m_ObjectHideFlags: 0

@@ -51,8 +51,8 @@ public class BakeBread : GoapAction {
         if (Time.time - startTime > workDuration)
         {
             Debug.Log("Finished: " + name);
-            this.GetComponent<Inventory>().flourLevel -= 2;
-            this.GetComponent<Inventory>().breadLevel += 1;
+            this.transform.parent.parent.GetComponent<Inventory>().flourLevel -= 2;
+            this.transform.parent.parent.GetComponent<Inventory>().breadLevel += 1;
             completed = true;
         }
         return true;

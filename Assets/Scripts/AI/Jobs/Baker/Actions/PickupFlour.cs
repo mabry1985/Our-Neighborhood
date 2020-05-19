@@ -54,7 +54,7 @@ public class PickupFlour : GoapAction {
 		if (Time.time - startTime > workDuration) 
 		{
 			Debug.Log("Finished: " + name);
-			this.GetComponent<Inventory>().flourLevel += 5;
+			this.transform.parent.parent.GetComponent<Inventory>().flourLevel += 5;
 			windmill.flourLevel -= 5;
 			completed = true;
 		}

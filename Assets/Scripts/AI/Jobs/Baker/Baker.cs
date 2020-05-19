@@ -14,7 +14,7 @@ public class Baker : MonoBehaviour, IGoap
 	{
 		windmill = GameObject.FindGameObjectWithTag("Windmill").GetComponent<Inventory>();
 		agent = this.transform.parent.parent.GetComponent<NavMeshAgent>();
-		inv = this.GetComponent<Inventory>();
+		inv = this.transform.parent.parent.GetComponent<Inventory>();
 	}
 
 	public HashSet<KeyValuePair<string,object>> GetWorldState () 

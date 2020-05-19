@@ -29,7 +29,6 @@ public class PlayerManager : MonoBehaviour
         
         Player p = new Player();
         players.Add(player.playerID, player);
-        print("in add player to dictionary" + player.playerID);
         playerReferences.Add(player.playerID, p);
         
     }
@@ -41,6 +40,7 @@ public class PlayerManager : MonoBehaviour
 
         var playerScript = go.GetComponent<Player>();
         playerScript.playerID = player.playerID;
+        playerScript.playerName = player.playerName;
         print("in player spawn" + playerScript.playerID);
         playerName = go.GetComponentInChildren<Text>();
         

@@ -51,7 +51,7 @@ public class DeliverBread : GoapAction {
 		if (Time.time - startTime > workDuration) 
 		{
 			Debug.Log("Finished: " + name);
-			this.GetComponent<Inventory>().breadLevel -= 5;
+			this.transform.parent.parent.GetComponent<Inventory>().breadLevel -= 5;
 			completed = true;
 		}
 		return true;

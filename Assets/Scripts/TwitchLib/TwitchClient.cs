@@ -49,7 +49,7 @@ public class TwitchClient : MonoBehaviour
 
         print(e.Username);
         if (e.Username != "our_neighborhood_bot" || e.Username != "our_neighborhood") {
-            client.SendMessage(client.JoinedChannels[0], $"Welcome, {e.Username}, type hello in the chat to join our neighborhood!");
+            //client.SendMessage(client.JoinedChannels[0], $"Welcome, {e.Username}, type hello in the chat to join our neighborhood!");
         }
     }
 
@@ -58,9 +58,7 @@ public class TwitchClient : MonoBehaviour
     {
         var id = int.Parse(e.Command.ChatMessage.UserId);
         var arguments = e.Command.ArgumentsAsList;
-        print(id.GetType());
-        print(playerManager.playerReferences.Keys.GetType());
-        Debug.Log(playerManager.playerReferences.ContainsKey(id));
+
         foreach (int key in playerManager.playerReferences.Keys)
         {
             print(key);
@@ -85,7 +83,6 @@ public class TwitchClient : MonoBehaviour
         if (!playerManager.players.ContainsKey(id)) {
             var player = playerManager.CreatePlayerModel(e.ChatMessage.Username, id);
             playerManager.AddToPlayersDictionary(player); 
-            playerManager.PlayerSpawn(player);
         };
 
         Debug.Log("The bot just read a message in chat");

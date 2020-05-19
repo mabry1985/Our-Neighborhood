@@ -11,9 +11,12 @@ public class Player : MonoBehaviour
     public List<GameObject> jobs;
     public NavMeshAgent agent;
     public Canvas playerNameCanvas;
+    public string playerName;
     public Text playerNameText;
     public static Player instance;
+
     public PlayerManager playerManager;
+    public Inventory inventory;
 
     public GameObject idle;
     public GameObject baker;
@@ -32,8 +35,8 @@ public class Player : MonoBehaviour
     private Job job;
 
     private void Start() {
-        print("In player start" + this.playerID);
         playerManager.playerReferences[playerID] = this;
+        inventory.name = this.playerName;
     }
 
     private void Awake() 
@@ -80,8 +83,6 @@ public class Player : MonoBehaviour
 
         for (int i = 0; i < jobCount; i++)
         {
-            //playerManager.playerReferences[this.playerID].gameObject.SetActive(false);
-
             if (jobs[i].tag == job)
             {
                 jobs[i].SetActive(true);

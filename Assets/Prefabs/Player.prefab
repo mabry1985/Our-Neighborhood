@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4814275711218988551}
-  - component: {fileID: 7479483578900399053}
   - component: {fileID: 7676778618828504883}
   m_Layer: 0
   m_Name: Idle
@@ -32,22 +31,6 @@ Transform:
   m_Father: {fileID: 8984601606776718360}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7479483578900399053
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1321865871896950379}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1bfb8279b17cb34c9d0b728efd1313d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  flourLevel: 5
-  breadLevel: 0
-  drawOffset: 0
-  name: Baker
 --- !u!114 &7676778618828504883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -349,7 +332,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3390088594331271070}
   - component: {fileID: 3390088594331271066}
-  - component: {fileID: 3390088594331271061}
   - component: {fileID: 3390088594331271063}
   - component: {fileID: 3390088594331271067}
   - component: {fileID: 3390088594331271060}
@@ -388,22 +370,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9a07630984c23e48a79079359aca64c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3390088594331271061
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3390088594331271138}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1bfb8279b17cb34c9d0b728efd1313d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  flourLevel: 5
-  breadLevel: 0
-  drawOffset: 0
-  name: Baker
 --- !u!114 &3390088594331271063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -603,6 +569,7 @@ GameObject:
   - component: {fileID: 8703516150237974929}
   - component: {fileID: 8703516150237974926}
   - component: {fileID: 8703516150237974927}
+  - component: {fileID: 5162745937681923619}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -704,8 +671,10 @@ MonoBehaviour:
   - {fileID: 3390088593626580495}
   agent: {fileID: 8703516150237974926}
   playerNameCanvas: {fileID: 8703516149618601284}
+  playerName: 
   playerNameText: {fileID: 8703516150979983246}
   playerManager: {fileID: 0}
+  inventory: {fileID: 5162745937681923619}
   idle: {fileID: 1321865871896950379}
   baker: {fileID: 3390088594331271138}
   farmer: {fileID: 3390088593626580495}
@@ -744,6 +713,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 207a8619d13a0cc4e8e0626a8ca42e3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5162745937681923619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8703516150237974928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1bfb8279b17cb34c9d0b728efd1313d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flourLevel: 5
+  breadLevel: 0
+  drawOffset: 0
+  name: Player
 --- !u!1 &8703516150979983244
 GameObject:
   m_ObjectHideFlags: 0
