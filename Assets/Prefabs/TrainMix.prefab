@@ -2042,7 +2042,7 @@ GameObject:
   - component: {fileID: 3726813019845295990}
   - component: {fileID: 3726813019845295989}
   m_Layer: 0
-  m_Name: MixTrain
+  m_Name: TrainMix
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2055,9 +2055,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3726813019845295988}
-  m_LocalRotation: {x: 0.7065849, y: -0.70762837, z: 0.00012312538, w: 0.00012330711}
+  m_LocalRotation: {x: 0.70658207, y: -0.7076312, z: 0.00012362828, w: 0.00012318038}
   m_LocalPosition: {x: -79.9, y: 1.43, z: -8.400595}
-  m_LocalScale: {x: 5.9535127, y: 5.9535127, z: 5.9535127}
+  m_LocalScale: {x: 5.2630525, y: 5.268309, z: 5.2683363}
   m_Children:
   - {fileID: 4887312895081586464}
   - {fileID: 344046721806839840}
@@ -2081,7 +2081,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pathCreator: {fileID: 0}
-  speed: 68
+  speed: 25
 --- !u!1 &3842803780626828869
 GameObject:
   m_ObjectHideFlags: 0
