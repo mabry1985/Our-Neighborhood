@@ -172,12 +172,12 @@ GameObject:
   - component: {fileID: 489424019}
   - component: {fileID: 489424018}
   m_Layer: 0
-  m_Name: ExitStationTrigger
-  m_TagString: Exit Station Trigger
+  m_Name: SpawnTrigger
+  m_TagString: Spawn Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &489424017
 Transform:
   m_ObjectHideFlags: 0
@@ -186,7 +186,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 489424016}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.45, y: -0.025, z: -1.1}
+  m_LocalPosition: {x: 1.169, y: -0.025, z: -1.001}
   m_LocalScale: {x: 0.22010022, y: 0.93172, z: 0.93172}
   m_Children: []
   m_Father: {fileID: 2127327067}
@@ -551,6 +551,16 @@ PrefabInstance:
       propertyPath: speed
       value: 60
       objectReference: {fileID: 0}
+    - target: {fileID: 3726813019845295989, guid: 7cd9af3350af7224587427d59cc7c499,
+        type: 3}
+      propertyPath: playerManager
+      value: 
+      objectReference: {fileID: 1158382979}
+    - target: {fileID: 3726813019845295989, guid: 7cd9af3350af7224587427d59cc7c499,
+        type: 3}
+      propertyPath: botManager
+      value: 
+      objectReference: {fileID: 1634108540}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7cd9af3350af7224587427d59cc7c499, type: 3}
 --- !u!1 &818579530
@@ -975,7 +985,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1577763291}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -2106,6 +2116,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8703516150237974928, guid: 7a125c89841135b41b105dd26eb17e12,
         type: 3}
+    - target: {fileID: 6241476009280944349, guid: 70751108c46497943b253ef0f940a232,
+        type: 3}
+      propertyPath: spawnPoint
+      value: 
+      objectReference: {fileID: 38639348}
     - target: {fileID: 6241476009280944346, guid: 70751108c46497943b253ef0f940a232,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2175,6 +2190,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BotManager
       objectReference: {fileID: 0}
+    - target: {fileID: 6514483603826440386, guid: eff19e4c356a9a34e92ebe4f29ca1fe7,
+        type: 3}
+      propertyPath: spawnPoint
+      value: 
+      objectReference: {fileID: 38639348}
     - target: {fileID: 6514483603826440389, guid: eff19e4c356a9a34e92ebe4f29ca1fe7,
         type: 3}
       propertyPath: m_LocalPosition.x

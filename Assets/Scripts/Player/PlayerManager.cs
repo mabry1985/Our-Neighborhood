@@ -6,36 +6,25 @@ using UnityEngine.UI;
 public class PlayerManager : MonoBehaviour
 {
     public GameObject playerPrefab;
+    public Transform spawnPoint;
 
     public Dictionary<int, PlayerModel> players = new Dictionary<int, PlayerModel>();
     public List<int> spawnedPlayerList = new List<int>();
     public Dictionary<int, Player> playerReferences = new Dictionary<int, Player>();
 
     private Text playerName;
- 
-    // Start is called before the first frame update
-    void Start()
-    {
-        StartCoroutine(CheckForPlayerSpawn());
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    public void AddToPlayersDictionary(PlayerModel player) {
-        
+    public void AddToPlayersDictionary(PlayerModel player) 
+    {    
         Player p = new Player();
         players.Add(player.playerID, player);
         playerReferences.Add(player.playerID, p);
         
     }
 
-    public void PlayerSpawn(PlayerModel player)
+    public void PlayerSpawn(PlayerModel player) 
     {
-        var go = Instantiate(playerPrefab, transform.position, transform.rotation);
+        var go = Instantiate(playerPrefab, spawnPoint.position, spawnPoint.rotation);
 
 
         var playerScript = go.GetComponent<Player>();
@@ -48,7 +37,8 @@ public class PlayerManager : MonoBehaviour
 
     }
     
-    public PlayerModel CreatePlayerModel(string name, int id) {
+    public PlayerModel CreatePlayerModel(string name, int id) 
+    {
         var player = new PlayerModel() {
             playerName = name,
             playerID = id,
@@ -62,22 +52,23 @@ public class PlayerManager : MonoBehaviour
         return player;
     }
 
-    public IEnumerator CheckForPlayerSpawn() {
-        while (true)
-        {
-            yield return new WaitForSeconds(5);
-
-            if (spawnedPlayerList.Count < players.Count) {
-                foreach (KeyValuePair<int, PlayerModel> player in players) {
-                    if (!spawnedPlayerList.Contains((player.Key))) {
-                        PlayerSpawn(player.Value);
-                    }
+    public IEnumerator CheckForPlayerSpawn() 
+    {
+        print("in check for player spawn");
+        if (spawnedPlayerList.Count < players.Count) {
+            foreach (KeyValuePair<int, PlayerModel> player in players) {
+                    print("in check player spawn loop");
+                
+                if (!spawnedPlayerList.Contains((player.Key))) {
+                    print("spawning player");
+                    yield return new WaitForSeconds(2);
+                    PlayerSpawn(player.Value);
                 }
-
             }
-
         }
+
     }
+    
 
     
 }

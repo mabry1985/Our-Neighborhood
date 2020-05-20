@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class BotManager : MonoBehaviour
 {
     public GameObject botPrefab;
+    public Transform spawnPoint;
 
     public Dictionary<int, BotModel> bots = new Dictionary<int, BotModel>();
     public List<int> spawnedBotList = new List<int>();
@@ -42,7 +43,7 @@ public class BotManager : MonoBehaviour
 
     public void BotSpawn(BotModel bot)
     {
-        var go = Instantiate(botPrefab, transform.position, transform.rotation);
+        var go = Instantiate(botPrefab, spawnPoint.position, spawnPoint.rotation);
         var botScript = go.GetComponent<Bot>();
         botName = go.GetComponentInChildren<Text>();
 
@@ -80,23 +81,18 @@ public class BotManager : MonoBehaviour
 
     public IEnumerator CheckForBotSpawn()
     {
-        while (true)
+        if (spawnedBotList.Count < bots.Count)
         {
-            yield return new WaitForSeconds(5);
-
-            if (spawnedBotList.Count < bots.Count)
+            foreach (KeyValuePair<int, BotModel> bot in bots)
             {
-                foreach (KeyValuePair<int, BotModel> bot in bots)
+                if (!spawnedBotList.Contains((bot.Key)))
                 {
-                    if (!spawnedBotList.Contains((bot.Key)))
-                    {
-                        BotSpawn(bot.Value);
-                    }
+                    yield return new WaitForSeconds(2);
+                    BotSpawn(bot.Value);
                 }
-
             }
-
         }
+
     }
 
 

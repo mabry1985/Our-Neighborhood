@@ -18,7 +18,7 @@ TagManager:
   - Windmill
   - Player Manager
   - Enter Station Trigger
-  - Exit Station Trigger
+  - Spawn Trigger
   layers:
   - Default
   - TransparentFX
