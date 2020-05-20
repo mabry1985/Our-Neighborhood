@@ -11,16 +11,22 @@ public class TwitchClient : MonoBehaviour
 
     public Client client;
     public PlayerManager playerManager;
+    public CommandManager commandManager;
 
     private string channelName = Secrets.CHANNEL_NAME;
 
     private void Start() {
+        commandManager = gameObject.GetComponent<CommandManager>();
         Application.runInBackground = true;
+        
+        InitializeClient();
+    }
 
+
+    private void InitializeClient() {
         ConnectionCredentials credentials = new ConnectionCredentials(Secrets.BOT_NAME, Secrets.BOT_ACCESS_TOKEN);
         client = new Client();
-        client.Initialize(credentials, channelName);  
-
+        client.Initialize(credentials, channelName);
         client.Connect();
 
         client.OnRitualNewChatter += OnRitualNewChatter;
@@ -28,7 +34,6 @@ public class TwitchClient : MonoBehaviour
         client.OnChatCommandReceived += OnChatCommandRecieved;
         client.OnMessageReceived += OnMessageReceived;
         client.OnWhisperCommandReceived += OnWhisperCommandRecieved;
-
     }
 
     private void Update() {
@@ -59,10 +64,8 @@ public class TwitchClient : MonoBehaviour
         var id = int.Parse(e.Command.ChatMessage.UserId);
         var arguments = e.Command.ArgumentsAsList;
 
-        if (e.Command.CommandText == "job") {
-            var player = playerManager.players[id];
-            playerManager.playerReferences[id].JobSwitch(arguments[0]);
-        }
+        commandManager.CheckCommand(id, e.Command.CommandText, arguments);
+
     }
 
     private void OnWhisperCommandRecieved(object sender, OnWhisperCommandReceivedArgs e)

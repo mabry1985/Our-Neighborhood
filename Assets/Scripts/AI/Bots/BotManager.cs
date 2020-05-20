@@ -24,40 +24,55 @@ public class BotManager : MonoBehaviour
 
     }
 
+    public void OnBotCommand(List<string> arg) {
+        var botCount = int.Parse(arg[0]);
+
+        for (int i = 0; i < botCount; i++)
+        {
+            var bot = CreateBotModel(arg[1]);
+            AddToBotsDictionary(bot);
+        }
+
+    }
+
     public void AddToBotsDictionary(BotModel bot)
     {
         bots.Add(bot.botID, bot);
-
-
     }
 
     public void BotSpawn(BotModel bot)
     {
         var go = Instantiate(botPrefab, transform.position, transform.rotation);
-
-
         var botScript = go.GetComponent<Bot>();
+        botName = go.GetComponentInChildren<Text>();
+
+        botScript.JobSwitch(bot.jobType);
+        
         botScript.botID = bot.botID;
         botScript.botName = bot.botName;
-        print("in bot spawn" + botScript.botID);
-        botName = go.GetComponentInChildren<Text>();
+
 
         botName.text = bot.botName;
         spawnedBotList.Add(bot.botID);
 
     }
 
-    public BotModel CreateBotModel(string name, int id)
+    public BotModel CreateBotModel(string name)
     {
+        var id = Random.Range(0, 100000);
+        var newName = name + id;
+
         var bot = new BotModel()
         {
-            botName = name,
+            botName = newName,
             botID = id,
-            botLvl = 0,
+            botLvl = 1,
+            jobType = name,
             botMoney = 100,
             botXP = 0,
             botEnergy = 100,
-            botPrefab = botPrefab
+            botPrefab = botPrefab,
+
         };
 
         return bot;
