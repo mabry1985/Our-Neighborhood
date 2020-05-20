@@ -22,69 +22,49 @@ public class TwitchClient : MonoBehaviour
         InitializeClient();
     }
 
-
     private void InitializeClient() {
         ConnectionCredentials credentials = new ConnectionCredentials(Secrets.BOT_NAME, Secrets.BOT_ACCESS_TOKEN);
         client = new Client();
         client.Initialize(credentials, channelName);
         client.Connect();
 
-        client.OnRitualNewChatter += OnRitualNewChatter;
         client.OnUserJoined += OnUserJoined;
         client.OnChatCommandReceived += OnChatCommandRecieved;
         client.OnMessageReceived += OnMessageReceived;
         client.OnWhisperCommandReceived += OnWhisperCommandRecieved;
     }
-
-    private void Update() {
-        if (Input.GetKeyDown(KeyCode.Alpha1)){
-            print("keydown");
-            client.SendMessage(client.JoinedChannels[0], "This is a test message from the bot");
-        }
-    }
     
-    private void OnRitualNewChatter(object sender, OnRitualNewChatterArgs e)
-    {
-        Debug.Log(e.RitualNewChatter.RoomId);
-    }
-
-
     private void OnUserJoined(object sender, OnUserJoinedArgs e)
     {   
         print(e.Username);
-        if (e.Username != "our_neighborhood_bot" || e.Username != "our_neighborhood") {
-            client.SendMessage(client.JoinedChannels[0], $"Welcome, {e.Username}, type !help in the chat for more info!");
+        if (e.Username != "our_neighborhood_bot" && e.Username != "our_neighborhood") {
+            client.SendMessage(client.JoinedChannels[0], $"Welcome, {e.Username}, type !join to catch the next train into our neighborhood");
+
         }
     }
-
 
     private void OnChatCommandRecieved(object sender, OnChatCommandReceivedArgs e)
     {
         var id = int.Parse(e.Command.ChatMessage.UserId);
+        var name = e.Command.ChatMessage.Username;
         var arguments = e.Command.ArgumentsAsList;
 
-        commandManager.CheckCommand(id, e.Command.CommandText, arguments);
+        commandManager.CheckCommand(id, name, e.Command.CommandText, arguments, client);
 
     }
 
     private void OnWhisperCommandRecieved(object sender, OnWhisperCommandReceivedArgs e)
     {
         var id = int.Parse(e.Command.WhisperMessage.UserId);
+        var name = e.Command.WhisperMessage.Username;
         var arguments = e.Command.ArgumentsAsList;
 
-        commandManager.CheckCommand(id, e.Command.CommandText, arguments);
+        commandManager.CheckCommand(id, name, e.Command.CommandText, arguments, client);
     }
 
     private void OnMessageReceived(object sender, OnMessageReceivedArgs e)
     {
-        var id = int.Parse(e.ChatMessage.UserId);
-
-        if (!playerManager.players.ContainsKey(id)) {
-            var player = playerManager.CreatePlayerModel(e.ChatMessage.Username, id);
-            playerManager.AddToPlayersDictionary(player); 
-        };
-
-        Debug.Log("The bot just read a message in chat");
+        //Debug.Log("The bot just read a message in chat");
     }
 
 
