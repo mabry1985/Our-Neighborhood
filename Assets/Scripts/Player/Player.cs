@@ -22,7 +22,6 @@ public class Player : MonoBehaviour
     public GameObject baker;
     public GameObject farmer;
     
-    private PlayerModel playerModel = new PlayerModel();
     public int playerID;
 
     private enum Job

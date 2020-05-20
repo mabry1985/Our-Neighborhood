@@ -41,7 +41,6 @@ public class PlayerManager : MonoBehaviour
         var playerScript = go.GetComponent<Player>();
         playerScript.playerID = player.playerID;
         playerScript.playerName = player.playerName;
-        print("in player spawn" + playerScript.playerID);
         playerName = go.GetComponentInChildren<Text>();
         
         playerName.text = player.playerName;

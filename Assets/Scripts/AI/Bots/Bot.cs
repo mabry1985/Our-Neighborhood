@@ -22,7 +22,6 @@ public class Bot : MonoBehaviour
     public GameObject baker;
     public GameObject farmer;
 
-    private BotModel botModel = new BotModel();
     public int botID;
 
     private enum Job

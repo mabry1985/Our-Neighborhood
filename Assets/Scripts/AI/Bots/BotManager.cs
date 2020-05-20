@@ -59,7 +59,7 @@ public class BotManager : MonoBehaviour
 
     public BotModel CreateBotModel(string name)
     {
-        var id = Random.Range(0, 100000);
+        var id = Random.Range(1, 100000) + Random.Range(1, 100000) / Random.Range (1, 100);
         var newName = name + id;
 
         var bot = new BotModel()

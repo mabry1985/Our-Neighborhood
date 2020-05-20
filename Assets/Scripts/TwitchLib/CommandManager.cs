@@ -22,7 +22,7 @@ public class CommandManager : MonoBehaviour
     public void CheckCommand(int id, string command, List<string> arg) {
         switch (command)
         {
-            case "task":
+            case "job":
                 playerManager.playerReferences[id].JobSwitch(arg[0]);
                 break;
             case "bot":

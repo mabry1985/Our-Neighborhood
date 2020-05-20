@@ -51,10 +51,9 @@ public class TwitchClient : MonoBehaviour
 
     private void OnUserJoined(object sender, OnUserJoinedArgs e)
     {   
-
         print(e.Username);
         if (e.Username != "our_neighborhood_bot" || e.Username != "our_neighborhood") {
-            //client.SendMessage(client.JoinedChannels[0], $"Welcome, {e.Username}, type hello in the chat to join our neighborhood!");
+            client.SendMessage(client.JoinedChannels[0], $"Welcome, {e.Username}, type !help in the chat for more info!");
         }
     }
 
@@ -70,8 +69,10 @@ public class TwitchClient : MonoBehaviour
 
     private void OnWhisperCommandRecieved(object sender, OnWhisperCommandReceivedArgs e)
     {
-        Debug.Log(e.Command.WhisperMessage);
-        Debug.Log(e.Command.CommandText);
+        var id = int.Parse(e.Command.WhisperMessage.UserId);
+        var arguments = e.Command.ArgumentsAsList;
+
+        commandManager.CheckCommand(id, e.Command.CommandText, arguments);
     }
 
     private void OnMessageReceived(object sender, OnMessageReceivedArgs e)
