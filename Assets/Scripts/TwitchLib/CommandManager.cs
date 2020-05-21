@@ -30,6 +30,9 @@ public class CommandManager : MonoBehaviour
                     client.SendMessage(client.JoinedChannels[0], $"Hi, {name}, you have already joined our neighborhood");
                 }
                 break;
+            case "ping":
+                playerManager.playerReferences[id].transform.GetChild(2).gameObject.SetActive(true);
+                break;
             default:
                 break;
         }
