@@ -54,13 +54,10 @@ public class PlayerManager : MonoBehaviour
 
     public IEnumerator CheckForPlayerSpawn() 
     {
-        print("in check for player spawn");
+
         if (spawnedPlayerList.Count < players.Count) {
-            foreach (KeyValuePair<int, PlayerModel> player in players) {
-                    print("in check player spawn loop");
-                
+            foreach (KeyValuePair<int, PlayerModel> player in players) {          
                 if (!spawnedPlayerList.Contains((player.Key))) {
-                    print("spawning player");
                     yield return new WaitForSeconds(2);
                     PlayerSpawn(player.Value);
                 }

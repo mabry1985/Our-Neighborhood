@@ -19,6 +19,8 @@ TagManager:
   - Player Manager
   - Enter Station Trigger
   - Spawn Trigger
+  - Passenger Train
+  - Passenger Track
   layers:
   - Default
   - TransparentFX

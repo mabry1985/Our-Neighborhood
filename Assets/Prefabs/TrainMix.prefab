@@ -2041,9 +2041,11 @@ GameObject:
   m_Component:
   - component: {fileID: 3726813019845295990}
   - component: {fileID: 3726813019845295989}
+  - component: {fileID: 3582874422315773043}
+  - component: {fileID: 4478033253294794230}
   m_Layer: 0
   m_Name: TrainMix
-  m_TagString: Untagged
+  m_TagString: Passenger Train
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2081,7 +2083,42 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pathCreator: {fileID: 0}
-  speed: 25
+  playerManager: {fileID: 0}
+  botManager: {fileID: 0}
+  trainSpawner: {fileID: 0}
+  speed: 60
+  isMoving: 1
+  enteringStation: 0
+  leavingStation: 0
+--- !u!54 &3582874422315773043
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3726813019845295988}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &4478033253294794230
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3726813019845295988}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0.01, y: 0.43, z: 4.56}
 --- !u!1 &3842803780626828869
 GameObject:
   m_ObjectHideFlags: 0

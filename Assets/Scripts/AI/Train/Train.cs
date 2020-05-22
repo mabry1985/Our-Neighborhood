@@ -7,6 +7,7 @@ public class Train : MonoBehaviour
     public PathCreator pathCreator;
     public PlayerManager playerManager; 
     public BotManager botManager;
+    public TrainSpawner trainSpawner;
 
     public float speed = 25;
     public bool isMoving = false;
@@ -20,8 +21,14 @@ public class Train : MonoBehaviour
     {
         botManager = GameObject.Find("BotManager").GetComponent<BotManager>();
         playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
+        trainSpawner = GameObject.Find("TrainSpawner").GetComponent<TrainSpawner>();
 
         originalSpeed = speed;
+
+        if(this.gameObject.tag == "Passenger Train") {
+            pathCreator = GameObject.FindGameObjectWithTag("Passenger Track").GetComponent<PathCreator>();
+            trainSpawner.trainInstance = this;
+        }
     }
 
     void Update()
@@ -67,9 +74,10 @@ public class Train : MonoBehaviour
                 StopTrain();
                 break;
             case "Spawn Trigger":
-                print("in spawn trigger case");
+
                 StartCoroutine(this.playerManager.CheckForPlayerSpawn());
                 StartCoroutine(this.botManager.CheckForBotSpawn());
+                Destroy(this.gameObject, 15f);
                 break;
             default:
                 break;
