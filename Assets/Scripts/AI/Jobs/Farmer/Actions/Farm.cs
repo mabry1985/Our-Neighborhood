@@ -34,7 +34,6 @@ public class Farm : GAction
         return true;
     }
 
-
     public override bool PostPerform()
     {
         player = gameObject.transform.parent.parent.GetComponent<Player>();

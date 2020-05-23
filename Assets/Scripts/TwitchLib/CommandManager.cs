@@ -33,6 +33,9 @@ public class CommandManager : MonoBehaviour
             case "ping":
                 playerManager.playerReferences[id].transform.GetChild(2).gameObject.SetActive(true);
                 break;
+            case "home":
+                playerManager.playerReferences[id].ChangeJobs("GoHome", null);
+                break;
             default:
                 break;
         }

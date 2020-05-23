@@ -23,6 +23,7 @@ TagManager:
   - Passenger Track
   - Stone
   - Bot
+  - Home
   layers:
   - Default
   - TransparentFX

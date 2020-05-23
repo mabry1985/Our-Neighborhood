@@ -12,15 +12,12 @@ public class Bot : MonoBehaviour
     public NavMeshAgent agent;
     public Canvas botNameCanvas;
     public string botName;
+    public string currentJob;
     public int botID;
     public Text botNameText;
     public static Bot instance;
 
     public BotManager botManager;
-
-    public GameObject idle;
-    //public GameObject baker;
-    public GameObject farmer;
 
     public GInventory inventory = new GInventory();
     public int inventorySize = 5;
@@ -28,6 +25,7 @@ public class Bot : MonoBehaviour
     private enum Job
     {
         Idle,
+        GoHome,
        // Baker,
         Farmer
     }
@@ -66,6 +64,9 @@ public class Bot : MonoBehaviour
             case Job.Idle:
                 ChangeJobs(job, material);
                 break;
+            case Job.GoHome:
+                ChangeJobs(job, material);
+                break;
             // case Job.Baker:
             //     ChangeJobs(job, material);
             //     break;
@@ -79,6 +80,7 @@ public class Bot : MonoBehaviour
 
     public void ChangeJobs(string job, string material)
     {
+        this.currentJob = job;
 
         var jobCount = Enum.GetNames(typeof(Job)).Length;
 

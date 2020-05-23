@@ -12,22 +12,20 @@ public class Player : MonoBehaviour
     public NavMeshAgent agent;
     public Canvas playerNameCanvas;
     public string playerName;
+    public string currentJob;
     public Text playerNameText;
     public static Player instance;
 
     public PlayerManager playerManager;
     public GInventory inventory;
     public int inventorySize = 5;
-
-    public GameObject idle;
-    //public GameObject baker;
-    public GameObject farmer;
     
     public int playerID;
 
     private enum Job
     {
         Idle,
+        GoHome,
        // Baker,
         Farmer
     }
@@ -67,6 +65,9 @@ public class Player : MonoBehaviour
             case Job.Idle:
                 ChangeJobs(job, null);
                 break;
+            case Job.GoHome:
+                ChangeJobs(job, null);
+                break;
             // case Job.Baker:
             //     ChangeJobs(arg);
             //     break;
@@ -80,7 +81,8 @@ public class Player : MonoBehaviour
     }
 
     public void ChangeJobs(string job, string material)
-    {
+    { 
+        this.currentJob = job;
     
         var jobCount = Enum.GetNames(typeof(Job)).Length;
 
