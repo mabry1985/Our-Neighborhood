@@ -15,6 +15,10 @@ public class GInventory
 
     public Dictionary<string, int> homeInventory = new Dictionary<string,int>();
 
+    public int invSpace;
+
+    public Player player;
+
     public void AddItem(GameObject i)
     {
         worldObjects.Add(i);
@@ -65,6 +69,7 @@ public class GInventory
                 homeInventory.Add(item.Key, item.Value);
             }
                 items.Remove(item.Key);
+                invSpace += item.Value;
         }
     }
 

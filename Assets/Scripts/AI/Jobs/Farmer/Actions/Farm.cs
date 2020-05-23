@@ -17,7 +17,7 @@ public class Farm : GAction
         if (gameObject.transform.parent.parent.tag == "Player")
         {   
             inv = player.inventory;
-            if (player.inventorySize == 0) {
+            if (inv.invSpace == 0) {
                 player.ChangeJobs("Idle", null);
                 return false;
             }
@@ -25,7 +25,7 @@ public class Farm : GAction
         else if (gameObject.transform.parent.parent.tag == "Bot")
         {
             inv = bot.inventory;
-            if (bot.inventorySize == 0) {
+            if (inv.invSpace == 0) {
                 bot.ChangeJobs("Idle", null);
                 return false;
             }
@@ -45,12 +45,12 @@ public class Farm : GAction
         if (gameObject.transform.parent.parent.tag == "Player")
         {
             inv = player.inventory;
-            player.inventorySize -= 1;
+            inv.invSpace -= 1;
         }
         else if (gameObject.transform.parent.parent.tag == "Bot")
         {
             inv = bot.inventory;
-            bot.inventorySize -= 1;
+            inv.invSpace -= 1;
         }
 
         if (inv.items.ContainsKey(material))

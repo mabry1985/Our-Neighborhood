@@ -35,6 +35,8 @@ public class Player : MonoBehaviour
     private void Start() {
         playerManager.playerReferences[playerID] = this;
         inventory = new GInventory();
+        inventory.invSpace = inventorySize;
+        inventory.player = this;
     }
 
     private void Awake() 
@@ -44,6 +46,7 @@ public class Player : MonoBehaviour
         {
             instance = this;
         }
+
 
         var playerRenderer = gameObject.GetComponent<Renderer>();
         playerRenderer.material.SetColor("_Color", Color.black);
