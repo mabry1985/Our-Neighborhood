@@ -19,7 +19,7 @@ public class Bot : MonoBehaviour
     public BotManager botManager;
 
     public GameObject idle;
-    public GameObject baker;
+    //public GameObject baker;
     public GameObject farmer;
 
     public GInventory inventory = new GInventory();
@@ -28,7 +28,7 @@ public class Bot : MonoBehaviour
     private enum Job
     {
         Idle,
-        Baker,
+       // Baker,
         Farmer
     }
 
@@ -49,9 +49,6 @@ public class Bot : MonoBehaviour
         var playerRenderer = gameObject.GetComponent<Renderer>();
         playerRenderer.material.SetColor("_Color", Color.black);
         
-        var list = new List<string>();
-        list.Add("Idle");
-
         JobSwitch("Idle", null);
     }
 
@@ -69,9 +66,9 @@ public class Bot : MonoBehaviour
             case Job.Idle:
                 ChangeJobs(job, material);
                 break;
-            case Job.Baker:
-                ChangeJobs(job, material);
-                break;
+            // case Job.Baker:
+            //     ChangeJobs(job, material);
+            //     break;
             case Job.Farmer:
                 ChangeJobs(job, material);
                 break;
@@ -80,8 +77,9 @@ public class Bot : MonoBehaviour
         }
     }
 
-    private void ChangeJobs(string job, string material)
+    public void ChangeJobs(string job, string material)
     {
+
         var jobCount = Enum.GetNames(typeof(Job)).Length;
 
         for (int i = 0; i < jobCount; i++)
@@ -89,7 +87,12 @@ public class Bot : MonoBehaviour
             if (jobs[i].tag == job)
             {
                 if (job == "Farmer")
+                {
                     jobs[i].GetComponent<Farmer>().material = material;
+                    jobs[i].GetComponent<Farm>().targetTag = material;
+                    jobs[i].GetComponent<Farm>().afterEffects[0].key = "farm" + material;
+                }
+
                 jobs[i].SetActive(true);
             }
             else if (jobs[i].tag != job)

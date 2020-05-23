@@ -22,6 +22,7 @@ TagManager:
   - Passenger Train
   - Passenger Track
   - Stone
+  - Bot
   layers:
   - Default
   - TransparentFX

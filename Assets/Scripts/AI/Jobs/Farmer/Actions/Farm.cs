@@ -25,8 +25,10 @@ public class Farm : GAction
         else if (gameObject.transform.parent.parent.tag == "Bot")
         {
             inv = bot.inventory;
-            if (bot.inventorySize == 0)
+            if (bot.inventorySize == 0) {
+                bot.ChangeJobs("Idle", null);
                 return false;
+            }
         }
         
         return true;
