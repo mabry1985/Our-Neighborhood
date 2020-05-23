@@ -7,7 +7,7 @@ public class Idle : MonoBehaviour
 {
     public NavMeshAgent agent;
 
-    void Awake()
+    void OnEnable()
     {
         StartCoroutine(Wander());
     }

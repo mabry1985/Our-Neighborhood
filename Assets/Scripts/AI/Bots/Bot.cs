@@ -12,17 +12,18 @@ public class Bot : MonoBehaviour
     public NavMeshAgent agent;
     public Canvas botNameCanvas;
     public string botName;
+    public int botID;
     public Text botNameText;
     public static Bot instance;
 
     public BotManager botManager;
-    public Inventory inventory;
 
     public GameObject idle;
     public GameObject baker;
     public GameObject farmer;
 
-    public int botID;
+    public GInventory inventory = new GInventory();
+    public int inventorySize = 5;
 
     private enum Job
     {
@@ -35,7 +36,7 @@ public class Bot : MonoBehaviour
 
     private void Start()
     {
-        inventory.name = this.botName;
+        //inventory.name = this.botName;
     }
 
     private void Awake()
@@ -47,7 +48,11 @@ public class Bot : MonoBehaviour
 
         var playerRenderer = gameObject.GetComponent<Renderer>();
         playerRenderer.material.SetColor("_Color", Color.black);
-        JobSwitch("Idle");
+        
+        var list = new List<string>();
+        list.Add("Idle");
+
+        JobSwitch("Idle", null);
     }
 
     void LateUpdate()
@@ -55,27 +60,27 @@ public class Bot : MonoBehaviour
         botNameCanvas.transform.rotation = Camera.main.transform.rotation;
     }
 
-    public void JobSwitch(string job)
+    public void JobSwitch(string job, string material)
     {
         var jobEnum = Enum.Parse(typeof(Job), job);
 
         switch (jobEnum)
         {
             case Job.Idle:
-                ChangeJobs(job);
+                ChangeJobs(job, material);
                 break;
             case Job.Baker:
-                ChangeJobs(job);
+                ChangeJobs(job, material);
                 break;
             case Job.Farmer:
-                ChangeJobs(job);
+                ChangeJobs(job, material);
                 break;
             default:
                 break;
         }
     }
 
-    private void ChangeJobs(string job)
+    private void ChangeJobs(string job, string material)
     {
         var jobCount = Enum.GetNames(typeof(Job)).Length;
 
@@ -83,8 +88,9 @@ public class Bot : MonoBehaviour
         {
             if (jobs[i].tag == job)
             {
+                if (job == "Farmer")
+                    jobs[i].GetComponent<Farmer>().material = material;
                 jobs[i].SetActive(true);
-                print(jobs[i] + "set active to true!");
             }
             else if (jobs[i].tag != job)
             {

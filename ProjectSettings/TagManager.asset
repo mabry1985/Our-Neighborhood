@@ -21,6 +21,7 @@ TagManager:
   - Spawn Trigger
   - Passenger Train
   - Passenger Track
+  - Stone
   layers:
   - Default
   - TransparentFX

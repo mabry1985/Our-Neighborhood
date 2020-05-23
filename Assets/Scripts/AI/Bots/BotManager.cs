@@ -27,10 +27,14 @@ public class BotManager : MonoBehaviour
 
     public void OnBotCommand(List<string> arg) {
         var botCount = int.Parse(arg[0]);
+        var botName = arg[1];
+        var material = "";
+        if (arg[2] != null)
+            material = arg[2];
 
         for (int i = 0; i < botCount; i++)
         {
-            var bot = CreateBotModel(arg[1]);
+            var bot = CreateBotModel(botName, material);
             AddToBotsDictionary(bot);
         }
 
@@ -47,7 +51,7 @@ public class BotManager : MonoBehaviour
         var botScript = go.GetComponent<Bot>();
         botName = go.GetComponentInChildren<Text>();
 
-        botScript.JobSwitch(bot.jobType);
+        botScript.JobSwitch(bot.jobType, bot.material);
         
         botScript.botID = bot.botID;
         botScript.botName = bot.botName;
@@ -58,7 +62,7 @@ public class BotManager : MonoBehaviour
 
     }
 
-    public BotModel CreateBotModel(string name)
+    public BotModel CreateBotModel(string name, string material)
     {
         var id = Random.Range(1, 100000) + Random.Range(1, 100000) / Random.Range (1, 100);
         var newName = name + id;
@@ -69,6 +73,7 @@ public class BotManager : MonoBehaviour
             botID = id,
             botLvl = 1,
             jobType = name,
+            material = material,
             botMoney = 100,
             botXP = 0,
             botEnergy = 100,

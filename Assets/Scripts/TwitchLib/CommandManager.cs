@@ -14,7 +14,7 @@ public class CommandManager : MonoBehaviour
         switch (command)
         {
             case "job":
-                playerManager.playerReferences[id].JobSwitch(arg[0]);
+                playerManager.playerReferences[id].JobSwitch(arg);
                 break;
             case "bot":
                 botManager.OnBotCommand(arg);
