@@ -289,7 +289,7 @@ MonoBehaviour:
   currentJob: 
   playerNameText: {fileID: 1493775705369181962}
   playerManager: {fileID: 0}
-  inventorySize: 5
+  inventorySize: 20
   playerID: 0
 --- !u!195 &1493775704610134282
 NavMeshAgent:
