@@ -52,9 +52,8 @@ public class Farm : GAction
         else if (gameObject.transform.parent.parent.tag == "Bot")
         {
             inv = bot.inventory;
-            bot.inventorySize -=1;
+            bot.inventorySize -= 1;
         }
-
 
         if (inv.items.ContainsKey(material))
             inv.items[material] = inv.items[material] += 1;

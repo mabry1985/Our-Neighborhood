@@ -6069,6 +6069,12 @@ PrefabInstance:
       propertyPath: spawnPoint
       value: 
       objectReference: {fileID: 38639348}
+    - target: {fileID: 6514483603826440386, guid: eff19e4c356a9a34e92ebe4f29ca1fe7,
+        type: 3}
+      propertyPath: botPrefab
+      value: 
+      objectReference: {fileID: 56210461997334008, guid: ca94c5746cb016044bf66c6300bfe624,
+        type: 3}
     - target: {fileID: 6514483603826440389, guid: eff19e4c356a9a34e92ebe4f29ca1fe7,
         type: 3}
       propertyPath: m_LocalPosition.x
