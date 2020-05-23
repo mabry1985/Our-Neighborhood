@@ -26,6 +26,7 @@ TagManager:
   - Home
   - GoHome
   - Wheat
+  - Streamer
   layers:
   - Default
   - TransparentFX
