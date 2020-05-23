@@ -1236,10 +1236,10 @@ MonoBehaviour:
   finalBlitToCameraTarget: 0
   antialiasingMode: 3
   temporalAntialiasing:
-    jitterSpread: 0.75
+    jitterSpread: 0.37
     sharpness: 0.25
     stationaryBlending: 0.95
-    motionBlending: 0.85
+    motionBlending: 0.73
   subpixelMorphologicalAntialiasing:
     quality: 2
   fastApproximateAntialiasing:

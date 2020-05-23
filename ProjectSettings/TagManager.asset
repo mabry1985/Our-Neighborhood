@@ -24,6 +24,7 @@ TagManager:
   - Stone
   - Bot
   - Home
+  - GoHome
   layers:
   - Default
   - TransparentFX
