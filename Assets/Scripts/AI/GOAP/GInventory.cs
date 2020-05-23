@@ -51,7 +51,6 @@ public class GInventory
             worldObjects.RemoveAt(indexToRemove);
     }
 
-        
     public void TransferToHomeInventory() 
     {
         var itemsCopy = items;

@@ -25,6 +25,7 @@ TagManager:
   - Bot
   - Home
   - GoHome
+  - Wheat
   layers:
   - Default
   - TransparentFX
