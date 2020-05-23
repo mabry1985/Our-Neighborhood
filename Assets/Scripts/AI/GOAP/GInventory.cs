@@ -1,9 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TwitchLib.Unity;
+using TwitchLib.Client.Models;
+using TwitchLib.Client.Events;
 using UnityEngine;
 
 public class GInventory
 {   
+
     //the physical objects in the world
     public List<GameObject> worldObjects = new List<GameObject>();
 
@@ -50,8 +54,9 @@ public class GInventory
         
     public void TransferToHomeInventory() 
     {
+        var itemsCopy = items;
             
-        foreach(KeyValuePair<string, int> item in items)
+        foreach(KeyValuePair<string, int> item in itemsCopy)
         {
             if (homeInventory.ContainsKey(item.Key)) {
                 homeInventory[item.Key] = homeInventory[item.Key] += item.Value;
@@ -60,16 +65,34 @@ public class GInventory
             {
                 homeInventory.Add(item.Key, item.Value);
             }
+                items.Remove(item.Key);
         }
-
-        ListHomeInventory();
     }
 
-    public void ListHomeInventory()
+    public string ListHomeInventory()
     {
+        var inventory = "";
         foreach (KeyValuePair<string, int> item in homeInventory)
         {
-            Debug.Log(item.Key + " = " + item.Value );
+            inventory += $"| {item.Key} = {item.Value} ";
         }
+        Debug.Log(inventory);
+        
+        inventory += " |";
+        return inventory;
+    }
+
+    public string ListInventory()
+    {
+        var inventory = "";
+        
+        foreach (KeyValuePair<string, int> item in items)
+        {
+            inventory += $"| {item.Key} = {item.Value} ";
+        }
+        Debug.Log(inventory);
+        
+        inventory += " |";
+        return inventory;
     }
 }

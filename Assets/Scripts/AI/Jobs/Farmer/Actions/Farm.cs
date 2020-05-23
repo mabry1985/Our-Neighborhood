@@ -40,8 +40,7 @@ public class Farm : GAction
         bot = gameObject.transform.parent.parent.GetComponent<Bot>();
 
         var material = gameObject.GetComponent<Farmer>().material;
-            print("material is " + material);
-            print(gameObject.transform.parent.parent.tag);
+            print($"{player.playerName} is farming " + material);
         
         if (gameObject.transform.parent.parent.tag == "Player")
         {

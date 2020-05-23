@@ -289,7 +289,7 @@ MonoBehaviour:
   currentJob: 
   playerNameText: {fileID: 1493775705369181962}
   playerManager: {fileID: 0}
-  inventorySize: 20
+  inventorySize: 3
   playerID: 0
 --- !u!195 &1493775704610134282
 NavMeshAgent:
@@ -301,7 +301,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 7
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120

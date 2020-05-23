@@ -22,8 +22,8 @@ public class CommandManager : MonoBehaviour
             case "join":
                 if (!playerManager.players.ContainsKey(id))
                 {
-                    var player = playerManager.CreatePlayerModel(name, id);
-                    playerManager.AddToPlayersDictionary(player);
+                    var playerModel = playerManager.CreatePlayerModel(name, id);
+                    playerManager.AddToPlayersDictionary(playerModel);
                 } else {
                     //need to get a limit increase for whispering capabilities
                     //client.SendWhisper(name, $"Hi, {name}, you have already joined");
@@ -35,6 +35,19 @@ public class CommandManager : MonoBehaviour
                 break;
             case "home":
                 playerManager.playerReferences[id].ChangeJobs("GoHome", null);
+                break;
+            case "homeinv":
+                var homeInv = playerManager.playerReferences[id].inventory.ListHomeInventory();
+                client.SendMessage(client.JoinedChannels[0], $"{name}, at home you have {homeInv}");
+                break;
+            case "inv" :
+                var player = playerManager.playerReferences[id];
+                var inventory = player.inventory;
+                var items = player.inventory.ListInventory();
+                var invSpace = player.inventorySize;
+
+                client.SendMessage(client.JoinedChannels[0], $"{name}, you have {invSpace} slots available");
+                client.SendMessage(client.JoinedChannels[0], $"{items}");
                 break;
             default:
                 break;
