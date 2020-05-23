@@ -35,7 +35,6 @@ public class ResourceQueue
         if (que.Count == 0) return null;
         return que.Dequeue();
     }
-
 }
 
 public sealed class GWorld

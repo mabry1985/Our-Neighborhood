@@ -6,12 +6,14 @@ public class GoHome : GAction
 {
     public override bool PrePerform()
     {
+        print("in gohome preperform");
         return true;
     }
     
     public override bool PostPerform()
     {
-        beliefs.RemoveState("exhausted");
+        this.transform.parent.GetComponentInParent<Player>().inventory.TransferToHomeInventory();
+        print("Im home");
         return true;
     }
 }

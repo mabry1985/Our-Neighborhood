@@ -9,6 +9,8 @@ public class GInventory
 
     public Dictionary<string, int> items = new Dictionary<string, int>();
 
+    public Dictionary<string, int> homeInventory = new Dictionary<string,int>();
+
     public void AddItem(GameObject i)
     {
         worldObjects.Add(i);
@@ -28,11 +30,12 @@ public class GInventory
                 return i;
             }
         }
-        
+
         return null;
     }
 
-    public void RemoveItem(GameObject i) {
+    public void RemoveItem(GameObject i) 
+    {
         int indexToRemove = -1;
         foreach(GameObject g in worldObjects)
         {
@@ -42,5 +45,31 @@ public class GInventory
         }
         if(indexToRemove >= -1)
             worldObjects.RemoveAt(indexToRemove);
+    }
+
+        
+    public void TransferToHomeInventory() 
+    {
+            
+        foreach(KeyValuePair<string, int> item in items)
+        {
+            if (homeInventory.ContainsKey(item.Key)) {
+                homeInventory[item.Key] = homeInventory[item.Key] += item.Value;
+            }
+            else
+            {
+                homeInventory.Add(item.Key, item.Value);
+            }
+        }
+
+        ListHomeInventory();
+    }
+
+    public void ListHomeInventory()
+    {
+        foreach (KeyValuePair<string, int> item in homeInventory)
+        {
+            Debug.Log(item.Key + " = " + item.Value );
+        }
     }
 }
