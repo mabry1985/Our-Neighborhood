@@ -27,6 +27,8 @@ TagManager:
   - GoHome
   - Wheat
   - Streamer
+  - Wood
+  - Water
   layers:
   - Default
   - TransparentFX
