@@ -20,7 +20,7 @@ public class CommandManager : MonoBehaviour
                 botManager.OnBotCommand(arg);
                 break;
             case "join":
-                handleJoin(id, client);
+                handleJoin(id, name, client);
                 break;
             case "ping":
                 playerManager.playerReferences[id].transform.GetChild(2).gameObject.SetActive(true);
@@ -29,17 +29,17 @@ public class CommandManager : MonoBehaviour
                 playerManager.playerReferences[id].ChangeJobs("GoHome", null);
                 break;
             case "homeinv":
-                handleHomeInv(id, client);
+                handleHomeInv(id, client, name);
                 break;
             case "inv" :
-                handleInv(id, client);
+                handleInv(id, client, name);
                 break;
             default:
                 break;
         }
     }
 
-    public void handleJoin(int id, Client client) {
+    public void handleJoin(int id, string name, Client client) {
         if (!playerManager.players.ContainsKey(id))
         {
             var playerModel = playerManager.CreatePlayerModel(name, id);
@@ -53,13 +53,13 @@ public class CommandManager : MonoBehaviour
         }
     }
 
-    public void handleHomeInv(int id, Client client) {
+    public void handleHomeInv(int id, Client client, string name) {
         var homeInv = playerManager.playerReferences[id].inventory.ListHomeInventory();
         client.SendMessage(client.JoinedChannels[0], $"{name}, at home you have {homeInv}");
 
     }
 
-    public void handleInv(int id, Client client){
+    public void handleInv(int id, Client client, string name){
         var player = playerManager.playerReferences[id];
         var inventory = player.inventory;
         var items = inventory.ListInventory();
