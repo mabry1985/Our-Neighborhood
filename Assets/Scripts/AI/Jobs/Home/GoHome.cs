@@ -14,6 +14,6 @@ public class GoHome : GAction
     {
         this.transform.parent.GetComponentInParent<Player>().inventory.TransferToHomeInventory();
         print("Im home");
-        return true;
+        return false;
     }
 }

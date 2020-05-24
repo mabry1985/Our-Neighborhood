@@ -12,6 +12,10 @@ public class Farmer : GAgent
 		
 	}
 
+    private void Awake() {
+        
+    }
+
     new void Start()
     {
         base.Start();

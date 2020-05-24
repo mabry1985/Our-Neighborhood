@@ -14,7 +14,7 @@ public class GInventory
     public Dictionary<string, int> items = new Dictionary<string, int>();
 
     public Dictionary<string, int> homeInventory = new Dictionary<string,int>();
-
+    
     public int invSpace;
 
     public Player player;
@@ -57,20 +57,37 @@ public class GInventory
 
     public void TransferToHomeInventory() 
     {
-        var itemsCopy = items;
-            
-        foreach(KeyValuePair<string, int> item in itemsCopy)
+        List<string> keys = new List<string>(items.Keys);
+
+        foreach (string key in keys)
         {
-            if (homeInventory.ContainsKey(item.Key)) {
-                homeInventory[item.Key] = homeInventory[item.Key] += item.Value;
+            Debug.Log(key + " " + items[key]);
+            
+            if (homeInventory.ContainsKey(key))
+            {
+                homeInventory[key] = homeInventory[key] += items[key];
             }
             else
             {
-                homeInventory.Add(item.Key, item.Value);
+                homeInventory.Add(key, items[key]);
             }
-                items.Remove(item.Key);
-                invSpace += item.Value;
+            invSpace += items[key];
+            items.Remove(key);
         }
+            
+        // foreach(KeyValuePair<string, int> item in itemsCopy)
+        // {
+        //     Debug.Log(item.Key);
+        //     if (homeInventory.ContainsKey(item.Key)) {
+        //         homeInventory[item.Key] = homeInventory[item.Key] += item.Value;
+        //     }
+        //     else
+        //     {
+        //         homeInventory.Add(item.Key, item.Value);
+        //     }
+        //         items.Remove(item.Key);
+        //         invSpace += item.Value;
+        // }
     }
 
     public string ListHomeInventory()
@@ -80,7 +97,7 @@ public class GInventory
         {
             inventory += $"| {item.Key} = {item.Value} ";
         }
-        Debug.Log(inventory);
+        //Debug.Log(inventory);
         
         inventory += " |";
         return inventory;
@@ -94,7 +111,7 @@ public class GInventory
         {
             inventory += $"| {item.Key} = {item.Value} ";
         }
-        Debug.Log(inventory);
+        //Debug.Log(inventory);
         
         inventory += " |";
         return inventory;

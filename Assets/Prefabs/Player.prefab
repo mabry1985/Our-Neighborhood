@@ -284,13 +284,16 @@ MonoBehaviour:
   - {fileID: 4863869287118229131}
   - {fileID: 4778024041929283979}
   agent: {fileID: 1493775704610134282}
-  playerNameCanvas: {fileID: 1493775703987873216}
-  playerName: 
-  currentJob: 
-  playerNameText: {fileID: 1493775705369181962}
   playerManager: {fileID: 0}
-  inventorySize: 3
   playerID: 0
+  playerName: 
+  playerNameCanvas: {fileID: 1493775703987873216}
+  playerNameText: {fileID: 1493775705369181962}
+  currentJob: 
+  inventorySize: 15
+  idle: {fileID: 270752909248050187, guid: 8175a7737a275e14ebfad47ed402a919, type: 3}
+  goHome: {fileID: 9011916354984691492, guid: 962b7ce526f08564eaf8b36fd8dc622f, type: 3}
+  farmer: {fileID: 4855198959505929224, guid: a772d7db382e59a47b0d7b6d57ffe0e3, type: 3}
 --- !u!195 &1493775704610134282
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -802,6 +805,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Idle
       objectReference: {fileID: 0}
+    - target: {fileID: 270752909248050187, guid: 8175a7737a275e14ebfad47ed402a919,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8867793467772058963, guid: 8175a7737a275e14ebfad47ed402a919,
+        type: 3}
+      propertyPath: agent
+      value: 
+      objectReference: {fileID: 1493775704610134282}
     - target: {fileID: 6005092807050310759, guid: 8175a7737a275e14ebfad47ed402a919,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -857,11 +870,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8867793467772058963, guid: 8175a7737a275e14ebfad47ed402a919,
-        type: 3}
-      propertyPath: agent
-      value: 
-      objectReference: {fileID: 1493775704610134282}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8175a7737a275e14ebfad47ed402a919, type: 3}
 --- !u!4 &3367657352975466115 stripped

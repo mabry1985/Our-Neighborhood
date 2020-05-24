@@ -43,11 +43,12 @@ public class CommandManager : MonoBehaviour
             case "inv" :
                 var player = playerManager.playerReferences[id];
                 var inventory = player.inventory;
-                var items = player.inventory.ListInventory();
-                var invSpace = player.inventorySize;
+                var items = inventory.ListInventory();
+                var invSpace = inventory.invSpace;
 
                 client.SendMessage(client.JoinedChannels[0], $"{name}, you have {invSpace} slots available");
-                client.SendMessage(client.JoinedChannels[0], $"{items}");
+                if (items.Length > 3)
+                    client.SendMessage(client.JoinedChannels[0], $"{items}");
                 break;
             default:
                 break;

@@ -7,20 +7,19 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-
     public List<GameObject> jobs;
     public NavMeshAgent agent;
-    public Canvas playerNameCanvas;
-    public string playerName;
-    public string currentJob;
-    public Text playerNameText;
-    public static Player instance;
-
-    public PlayerManager playerManager;
     public GInventory inventory;
-    public int inventorySize = 5;
-    
+    public PlayerManager playerManager;
+    public static Player instance;
+   
     public int playerID;
+    public string playerName;
+    public Canvas playerNameCanvas;
+    public Text playerNameText;
+    
+    public string currentJob;
+    public int inventorySize = 5;
 
     private enum Job
     {
@@ -91,27 +90,25 @@ public class Player : MonoBehaviour
 
         for (int i = 0; i < jobCount; i++)
         {
+            jobs[i].SetActive(false);
             if (jobs[i].tag == job)
             {
                 if (job == "Farmer") {
-                    jobs[i].GetComponent<Farmer>().material = material;
-                    jobs[i].GetComponent<Farm>().targetTag = material;
-                    jobs[i].GetComponent<Farm>().afterEffects[0].key = "farm" + material;
+                   HandleFarmer(material, jobs[i]);
                 }
-
                 jobs[i].SetActive(true);
             }
-            else if (jobs[i].tag != job)
-            {
-                jobs[i].SetActive(false);
-            }
-            else if (jobs[i].tag == "Untagged")
-            {
-                Debug.Log(jobs[i] + "needs to be tagged with the enum job value");
-            }
-
         }
     }
 
+    private void HandleFarmer(string material, GameObject job){
+        var farm = job.GetComponent<Farm>();
+
+        var d = GameObject.FindGameObjectWithTag(material);
+        job.GetComponent<Farmer>().material = material;
+        farm.GetComponent<Farm>().targetTag = material;
+        farm.GetComponent<Farm>().target = d;
+        farm.GetComponent<Farm>().afterEffects[0].key = "farm" + material;
+    }
 }
     

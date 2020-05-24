@@ -49,7 +49,7 @@ public class GAgent : MonoBehaviour
         if (currentAction != null && currentAction.running)
         {
             float distanceToTarget = Vector3.Distance(destination, this.transform.position);
-            Debug.Log(currentAction.agent.hasPath + "   " + distanceToTarget);
+           // Debug.Log(currentAction.agent.hasPath + "   " + distanceToTarget);
            //Debug.Log(distanceToTarget + " " + currentAction.agent.hasPath);
             if (distanceToTarget < 2f)
             {
@@ -98,6 +98,7 @@ public class GAgent : MonoBehaviour
                 if(currentAction.target == null && currentAction.targetTag != "")
                     currentAction.target = GameObject.FindWithTag(currentAction.targetTag);
 
+                //print(currentAction.target + " is the current action target");
                 if(currentAction.target != null)
                 {
                      currentAction.running = true;
