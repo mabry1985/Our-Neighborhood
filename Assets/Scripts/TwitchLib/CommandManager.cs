@@ -20,15 +20,7 @@ public class CommandManager : MonoBehaviour
                 botManager.OnBotCommand(arg);
                 break;
             case "join":
-                if (!playerManager.players.ContainsKey(id))
-                {
-                    var playerModel = playerManager.CreatePlayerModel(name, id);
-                    playerManager.AddToPlayersDictionary(playerModel);
-                } else {
-                    //need to get a limit increase for whispering capabilities
-                    //client.SendWhisper(name, $"Hi, {name}, you have already joined");
-                    client.SendMessage(client.JoinedChannels[0], $"Hi, {name}, you have already joined our neighborhood");
-                }
+                handleJoin(id, client);
                 break;
             case "ping":
                 playerManager.playerReferences[id].transform.GetChild(2).gameObject.SetActive(true);
@@ -37,22 +29,46 @@ public class CommandManager : MonoBehaviour
                 playerManager.playerReferences[id].ChangeJobs("GoHome", null);
                 break;
             case "homeinv":
-                var homeInv = playerManager.playerReferences[id].inventory.ListHomeInventory();
-                client.SendMessage(client.JoinedChannels[0], $"{name}, at home you have {homeInv}");
+                handleHomeInv(id, client);
                 break;
             case "inv" :
-                var player = playerManager.playerReferences[id];
-                var inventory = player.inventory;
-                var items = inventory.ListInventory();
-                var invSpace = inventory.invSpace;
-
-                client.SendMessage(client.JoinedChannels[0], $"{name}, you have {invSpace} slots available");
-                if (items.Length > 3)
-                    client.SendMessage(client.JoinedChannels[0], $"{items}");
+                handleInv(id, client);
                 break;
             default:
                 break;
         }
+    }
+
+    public void handleJoin(int id, Client client) {
+        if (!playerManager.players.ContainsKey(id))
+        {
+            var playerModel = playerManager.CreatePlayerModel(name, id);
+            playerManager.AddToPlayersDictionary(playerModel);
+        }
+        else
+        {
+            //need to get a limit increase for whispering capabilities
+            //client.SendWhisper(name, $"Hi, {name}, you have already joined");
+            client.SendMessage(client.JoinedChannels[0], $"Hi, {name}, you have already joined our neighborhood");
+        }
+    }
+
+    public void handleHomeInv(int id, Client client) {
+        var homeInv = playerManager.playerReferences[id].inventory.ListHomeInventory();
+        client.SendMessage(client.JoinedChannels[0], $"{name}, at home you have {homeInv}");
+
+    }
+
+    public void handleInv(int id, Client client){
+        var player = playerManager.playerReferences[id];
+        var inventory = player.inventory;
+        var items = inventory.ListInventory();
+        var invSpace = inventory.invSpace;
+
+        client.SendMessage(client.JoinedChannels[0], $"{name}, you have {invSpace} slots available");
+
+        if (items.Length > 3)
+            client.SendMessage(client.JoinedChannels[0], $"{items}");
     }
 
 }
