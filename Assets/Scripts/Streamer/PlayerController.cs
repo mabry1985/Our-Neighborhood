@@ -21,10 +21,15 @@ public class PlayerController : MonoBehaviour
         {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
+            Debug.Log("RMB pressed");
 
             if (Physics.Raycast(ray, out hit))
             {
                 agent.SetDestination(hit.point);
+            }
+            else
+            {
+                Debug.Log("No mesh found");
             }
         }
 
