@@ -101,7 +101,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7453721397822601001}
-  - component: {fileID: 7453721397822601000}
   m_Layer: 0
   m_Name: BlankResource
   m_TagString: Untagged
@@ -125,14 +124,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 1.3160001, z: 0}
---- !u!33 &7453721397822601000
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7453721397822601005}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &7453721398655684601
 GameObject:
   m_ObjectHideFlags: 0
@@ -147,7 +138,7 @@ GameObject:
   - component: {fileID: 7453721398655684603}
   m_Layer: 0
   m_Name: Destination
-  m_TagString: Farm Door
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

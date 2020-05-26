@@ -76,7 +76,7 @@ public class Train : MonoBehaviour
             case "Spawn Trigger":
                 StartCoroutine(this.playerManager.CheckForPlayerSpawn());
                 StartCoroutine(this.botManager.CheckForBotSpawn());
-                Destroy(this.gameObject, 15f);
+                Destroy(this.gameObject, 5f);
                 break;
             default:
                 break;

@@ -29,6 +29,7 @@ TagManager:
   - Streamer
   - Wood
   - Water
+  - Corn
   layers:
   - Default
   - TransparentFX
