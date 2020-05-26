@@ -71,7 +71,7 @@ public class Input_Manager : MonoBehaviour
 
     #region Public Methods
     public void PrintCommandItems()
-    {
+    {   //pass in chat command function
         string temp = "";
         foreach (string a in input_Logs)
         {

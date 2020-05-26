@@ -47,7 +47,7 @@ public class Player : MonoBehaviour
         }
 
 
-        var playerRenderer = gameObject.GetComponent<Renderer>();
+        var playerRenderer = gameObject.GetComponentInChildren<Renderer>();
         playerRenderer.material.SetColor("_Color", Color.black);
         
         ChangeJobs("Idle", null);
