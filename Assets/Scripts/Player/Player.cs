@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
     public Canvas playerNameCanvas;
     public Text playerNameText;
     public bool isDead = false;
+    public bool isWorking = false;
     
     public string currentJob;
     public int inventorySize = 5;
@@ -58,8 +59,6 @@ public class Player : MonoBehaviour
 
         var playerRenderer = gameObject.GetComponentInChildren<Renderer>();
         playerRenderer.material.SetColor("_Color", Color.black);
-        
-        ChangeJobs("Idle", null);
     }
 
     void LateUpdate()
@@ -96,17 +95,24 @@ public class Player : MonoBehaviour
     {
         this.currentJob = job;
         var jobCount = Enum.GetNames(typeof(Job)).Length;
+        var gAgents = transform.GetChild(0).GetComponentsInChildren<GAgent>(true);
 
-        for (int i = 0; i < jobCount; i++)
+        foreach (var gAgent in gAgents)
         {
-            //CancelGoap(jobs[i]);
-            jobs[i].SetActive(false);
-            if (jobs[i].tag == job)
+            var gameObject = gAgent.gameObject;
+            if (gameObject.activeSelf)
             {
-                if (job == "Farmer") {
-                   HandleFarmer(material, jobs[i]);
+                CancelGoap(gAgent.transform);
+                gameObject.SetActive(false);
+            }
+
+            if (gameObject.tag == job)
+            {
+                if (job == "Farmer")
+                {
+                    HandleFarmer(material, gameObject);
                 }
-                jobs[i].SetActive(true);
+                gameObject.SetActive(true);
             }
         }
     }
@@ -115,11 +121,14 @@ public class Player : MonoBehaviour
     {
         var farm = job.GetComponent<Farm>();
 
-        var d = GameObject.FindGameObjectWithTag(material);
-        job.GetComponent<Farmer>().material = material;
-        farm.targetTag = material;
-        farm.target = d;
-        farm.afterEffects[0].key = "farm" + material;
+        var d = GameObject.FindGameObjectWithTag(material) ?? null;
+
+        if (d != null){
+            job.GetComponent<Farmer>().material = material;
+            farm.targetTag = material;
+            farm.target = d; 
+            farm.afterEffects[0].key = "farm" + material;
+        }
     }
 
     public IEnumerator OnDeath() 
@@ -137,10 +146,10 @@ public class Player : MonoBehaviour
         {
             if (job.GetChild(i).gameObject.activeSelf == true)
             {
-                var agent = job.GetChild(i);
-                CancelGoap(agent);
-                agent.gameObject.SetActive(false);
-                ChangeJobs("Idle", null);
+                var gAgent = job.GetChild(i);
+                CancelGoap(gAgent);
+                gAgent.gameObject.SetActive(false);
+                //ChangeJobs("Idle", null);
             }
         }
 
@@ -169,10 +178,14 @@ public class Player : MonoBehaviour
         animator.enabled = true;
     }
 
-    public void CancelGoap(Transform agent)
+    public void CancelGoap(Transform gAgent)
     {
-        agent.GetComponent<GAgent>().actionQueue.Clear();
-        agent.GetComponent<GAgent>().currentAction.running = false;
+        var actionQueue = gAgent.GetComponent<GAgent>().actionQueue ?? null;
+        if (actionQueue != null)
+        {
+            actionQueue.Clear();
+            gAgent.GetComponent<GAgent>().currentAction.running = false;
+        }    
     }
 }
     

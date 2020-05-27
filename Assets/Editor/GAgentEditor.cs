@@ -18,7 +18,6 @@ public class GAgentVisualEditor : Editor
         serializedObject.Update();
         GAgentVisual agent = (GAgentVisual) target;
         GUILayout.Label("Name: " + agent.name);
-        //GUILayout.Label("Current Action: " + agent.GetComponent<GAgent>().currentAction);
         GUILayout.Label("Actions: ");
         foreach (GAction a in agent.GetComponent<GAgent>().actions)
         {

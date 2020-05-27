@@ -61,7 +61,6 @@ public class GInventory
 
         foreach (string key in keys)
         {
-            Debug.Log(key + " " + items[key]);
             
             if (homeInventory.ContainsKey(key))
             {
