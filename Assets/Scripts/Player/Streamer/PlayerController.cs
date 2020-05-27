@@ -8,9 +8,12 @@ public class PlayerController : MonoBehaviour
     private Cinemachine.CinemachineBrain brain;
     public Cinemachine.CinemachineFreeLook vcam;    
 
+    public GameObject resourceOverlayCanvas;
+
     private float rotSpeed = 20f;
 
     private bool freeCamToggle = false;
+    private bool showResourceCanvase = true;
 
     private void Start() {
         brain = cam.GetComponent<Cinemachine.CinemachineBrain>();
@@ -52,12 +55,19 @@ public class PlayerController : MonoBehaviour
         }
 
         if (Input.GetKeyDown(KeyCode.LeftControl))
-        {
+        {   
+            showResourceCanvase = !showResourceCanvase;    
             freeCamToggle = !freeCamToggle;
         }
     }
 
     private void LateUpdate() {
+
+        if (showResourceCanvase)
+            resourceOverlayCanvas.SetActive(true);
+        else
+            resourceOverlayCanvas.SetActive(false);
+
         if (freeCamToggle)
         {
             Cursor.lockState = CursorLockMode.Locked;

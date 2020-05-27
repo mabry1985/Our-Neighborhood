@@ -24695,7 +24695,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2765947506838551938}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2118853363
+--- !u!114 &2118853364
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -27757,6 +27757,7 @@ MonoBehaviour:
   agent: {fileID: 2822170841504707096}
   cam: {fileID: 1772510338}
   vcam: {fileID: 0}
+  resourceOverlayCanvas: {fileID: 367399712}
 --- !u!54 &2822170841504707081
 Rigidbody:
   m_ObjectHideFlags: 0
