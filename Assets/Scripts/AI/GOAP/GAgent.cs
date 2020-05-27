@@ -23,10 +23,12 @@ public class GAgent : MonoBehaviour
     public WorldStates beliefs = new WorldStates();
 
     GPlanner planner;
-    Queue<GAction> actionQueue;
+    public Queue<GAction> actionQueue;
     public GAction currentAction;
     SubGoal currentGoal;
     Vector3 destination = Vector3.zero;
+
+    Player player;
 
     public void Start()
     {
@@ -34,6 +36,8 @@ public class GAgent : MonoBehaviour
         foreach(GAction a in acts) {
             actions.Add(a);
         }
+
+        player = this.transform.parent.parent.gameObject.GetComponent<Player>();
     }
 
     bool invoked = false;
@@ -49,7 +53,7 @@ public class GAgent : MonoBehaviour
         if (currentAction != null && currentAction.running)
         {
             float distanceToTarget = Vector3.Distance(destination, this.transform.position);
-            //Debug.Log(currentAction.agent.hasPath + "   " + distanceToTarget);
+            Debug.Log(currentAction.agent.hasPath + "   " + distanceToTarget);
            //Debug.Log(distanceToTarget + " " + currentAction.agent.hasPath);
             if (distanceToTarget < 2f)
             {
@@ -101,15 +105,16 @@ public class GAgent : MonoBehaviour
                 //print(currentAction.target + " is the current action target");
                 if(currentAction.target != null)
                 {
-                     currentAction.running = true;
+                    currentAction.running = true;
 
-                     destination = currentAction.target.transform.position;
-                     Transform dest = currentAction.target.transform.Find("Destination");
+                    destination = currentAction.target.transform.position;
+                    Transform dest = currentAction.target.transform.Find("Destination");
 
-                     if(dest != null)
+                    if(dest != null)
                         destination = dest.position;
 
-                     currentAction.agent.SetDestination(destination);
+                    if (!player.isDead)
+                        currentAction.agent.SetDestination(destination);
                 }
             }
             else

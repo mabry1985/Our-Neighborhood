@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -40,7 +41,6 @@ public class Player : MonoBehaviour
         animator = this.GetComponentInChildren<Animator>();
         playerController = this.GetComponent<PlayerController>();
         home = playerManager.spawnPoint;
-
 
         playerManager.playerReferences[playerID] = this;
         inventory = new GInventory();
@@ -99,6 +99,7 @@ public class Player : MonoBehaviour
 
         for (int i = 0; i < jobCount; i++)
         {
+            //CancelGoap(jobs[i]);
             jobs[i].SetActive(false);
             if (jobs[i].tag == job)
             {
@@ -112,26 +113,39 @@ public class Player : MonoBehaviour
 
     private void HandleFarmer(string material, GameObject job)
     {
-
         var farm = job.GetComponent<Farm>();
 
         var d = GameObject.FindGameObjectWithTag(material);
         job.GetComponent<Farmer>().material = material;
-        farm.GetComponent<Farm>().targetTag = material;
-        farm.GetComponent<Farm>().target = d;
-        farm.GetComponent<Farm>().afterEffects[0].key = "farm" + material;
+        farm.targetTag = material;
+        farm.target = d;
+        farm.afterEffects[0].key = "farm" + material;
     }
 
-    public void OnDeath() 
+    public IEnumerator OnDeath() 
     {
+        isDead = true;
+        Transform job = gameObject.transform.GetChild(0);
+
         if (this.tag == "Streamer")
         {
             var cam = playerController.vcam;
             //cam.m_Follow = null;       
         }
 
-        this.transform.GetChild(0).gameObject.SetActive(false);
-        isDead = true;
+        for (int i = 0; i < job.childCount; i++)
+        {
+            if (job.GetChild(i).gameObject.activeSelf == true)
+            {
+                var agent = job.GetChild(i);
+                CancelGoap(agent);
+                agent.gameObject.SetActive(false);
+                ChangeJobs("Idle", null);
+            }
+        }
+
+        yield return new WaitForSeconds(0.3f);
+
         agent.enabled = false;
         animator.enabled = false;
 
@@ -140,20 +154,25 @@ public class Player : MonoBehaviour
 
     public void OnRevive() 
     {
-        this.transform.position = home.position;
+        isDead = false;
+        agent.enabled = true;
+        agent.isStopped = false;
+
+        agent.Warp(home.position);
+        
         if (this.tag == "Streamer")
         {
             var cam = playerController.vcam;
            // cam.m_Follow = this.transform;
         }
 
-        this.transform.GetChild(0).gameObject.SetActive(true);
-        isDead = false;
-        agent.enabled = true;
         animator.enabled = true;
+    }
 
-        this.ChangeJobs("Idle", null);
-        //ChangeJobs("Idle", null);
+    public void CancelGoap(Transform agent)
+    {
+        agent.GetComponent<GAgent>().actionQueue.Clear();
+        agent.GetComponent<GAgent>().currentAction.running = false;
     }
 }
     

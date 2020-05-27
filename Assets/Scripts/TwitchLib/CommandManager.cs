@@ -8,20 +8,27 @@ public class CommandManager : MonoBehaviour
 {
     public PlayerManager playerManager;
     public BotManager botManager;
+    Player player;
 
     public void CheckCommand(int id, string name, string command, List<string> arg, Client client) 
     {
+        var refDictionary = playerManager.playerReferences;
         command = StringFormatter(command);
+
         
         for (int i = 0; i < arg.Count; i++)
         {
             arg[i] = StringFormatter(arg[i]);
         }
     
+        if (refDictionary.ContainsKey(id))
+            player = refDictionary[id];
+        
         switch (command)
         {
             case "Farm":
-                playerManager.playerReferences[id].ChangeJobs("Farmer", arg[0]);
+                if (!player.isDead)
+                    player.ChangeJobs("Farmer", arg[0]);
                 break;
             case "Bot":
                 botManager.OnBotCommand(arg);
@@ -30,10 +37,12 @@ public class CommandManager : MonoBehaviour
                 HandleJoin(id, name, client);
                 break;
             case "Ping":
-                playerManager.playerReferences[id].transform.GetChild(3).gameObject.SetActive(true);
+                if (!player.isDead)
+                    player.transform.GetChild(3).gameObject.SetActive(true);
                 break;
             case "Home":
-                playerManager.playerReferences[id].ChangeJobs("GoHome", null);
+                if (!player.isDead)
+                    player.ChangeJobs("GoHome", null);
                 break;
             case "Homeinv":
                 HandleHomeInv(id, client, name);
@@ -42,7 +51,8 @@ public class CommandManager : MonoBehaviour
                 HandleInv(id, client, name);
                 break;
             case "Cancel":
-                playerManager.playerReferences[id].ChangeJobs("Idle", null);
+                if (!player.isDead)
+                    player.ChangeJobs("Idle", null);
                 break;
             case "Test":
                 var playerModel = playerManager.CreatePlayerModel(name, id);

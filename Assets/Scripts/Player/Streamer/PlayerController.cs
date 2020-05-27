@@ -27,8 +27,10 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.F))
         {
-            var pawn = GameObject.FindGameObjectWithTag("Player");
-            pawn.GetComponent<Player>().OnDeath();
+            var pawn = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+
+            if (pawn != null && !pawn.isDead)
+                StartCoroutine(pawn.OnDeath());
             //pawn.GetComponentInChildren<GAgent>().beliefs.ModifyState("inDanger", 1);
         }
 
