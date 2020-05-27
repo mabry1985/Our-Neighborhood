@@ -18,9 +18,9 @@ public abstract class GAction : MonoBehaviour
     public Dictionary<string, int> effects;
 
     public WorldStates agentBeliefs;
+    public WorldStates beliefs;
 
     public GInventory inventory;
-    public WorldStates beliefs;
     
     public bool running = false;
 

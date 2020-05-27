@@ -19,7 +19,8 @@ public class Farm : GAction
         if (gameObject.transform.parent.parent.tag == "Player")
         {   
             inv = player.inventory;
-            if (inv.invSpace == 0) {
+            if (inv.invSpace == 0) 
+            {
                 player.ChangeJobs("Idle", null);
                 return false;
             }

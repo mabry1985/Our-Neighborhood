@@ -14,6 +14,11 @@ public class PlayerManager : MonoBehaviour
 
     private Text playerName;
 
+    private void Start() 
+    {
+        Application.runInBackground = true;    
+    }
+
     public void AddToPlayersDictionary(PlayerModel player) 
     {    
         Player p = new Player();

@@ -41,21 +41,51 @@ public sealed class GWorld
 {
     private static readonly GWorld instance = new GWorld();
     private static WorldStates world;
-    private static ResourceQueue money;
-    private static ResourceQueue wood;
-    private static ResourceQueue stone;
+
+    public static GInventory worldInventory = new GInventory();
+
+    // private static ResourceQueue money;
+    // private static ResourceQueue population;
+    // private static ResourceQueue food;
+    // private static ResourceQueue meds;
+    // private static ResourceQueue wood;
+    // private static ResourceQueue stone;
+    // private static ResourceQueue iron;
 
     private static Dictionary<string, ResourceQueue> resources = new Dictionary<string, ResourceQueue>();
 
     static GWorld()
     {
         world = new WorldStates();
-        money = new ResourceQueue("", "", world);
-        resources.Add("money", money);
-        wood = new ResourceQueue("", "", world);
-        resources.Add("wood", wood);
-        stone = new ResourceQueue("", "", world);
-        resources.Add("stone", stone);
+        worldInventory.items.Add("Money", 0);
+        worldInventory.items.Add("Population", 10);
+        worldInventory.items.Add("Food", 0);
+        worldInventory.items.Add("Meds", 0);
+        worldInventory.items.Add("Wheat", 0);
+        worldInventory.items.Add("Wood", 0);
+        worldInventory.items.Add("Stone", 0);
+        worldInventory.items.Add("Iron", 0);
+
+        // money = new ResourceQueue("", "", world);
+        // resources.Add("money", money);
+        
+        // population = new ResourceQueue("", "", world);
+        // resources.Add("population", population);
+        
+        // food = new ResourceQueue("", "", world);
+        // resources.Add("food", food);
+        
+        // meds = new ResourceQueue("", "", world);
+        // resources.Add("meds", meds);
+        
+        // wood = new ResourceQueue("", "", world);
+        // resources.Add("wood", wood);
+        
+        // stone = new ResourceQueue("", "", world);
+        // resources.Add("stone", stone);
+        
+        // iron = new ResourceQueue("", "", world);
+        // resources.Add("iron", iron);
     }
 
     public ResourceQueue GetQueue(string type)

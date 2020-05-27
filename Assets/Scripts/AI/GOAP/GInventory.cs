@@ -13,7 +13,7 @@ public class GInventory
 
     public Dictionary<string, int> items = new Dictionary<string, int>();
 
-    public Dictionary<string, int> homeInventory = new Dictionary<string,int>();
+    //public Dictionary<string, int> homeInventory = new Dictionary<string,int>();
     
     public int invSpace;
 
@@ -55,20 +55,20 @@ public class GInventory
             worldObjects.RemoveAt(indexToRemove);
     }
 
-    public void TransferToHomeInventory() 
+    public void TransferToWorldInventory() 
     {
         List<string> keys = new List<string>(items.Keys);
 
         foreach (string key in keys)
         {
-            
-            if (homeInventory.ContainsKey(key))
+            Debug.Log(key);   
+            if (GWorld.worldInventory.items.ContainsKey(key))
             {
-                homeInventory[key] = homeInventory[key] += items[key];
+                GWorld.worldInventory.items[key] = GWorld.worldInventory.items[key] += items[key];
             }
             else
             {
-                homeInventory.Add(key, items[key]);
+                GWorld.worldInventory.items.Add(key, items[key]);
             }
             invSpace += items[key];
             items.Remove(key);
@@ -89,10 +89,10 @@ public class GInventory
         // }
     }
 
-    public string ListHomeInventory()
+    public string ListWorldInventory()
     {
         var inventory = "";
-        foreach (KeyValuePair<string, int> item in homeInventory)
+        foreach (KeyValuePair<string, int> item in GWorld.worldInventory.items)
         {
             inventory += $"| {item.Key} = {item.Value} ";
         }

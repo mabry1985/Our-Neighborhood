@@ -44,8 +44,8 @@ public class CommandManager : MonoBehaviour
                 if (!player.isDead)
                     player.ChangeJobs("GoHome", null);
                 break;
-            case "Homeinv":
-                HandleHomeInv(id, client, name);
+            case "Worldinv":
+                HandleWorldInv(id, client, name);
                 break;
             case "Inv" :
                 HandleInv(id, client, name);
@@ -84,9 +84,9 @@ public class CommandManager : MonoBehaviour
         }
     }
 
-    public void HandleHomeInv(int id, Client client, string name) {
-        var homeInv = playerManager.playerReferences[id].inventory.ListHomeInventory();
-        client.SendMessage(client.JoinedChannels[0], $"{name}, at home you have {homeInv}");
+    public void HandleWorldInv(int id, Client client, string name) {
+        var worldInv = playerManager.playerReferences[id].inventory.ListWorldInventory();
+        client.SendMessage(client.JoinedChannels[0], $" {worldInv}");
 
     }
 
