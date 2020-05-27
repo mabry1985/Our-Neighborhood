@@ -13,7 +13,7 @@ public class Farm : GAction
 
         player = gameObject.transform.parent.parent.GetComponent<Player>();
         bot = gameObject.transform.parent.parent.GetComponent<Bot>();
-
+        //this.GetComponent<GAgent>().beliefs.ModifyState("notWorking", -1);
         if (gameObject.transform.parent.parent.tag == "Player")
         {   
             inv = player.inventory;
@@ -57,6 +57,8 @@ public class Farm : GAction
             inv.items[material] = inv.items[material] += 1;
         else 
             inv.AddItem(material, 1);
+
+        //this.GetComponent<GAgent>().beliefs.ModifyState("notWorking", 1);
 
         return true;
     }

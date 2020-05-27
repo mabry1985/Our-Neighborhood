@@ -11,35 +11,56 @@ public class CommandManager : MonoBehaviour
 
     public void CheckCommand(int id, string name, string command, List<string> arg, Client client) 
     {
+        command = StringFormatter(command);
+        
+        for (int i = 0; i < arg.Count; i++)
+        {
+            arg[i] = StringFormatter(arg[i]);
+        }
+    
         switch (command)
         {
-            case "job":
-                playerManager.playerReferences[id].JobSwitch(arg);
+            case "Farm":
+                playerManager.playerReferences[id].ChangeJobs("Farmer", arg[0]);
                 break;
-            case "bot":
+            case "Bot":
                 botManager.OnBotCommand(arg);
                 break;
-            case "join":
-                handleJoin(id, name, client);
+            case "Join":
+                HandleJoin(id, name, client);
                 break;
-            case "ping":
-                playerManager.playerReferences[id].transform.GetChild(2).gameObject.SetActive(true);
+            case "Ping":
+                playerManager.playerReferences[id].transform.GetChild(3).gameObject.SetActive(true);
                 break;
-            case "home":
+            case "Home":
                 playerManager.playerReferences[id].ChangeJobs("GoHome", null);
                 break;
-            case "homeinv":
-                handleHomeInv(id, client, name);
+            case "Homeinv":
+                HandleHomeInv(id, client, name);
                 break;
-            case "inv" :
-                handleInv(id, client, name);
+            case "Inv" :
+                HandleInv(id, client, name);
+                break;
+            case "Cancel":
+                playerManager.playerReferences[id].ChangeJobs("Idle", null);
+                break;
+            case "Test":
+                var playerModel = playerManager.CreatePlayerModel(name, id);
+                playerManager.AddToPlayersDictionary(playerModel);
+                playerManager.PlayerSpawn(playerModel);
                 break;
             default:
                 break;
         }
     }
 
-    public void handleJoin(int id, string name, Client client) {
+    private string StringFormatter(string command){
+        var formatString = char.ToUpper(command[0]) + command.Substring(1);
+        return formatString;
+        
+    }
+
+    public void HandleJoin(int id, string name, Client client) {
         if (!playerManager.players.ContainsKey(id))
         {
             var playerModel = playerManager.CreatePlayerModel(name, id);
@@ -53,13 +74,13 @@ public class CommandManager : MonoBehaviour
         }
     }
 
-    public void handleHomeInv(int id, Client client, string name) {
+    public void HandleHomeInv(int id, Client client, string name) {
         var homeInv = playerManager.playerReferences[id].inventory.ListHomeInventory();
         client.SendMessage(client.JoinedChannels[0], $"{name}, at home you have {homeInv}");
 
     }
 
-    public void handleInv(int id, Client client, string name){
+    public void HandleInv(int id, Client client, string name){
         var player = playerManager.playerReferences[id];
         var inventory = player.inventory;
         var items = inventory.ListInventory();

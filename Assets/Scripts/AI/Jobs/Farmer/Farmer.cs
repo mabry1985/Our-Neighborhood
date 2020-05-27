@@ -12,8 +12,7 @@ public class Farmer : GAgent
 		
 	}
 
-    private void Awake() {
-        
+    private void OnEnable() {
     }
 
     new void Start()
@@ -21,6 +20,10 @@ public class Farmer : GAgent
         base.Start();
         SubGoal s1 = new SubGoal("farm" + material, 1, false);
         goals.Add(s1, 3);
+        SubGoal s2 = new SubGoal("isSafe", 1, false);
+        goals.Add(s2, 5);
+        
+        //this.GetComponent<GAgent>().beliefs.ModifyState("notWorking", 1);
         //Invoke("GetTired", Random.Range(2.0f, 20.0f))
     }
 

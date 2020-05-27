@@ -75,6 +75,7 @@ public class Player : MonoBehaviour
             //     break;
             case Job.Farmer:
                 var material = arg[1];
+                print(material);
                 ChangeJobs(job, material);
                 break;
             default:
@@ -83,9 +84,8 @@ public class Player : MonoBehaviour
     }
 
     public void ChangeJobs(string job, string material)
-    { 
+    {
         this.currentJob = job;
-    
         var jobCount = Enum.GetNames(typeof(Job)).Length;
 
         for (int i = 0; i < jobCount; i++)
@@ -94,6 +94,7 @@ public class Player : MonoBehaviour
             if (jobs[i].tag == job)
             {
                 if (job == "Farmer") {
+                    print("im a farmer!");
                    HandleFarmer(material, jobs[i]);
                 }
                 jobs[i].SetActive(true);
@@ -102,6 +103,7 @@ public class Player : MonoBehaviour
     }
 
     private void HandleFarmer(string material, GameObject job){
+        
         var farm = job.GetComponent<Farm>();
 
         var d = GameObject.FindGameObjectWithTag(material);

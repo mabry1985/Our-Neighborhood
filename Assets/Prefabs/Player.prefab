@@ -466,6 +466,56 @@ MonoBehaviour:
   ping: {fileID: 2382150824974200202}
   amplitude: 0.46
   frequency: 1
+--- !u!114 &867733583664666762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4778024041929283979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90cee7a1fdf5e6748a348dfad758d7f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: Action
+  cost: 1
+  target: {fileID: 0}
+  targetTag: Home
+  duration: 5
+  preConditions:
+  - key: inDanger
+    value: 5
+  afterEffects:
+  - key: isSafe
+    value: 5
+  agent: {fileID: 0}
+  running: 0
+--- !u!114 &3596721286118132193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4863869287118229131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90cee7a1fdf5e6748a348dfad758d7f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: Action
+  cost: 1
+  target: {fileID: 0}
+  targetTag: Home
+  duration: 5
+  preConditions:
+  - key: inDanger
+    value: 5
+  afterEffects:
+  - key: isSafe
+    value: 5
+  agent: {fileID: 0}
+  running: 0
 --- !u!1 &5101505259219637417
 GameObject:
   m_ObjectHideFlags: 0
@@ -622,6 +672,45 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &2277809317284187242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9091600809460449007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90cee7a1fdf5e6748a348dfad758d7f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: Action
+  cost: 1
+  target: {fileID: 0}
+  targetTag: Home
+  duration: 5
+  preConditions:
+  - key: inDanger
+    value: 5
+  afterEffects:
+  - key: isSafe
+    value: 5
+  agent: {fileID: 0}
+  running: 0
+--- !u!114 &4981244845128211896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9091600809460449007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d1585eb02a4aad4ca4eb3b290324fc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actions: []
+  currentAction: {fileID: 0}
 --- !u!1001 &8671719555283587
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -689,6 +778,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4855198959505929227, guid: a772d7db382e59a47b0d7b6d57ffe0e3,
+        type: 3}
+      propertyPath: preConditions.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4855198959505929226, guid: a772d7db382e59a47b0d7b6d57ffe0e3,
+        type: 3}
+      propertyPath: agent
+      value: 
+      objectReference: {fileID: 1493775704610134282}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a772d7db382e59a47b0d7b6d57ffe0e3, type: 3}
 --- !u!1 &4863869287118229131 stripped
@@ -792,15 +891,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 962b7ce526f08564eaf8b36fd8dc622f, type: 3}
---- !u!1 &4778024041929283979 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9011916354984691492, guid: 962b7ce526f08564eaf8b36fd8dc622f,
-    type: 3}
-  m_PrefabInstance: {fileID: 4566141637329018543}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2268884877668880256 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2315557633046106415, guid: 962b7ce526f08564eaf8b36fd8dc622f,
+    type: 3}
+  m_PrefabInstance: {fileID: 4566141637329018543}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4778024041929283979 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9011916354984691492, guid: 962b7ce526f08564eaf8b36fd8dc622f,
     type: 3}
   m_PrefabInstance: {fileID: 4566141637329018543}
   m_PrefabAsset: {fileID: 0}
