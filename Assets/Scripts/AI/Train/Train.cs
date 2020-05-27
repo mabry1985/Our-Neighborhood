@@ -78,6 +78,13 @@ public class Train : MonoBehaviour
                 StartCoroutine(this.botManager.CheckForBotSpawn());
                 Destroy(this.gameObject, 5f);
                 break;
+            case "Player":
+                other.GetComponent<Player>().OnDeath();
+            break;
+            case "Streamer":
+                other.GetComponent<Player>().OnDeath();
+                //other.GetComponentInChildren<Rigidbody>().AddForce(transform.forward * 40, ForceMode.Impulse);
+            break;
             default:
                 break;
         }

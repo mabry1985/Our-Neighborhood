@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
     public NavMeshAgent agent;
     public Camera cam;
     private Cinemachine.CinemachineBrain brain;
-    private Cinemachine.CinemachineFreeLook vcam;    
+    public Cinemachine.CinemachineFreeLook vcam;    
 
     private float rotSpeed = 20f;
 
@@ -28,7 +28,8 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
             var pawn = GameObject.FindGameObjectWithTag("Player");
-            pawn.GetComponentInChildren<GAgent>().beliefs.ModifyState("inDanger", 1);
+            pawn.GetComponent<Player>().OnDeath();
+            //pawn.GetComponentInChildren<GAgent>().beliefs.ModifyState("inDanger", 1);
         }
 
         if (Input.GetMouseButton(1))
@@ -70,13 +71,4 @@ public class PlayerController : MonoBehaviour
         }
     }
     
-    private void InstantlyTurn(Vector3 destination)
-    {
-        //When on target -> dont rotate!
-        if ((destination - transform.position).magnitude < 0.1f) return;
-
-        Vector3 direction = (destination - transform.position).normalized;
-        Quaternion qDir = Quaternion.LookRotation(direction);
-        transform.rotation = Quaternion.Slerp(transform.rotation, qDir, Time.deltaTime * rotSpeed);
-    }
 }

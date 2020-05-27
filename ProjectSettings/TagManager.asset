@@ -14,7 +14,6 @@ TagManager:
   - Farm Door
   - Market
   - Market Door
-  - 'test '
   - Windmill
   - Player Manager
   - Enter Station Trigger
@@ -30,6 +29,9 @@ TagManager:
   - Wood
   - Water
   - Corn
+  - input_window_title
+  - Rag Doll
+  - Jobs
   layers:
   - Default
   - TransparentFX
