@@ -131,7 +131,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    public IEnumerator OnDeath() 
+    public void OnDeath() 
     {
         isDead = true;
         Transform job = gameObject.transform.GetChild(0);
@@ -153,8 +153,6 @@ public class Player : MonoBehaviour
             }
         }
 
-        yield return new WaitForSeconds(0.3f);
-
         agent.enabled = false;
         animator.enabled = false;
 
@@ -167,7 +165,7 @@ public class Player : MonoBehaviour
         agent.enabled = true;
         agent.isStopped = false;
 
-        agent.Warp(home.position);
+        agent.transform.position = home.position;
         
         if (this.tag == "Streamer")
         {
