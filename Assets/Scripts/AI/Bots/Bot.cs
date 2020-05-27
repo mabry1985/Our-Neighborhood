@@ -7,7 +7,6 @@ using UnityEngine.UI;
 
 public class Bot : MonoBehaviour
 {
-
     public List<GameObject> jobs;
     public NavMeshAgent agent;
     public Canvas botNameCanvas;
@@ -34,6 +33,7 @@ public class Bot : MonoBehaviour
 
     private void Start()
     {
+        Application.runInBackground = true;
         //inventory.name = this.botName;
     }
 

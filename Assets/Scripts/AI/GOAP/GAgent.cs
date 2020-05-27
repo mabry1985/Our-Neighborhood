@@ -29,6 +29,7 @@ public class GAgent : MonoBehaviour
     Vector3 destination = Vector3.zero;
 
     Player player;
+    public float distanceToTarget;
 
     public void Start()
     {
@@ -52,7 +53,7 @@ public class GAgent : MonoBehaviour
     {
         if (currentAction != null && currentAction.running)
         {
-            float distanceToTarget = Vector3.Distance(destination, this.transform.position);
+            distanceToTarget = Vector3.Distance(destination, this.transform.position);
             //Debug.Log(currentAction.agent.hasPath + "   " + distanceToTarget);
             if (distanceToTarget < 2f)
             {

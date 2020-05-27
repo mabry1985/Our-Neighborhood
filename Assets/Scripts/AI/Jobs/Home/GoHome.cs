@@ -12,7 +12,7 @@ public class GoHome : GAction
     
     public override bool PostPerform()
     {
-        this.transform.parent.GetComponentInParent<Player>().inventory.TransferToHomeInventory();
+        this.transform.parent.GetComponentInParent<Player>().inventory.TransferToWorldInventory();
         //print("Im home");
         return false;
     }

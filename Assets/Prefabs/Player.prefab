@@ -117,6 +117,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actions: []
   currentAction: {fileID: 0}
+  distanceToTarget: 0
 --- !u!1 &1365365312696860982
 GameObject:
   m_ObjectHideFlags: 0
@@ -685,6 +686,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actions: []
   currentAction: {fileID: 0}
+  distanceToTarget: 0
 --- !u!114 &369121259721807079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -807,6 +809,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actions: []
   currentAction: {fileID: 0}
+  distanceToTarget: 0
   material: 
 --- !u!114 &3287862889406967712
 MonoBehaviour:
@@ -831,6 +834,7 @@ MonoBehaviour:
     value: 0
   agent: {fileID: 0}
   running: 0
+  gAgent: {fileID: 0}
   player: {fileID: 0}
   bot: {fileID: 0}
 --- !u!114 &6860429516657895625
@@ -2520,10 +2524,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f22638cdf8e21140af3b3a0c8d807ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jobs:
-  - {fileID: 1221848223218196423}
-  - {fileID: 3287862889406967715}
-  - {fileID: 3211569239277140131}
   agent: {fileID: 8819683794906953762}
   playerManager: {fileID: 0}
   playerController: {fileID: 0}
@@ -2535,7 +2535,6 @@ MonoBehaviour:
   playerNameText: {fileID: 8819683795691413026}
   isDead: 0
   isWorking: 0
-  currentJob: 
   inventorySize: 15
 --- !u!195 &8819683794906953762
 NavMeshAgent:
@@ -2547,10 +2546,10 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 7
-  m_Acceleration: 3
+  m_Speed: 10
+  m_Acceleration: 5
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 400
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1

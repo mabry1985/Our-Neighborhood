@@ -5,6 +5,7 @@ public class Farm : GAction
 {
 
     public GInventory inv;
+    public GAgent gAgent;
     public Player player;
     public Bot bot;
 
@@ -13,11 +14,13 @@ public class Farm : GAction
 
         player = gameObject.transform.parent.parent.GetComponent<Player>();
         bot = gameObject.transform.parent.parent.GetComponent<Bot>();
-        //this.GetComponent<GAgent>().beliefs.ModifyState("notWorking", -1);
+        gAgent = gameObject.GetComponent<GAgent>();
+
         if (gameObject.transform.parent.parent.tag == "Player")
         {   
             inv = player.inventory;
-            if (inv.invSpace == 0) {
+            if (inv.invSpace == 0) 
+            {
                 player.ChangeJobs("Idle", null);
                 return false;
             }
@@ -40,8 +43,18 @@ public class Farm : GAction
         bot = gameObject.transform.parent.parent.GetComponent<Bot>();
 
         var material = gameObject.GetComponent<Farmer>().material;
-            print($"{player.playerName} is farming " + material);
+        print($"{player.playerName} is farming " + material);
         
+        if (gAgent.distanceToTarget > 2f)
+            return false;
+
+        AddToInventory(material);
+        return true;
+    }
+
+
+    public void AddToInventory(string material)
+    {
         if (gameObject.transform.parent.parent.tag == "Player")
         {
             inv = player.inventory;
@@ -55,11 +68,7 @@ public class Farm : GAction
 
         if (inv.items.ContainsKey(material))
             inv.items[material] = inv.items[material] += 1;
-        else 
+        else
             inv.AddItem(material, 1);
-
-        //this.GetComponent<GAgent>().beliefs.ModifyState("notWorking", 1);
-
-        return true;
     }
 }
