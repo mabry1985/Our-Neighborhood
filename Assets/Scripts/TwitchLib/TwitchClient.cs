@@ -3,8 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using TwitchLib.Unity;
 using TwitchLib.Client.Models;
-using UnityEngine;
 using TwitchLib.Client.Events;
+using UnityEngine;
 
 public class TwitchClient : MonoBehaviour
 {
@@ -36,7 +36,7 @@ public class TwitchClient : MonoBehaviour
     
     private void OnUserJoined(object sender, OnUserJoinedArgs e)
     {   
-        print(e.Username);
+        //print(e.Username);
         if (e.Username != "our_neighborhood_bot" && e.Username != "our_neighborhood") {
             client.SendMessage(client.JoinedChannels[0], $"Welcome, {e.Username}, type !join to catch the next train into our neighborhood");
 

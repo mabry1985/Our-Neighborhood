@@ -12,22 +12,21 @@ public class Bot : MonoBehaviour
     public NavMeshAgent agent;
     public Canvas botNameCanvas;
     public string botName;
+    public string currentJob;
+    public int botID;
     public Text botNameText;
     public static Bot instance;
 
     public BotManager botManager;
-    public Inventory inventory;
 
-    public GameObject idle;
-    public GameObject baker;
-    public GameObject farmer;
-
-    public int botID;
+    public GInventory inventory = new GInventory();
+    public int inventorySize = 5;
 
     private enum Job
     {
         Idle,
-        Baker,
+        GoHome,
+       // Baker,
         Farmer
     }
 
@@ -35,7 +34,7 @@ public class Bot : MonoBehaviour
 
     private void Start()
     {
-        inventory.name = this.botName;
+        //inventory.name = this.botName;
     }
 
     private void Awake()
@@ -47,7 +46,8 @@ public class Bot : MonoBehaviour
 
         var playerRenderer = gameObject.GetComponent<Renderer>();
         playerRenderer.material.SetColor("_Color", Color.black);
-        JobSwitch("Idle");
+        
+        JobSwitch("Idle", null);
     }
 
     void LateUpdate()
@@ -55,36 +55,47 @@ public class Bot : MonoBehaviour
         botNameCanvas.transform.rotation = Camera.main.transform.rotation;
     }
 
-    public void JobSwitch(string job)
+    public void JobSwitch(string job, string material)
     {
         var jobEnum = Enum.Parse(typeof(Job), job);
 
         switch (jobEnum)
         {
             case Job.Idle:
-                ChangeJobs(job);
+                ChangeJobs(job, material);
                 break;
-            case Job.Baker:
-                ChangeJobs(job);
+            case Job.GoHome:
+                ChangeJobs(job, material);
                 break;
+            // case Job.Baker:
+            //     ChangeJobs(job, material);
+            //     break;
             case Job.Farmer:
-                ChangeJobs(job);
+                ChangeJobs(job, material);
                 break;
             default:
                 break;
         }
     }
 
-    private void ChangeJobs(string job)
+    public void ChangeJobs(string job, string material)
     {
+        this.currentJob = job;
+
         var jobCount = Enum.GetNames(typeof(Job)).Length;
 
         for (int i = 0; i < jobCount; i++)
         {
             if (jobs[i].tag == job)
             {
+                if (job == "Farmer")
+                {
+                    jobs[i].GetComponent<Farmer>().material = material;
+                    jobs[i].GetComponent<Farm>().targetTag = material;
+                    jobs[i].GetComponent<Farm>().afterEffects[0].key = "farm" + material;
+                }
+
                 jobs[i].SetActive(true);
-                print(jobs[i] + "set active to true!");
             }
             else if (jobs[i].tag != job)
             {

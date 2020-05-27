@@ -12,7 +12,7 @@ public class Ping : MonoBehaviour
     Vector3 posOffset = new Vector3();
     Vector3 tempPos = new Vector3();
 
-    private void Awake() {
+    private void OnEnable() {
         StartCoroutine(TriggerPing());
     }
 

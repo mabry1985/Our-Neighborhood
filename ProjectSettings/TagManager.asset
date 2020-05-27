@@ -14,13 +14,24 @@ TagManager:
   - Farm Door
   - Market
   - Market Door
-  - 'test '
   - Windmill
   - Player Manager
   - Enter Station Trigger
   - Spawn Trigger
   - Passenger Train
   - Passenger Track
+  - Stone
+  - Bot
+  - Home
+  - GoHome
+  - Wheat
+  - Streamer
+  - Wood
+  - Water
+  - Corn
+  - input_window_title
+  - Rag Doll
+  - Jobs
   layers:
   - Default
   - TransparentFX
@@ -30,7 +41,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Ignore NavMesh
   - 
   - 
   - 

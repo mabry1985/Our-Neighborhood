@@ -7,7 +7,7 @@ public class Idle : MonoBehaviour
 {
     public NavMeshAgent agent;
 
-    void Awake()
+    void OnEnable()
     {
         StartCoroutine(Wander());
     }
@@ -18,7 +18,8 @@ public class Idle : MonoBehaviour
         {
             yield return new WaitForSeconds(2);
             Vector3 newPos = RandomNavSphere(transform.position, 5, -1);
-            agent.SetDestination(newPos);
+            if (!agent.GetComponent<Player>().isDead)
+                agent.SetDestination(newPos);
         }
     }
 

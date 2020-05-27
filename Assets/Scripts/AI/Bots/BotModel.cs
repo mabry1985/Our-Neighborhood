@@ -7,6 +7,7 @@ public struct BotModel
     public string botName;
     public int botLvl;
     public string jobType;
+    public string material;
 
     public float botXP;
     public int botMoney;
