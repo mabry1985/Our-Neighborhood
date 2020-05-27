@@ -8,7 +8,6 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    public List<GameObject> jobs;
     public NavMeshAgent agent;
     public GInventory inventory;
     public PlayerManager playerManager;
@@ -25,7 +24,6 @@ public class Player : MonoBehaviour
     public bool isDead = false;
     public bool isWorking = false;
     
-    public string currentJob;
     public int inventorySize = 5;
 
     private enum Job
@@ -93,7 +91,6 @@ public class Player : MonoBehaviour
 
     public void ChangeJobs(string job, string material)
     {
-        this.currentJob = job;
         var jobCount = Enum.GetNames(typeof(Job)).Length;
         var gAgents = transform.GetChild(0).GetComponentsInChildren<GAgent>(true);
 
