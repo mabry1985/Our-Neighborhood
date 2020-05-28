@@ -109,6 +109,12 @@ public class Player : MonoBehaviour
                 {
                     HandleFarmer(material, gameObject);
                 }
+
+                if (job == "Crafter")
+                {
+                    HandleCrafter(material, gameObject);
+                }
+
                 gameObject.SetActive(true);
             }
         }
@@ -126,6 +132,13 @@ public class Player : MonoBehaviour
             farm.target = d; 
             farm.afterEffects[0].key = "farm" + material;
         }
+    }
+
+    private void HandleCrafter(string material, GameObject job)
+    {
+        var getMaterials = job.GetComponent<GetMaterials>();
+        var goToWorkshop = job.GetComponent<GoToWorkshop>();
+        job.GetComponent<Crafter>().material = material;  
     }
 
     public void OnDeath() 

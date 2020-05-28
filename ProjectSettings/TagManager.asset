@@ -32,6 +32,8 @@ TagManager:
   - input_window_title
   - Rag Doll
   - Jobs
+  - Crafter
+  - Workshop
   layers:
   - Default
   - TransparentFX

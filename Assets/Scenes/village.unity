@@ -18322,7 +18322,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1470748614}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14.83, y: 0.9, z: 0.1}
+  m_LocalPosition: {x: 15.99, y: 0.63, z: 0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1644187380}
@@ -18335,7 +18335,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1470748614}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -29720,8 +29720,8 @@ GameObject:
   - component: {fileID: 4892172804456323204}
   - component: {fileID: 4892172804454123077}
   m_Layer: 0
-  m_Name: Bakery
-  m_TagString: Untagged
+  m_Name: Workshop
+  m_TagString: Workshop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 9
