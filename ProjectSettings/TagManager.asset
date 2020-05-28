@@ -35,6 +35,7 @@ TagManager:
   - Crafter
   - Workshop
   - Campfire
+  - Warmth
   layers:
   - Default
   - TransparentFX

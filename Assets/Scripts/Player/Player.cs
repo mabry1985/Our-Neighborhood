@@ -12,8 +12,12 @@ public class Player : MonoBehaviour
     public GInventory inventory;
     public PlayerManager playerManager;
     public PlayerController playerController;
+    public PlaceableItemManager placeableItemManager;
     public Animator animator;
     public Transform home;
+
+    public GameObject questionMark;
+    public GameObject itemSpawnPoint;
 
     public static Player instance;
    
@@ -39,10 +43,11 @@ public class Player : MonoBehaviour
     private void Start() {
         animator = this.GetComponentInChildren<Animator>();
         playerController = this.GetComponent<PlayerController>();
+        placeableItemManager = GameObject.Find("PlaceableItemManager").GetComponent<PlaceableItemManager>();
         home = playerManager.spawnPoint;
 
         playerManager.playerReferences[playerID] = this;
-        inventory = new GInventory();
+        inventory = new GInventory() {};
         inventory.invSpace = inventorySize;
         inventory.player = this;
     }
@@ -138,6 +143,27 @@ public class Player : MonoBehaviour
         var getMaterials = job.GetComponent<GetMaterials>();
         var goToWorkshop = job.GetComponent<GoToWorkshop>();
         job.GetComponent<Crafter>().material = material;  
+    }
+
+    public void PlaceItem(string i)
+    {
+        if (inventory.items.ContainsKey(i))
+        {
+            inventory.items[i] -= 1;
+            inventory.invSpace += 1;
+
+            if(inventory.items[i] == 0)
+            {
+                inventory.items.Remove(i);
+            }
+            
+            Instantiate(placeableItemManager.campfirePrefab, itemSpawnPoint.transform.position, transform.rotation);
+        }
+        else
+        {
+            questionMark.SetActive(true);
+        }
+
     }
 
     public void OnDeath() 

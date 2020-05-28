@@ -9,7 +9,7 @@ public class ResourceUIManager : MonoBehaviour
     public TMPro.TextMeshProUGUI money;
     public TMPro.TextMeshProUGUI population;
     public TMPro.TextMeshProUGUI food;
-    public TMPro.TextMeshProUGUI meds;
+    public TMPro.TextMeshProUGUI water;
     public TMPro.TextMeshProUGUI wheat;
     public TMPro.TextMeshProUGUI wood;
     public TMPro.TextMeshProUGUI stone;
@@ -35,7 +35,7 @@ public class ResourceUIManager : MonoBehaviour
         money.text = $"$ {worldInventory["Money"]}";
         population.text = $"Pop: {spawnedPlayers.Count}/{worldInventory["Population"]}";
         food.text = $"Food: {worldInventory["Food"]}";
-        meds.text = $"Meds: {worldInventory["Meds"]}";
+        water.text = $"Water: {worldInventory["Water"]}";
         wheat.text = $"Wheat: {worldInventory["Wheat"]}";
         wood.text = $"Wood: {worldInventory["Wood"]}";
         stone.text = $"Stone: {worldInventory["Stone"]}";

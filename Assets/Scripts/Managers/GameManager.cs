@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public TwitchClient client;
     public TwitchAPI api;
     public PlayerManager playerManager;
+    public PlaceableItemManager placeableItemManager;
     public BotManager botManager;
 
     // Start is called before the first frame update

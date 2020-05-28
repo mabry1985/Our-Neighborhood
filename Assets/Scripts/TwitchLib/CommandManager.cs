@@ -53,6 +53,10 @@ public class CommandManager : MonoBehaviour
                 if (!player.isDead && player != null)
                     HandleInv(id, client, name);
                 break;
+            case "Place" :
+                if (!player.isDead && player != null)
+                    player.PlaceItem(arg[0]);
+                break;
             case "Cancel":
                 if (!player.isDead && player != null)
                     player.ChangeJobs("Idle", null);
@@ -107,5 +111,9 @@ public class CommandManager : MonoBehaviour
         if (items.Length > 3)
             client.SendMessage(client.JoinedChannels[0], $"{items}");
     }
+
+    // public void HandlePlace(int id, Client client, string name) {
+
+    // }
 
 }
