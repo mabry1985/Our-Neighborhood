@@ -55,7 +55,8 @@ public class CommandManager : MonoBehaviour
                 break;
             case "Place" :
                 if (!player.isDead && player != null)
-                    player.PlaceItem(arg[0]);
+                    if (player.placeableItemManager.placeableItems.Contains(arg[0]))
+                        player.PlaceItem(arg[0]);
                 break;
             case "Cancel":
                 if (!player.isDead && player != null)

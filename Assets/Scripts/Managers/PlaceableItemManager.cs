@@ -6,6 +6,10 @@ public class PlaceableItemManager : MonoBehaviour
 {
     public GameObject campfirePrefab;
 
-    
+    public List<string> placeableItems = new List<string>()
+    {
+        "Campfire"
+    };
+
 
 }
