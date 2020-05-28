@@ -4,45 +4,67 @@ using UnityEngine;
 
 public class GetMaterials : GAction
 {
-    public GInventory inv;
-    public GAgent gAgent;
-    public Player player;
-    public Bot bot;
-    public List<KeyValuePair<string, int>> craftingMaterials = new List<KeyValuePair<string, int>>();
+    private GInventory inv;
+    private GAgent gAgent;
+    private Player player;
+    private Bot bot;
+    private List<KeyValuePair<string, int>> craftingMaterials = new List<KeyValuePair<string, int>>();
+    private Crafter job;
+    private string material;
+    private bool hasMaterial;
 
     public override bool PrePerform()
     {
-        return true;
-    }
-    public override bool PostPerform()
-
-    {
+        job = this.gameObject.GetComponent<Crafter>();
+        material = job.material;
+        hasMaterial = false;
         player = gameObject.transform.parent.parent.GetComponent<Player>();
         bot = gameObject.transform.parent.parent.GetComponent<Bot>();
         gAgent = gameObject.GetComponent<GAgent>();
-        var job = this.gameObject.GetComponent<Crafter>();
-        var material = job.material;
-        var hasMaterial = false;
-
 
         craftingMaterials = CraftingRecipes.recipes[material];
+
         if (gameObject.transform.parent.parent.tag == "Player")
         {
             inv = player.inventory;
-            if (inv.invSpace == 0)
-            {
-                player.ChangeJobs("Idle", null);
-                return false;
-            }
         }
         else if (gameObject.transform.parent.parent.tag == "Bot")
         {
             inv = bot.inventory;
-            if (inv.invSpace == 0)
+        }
+
+        foreach (KeyValuePair<string, int> item in craftingMaterials)
+        {
+            if (GWorld.worldInventory.items[item.Key] < item.Value)
             {
-                bot.ChangeJobs("Idle", null);
                 return false;
             }
+            //if you have ALL of this particular material
+            if (inv.items.ContainsKey(item.Key) && inv.items[item.Key] >= item.Value)
+                hasMaterial = true;
+            else
+                hasMaterial = false;
+        }
+
+        if (hasMaterial) {
+            this.GetComponent<GAgent>().beliefs.ModifyState("hasMaterials", 1);
+            return false;
+        }
+
+        return true;
+    }
+    public override bool PostPerform()
+    {
+        craftingMaterials = CraftingRecipes.recipes[material];
+        if (gameObject.transform.parent.parent.tag == "Player" && inv.invSpace == 0)
+        {
+            player.ChangeJobs("Idle", null);
+            return false;      
+        }
+        else if (gameObject.transform.parent.parent.tag == "Bot" && inv.invSpace == 0)
+        {
+            bot.ChangeJobs("Idle", null);
+            return false;
         }
 
         foreach (KeyValuePair<string, int> item in craftingMaterials)
@@ -60,9 +82,6 @@ public class GetMaterials : GAction
             if (!hasMaterial)
                 AddToInventory(item.Key, item.Value);
         }
-
-        //if (gAgent.distanceToTarget > 2f)
-          //  return false;
 
         this.GetComponent<GAgent>().beliefs.ModifyState("hasMaterials", 1);
         return true;

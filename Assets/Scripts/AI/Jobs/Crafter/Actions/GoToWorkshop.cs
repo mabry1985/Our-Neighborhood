@@ -21,7 +21,6 @@ public class GoToWorkshop : GAction
         var hasMaterial = false;
         craftingMaterials = CraftingRecipes.recipes[material];
         
-        print("in preperfom with materia " + material);
         if (gameObject.transform.parent.parent.tag == "Player")
         {
             inv = player.inventory;
@@ -62,7 +61,6 @@ public class GoToWorkshop : GAction
             }
         }
 
-        print("adding to inventory" + material);
         AddToInventory(material, 1);
 
         this.GetComponent<GAgent>().beliefs.ModifyState("hasMaterials", -1);
@@ -85,7 +83,6 @@ public class GoToWorkshop : GAction
             }
             else
                 return false;
-
         }
         // else if (gameObject.transform.parent.parent.tag == "Bot")
         // {
@@ -98,6 +95,7 @@ public class GoToWorkshop : GAction
         //     GWorld.worldInventory.items[material] -= newAmount;
         // }
 
+        player.ChangeJobs("Idle", null);
         return true;
 
     }

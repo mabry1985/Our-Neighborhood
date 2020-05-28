@@ -19,7 +19,7 @@ public class Crafter : GAgent
     new void Start()
     {
         base.Start();
-        SubGoal s1 = new SubGoal("craftedItem", 1, true);
+        SubGoal s1 = new SubGoal("craftedItem", 1, false);
         goals.Add(s1, 3);
         SubGoal s2 = new SubGoal("isSafe", 1, false);
         goals.Add(s2, 5);

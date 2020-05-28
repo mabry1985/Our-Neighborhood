@@ -56,7 +56,6 @@ public class Player : MonoBehaviour
         }
 
         var playerRenderer = gameObject.GetComponentInChildren<Renderer>();
-        playerRenderer.material.SetColor("_Color", Color.black);
     }
 
     void LateUpdate()
