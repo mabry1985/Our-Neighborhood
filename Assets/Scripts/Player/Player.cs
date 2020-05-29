@@ -29,6 +29,7 @@ public class Player : MonoBehaviour
     public bool isWorking = false;
     public bool isStanding = true;
     public bool following = false;
+    public bool isChopping = false;
     
     public int inventorySize = 5;
 
@@ -100,7 +101,8 @@ public class Player : MonoBehaviour
 
     public void Mining()
     {
-        animator.SetBool("isChopping", true);
+        isChopping = !isChopping;
+        animator.SetBool("isChopping", !isChopping);
         agent.enabled = false;
     }
 
