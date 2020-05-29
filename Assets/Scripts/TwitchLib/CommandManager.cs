@@ -27,37 +27,60 @@ public class CommandManager : MonoBehaviour
         switch (command)
         {
             case "Farm":
-                if (!player.isDead)
+                if (!player.isDead && player != null)
                     player.ChangeJobs("Farmer", arg[0]);
                 break;
-            case "Bot":
-                botManager.OnBotCommand(arg);
+            case "Craft":
+                if (!player.isDead && player != null && CraftingRecipes.recipes.ContainsKey(arg[0]))
+                    player.ChangeJobs("Crafter", arg[0]);
                 break;
             case "Join":
                 HandleJoin(id, name, client);
                 break;
             case "Ping":
-                if (!player.isDead)
+                if (!player.isDead && player != null)
                     player.transform.GetChild(3).gameObject.SetActive(true);
                 break;
             case "Home":
-                if (!player.isDead)
+                if (!player.isDead && player != null)
                     player.ChangeJobs("GoHome", null);
                 break;
             case "Worldinv":
+                if (!player.isDead && player != null)
                 HandleWorldInv(id, client, name);
                 break;
             case "Inv" :
-                HandleInv(id, client, name);
+                if (!player.isDead && player != null)
+                    HandleInv(id, client, name);
+                break;
+            case "Place" :
+                if (!player.isDead && player != null)
+                    if (player.placeableItemManager.placeableItems.ContainsKey(arg[0]))
+                        player.PlaceItem(arg[0]);
+                break;
+            case "Sit" :
+                if (!player.isDead && player != null && player.isStanding)
+                    player.SitDown();
+                break;
+            case "Stand" :
+                if (!player.isDead && player != null && !player.isStanding)
+                    player.SitDown();
+                break;
+            case "Follow" :
+                if (!player.isDead && player != null)
+                    player.following = !player.following;
                 break;
             case "Cancel":
-                if (!player.isDead)
+                if (!player.isDead && player != null)
                     player.ChangeJobs("Idle", null);
                 break;
             case "Test":
                 var playerModel = playerManager.CreatePlayerModel(name, id);
                 playerManager.AddToPlayersDictionary(playerModel);
                 playerManager.PlayerSpawn(playerModel);
+                break;
+            case "Bot":
+                botManager.OnBotCommand(arg);
                 break;
             default:
                 break;
@@ -101,5 +124,9 @@ public class CommandManager : MonoBehaviour
         if (items.Length > 3)
             client.SendMessage(client.JoinedChannels[0], $"{items}");
     }
+
+    // public void HandlePlace(int id, Client client, string name) {
+
+    // }
 
 }

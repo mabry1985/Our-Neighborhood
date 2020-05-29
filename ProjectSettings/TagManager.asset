@@ -32,6 +32,10 @@ TagManager:
   - input_window_title
   - Rag Doll
   - Jobs
+  - Crafter
+  - Workshop
+  - Campfire
+  - Warmth
   layers:
   - Default
   - TransparentFX

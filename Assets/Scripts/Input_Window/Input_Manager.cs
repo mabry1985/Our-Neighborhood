@@ -47,7 +47,7 @@ public class Input_Manager : MonoBehaviour
     #region Private Methods
     private void OpenCommandWindow()
     {
-        if (Input.GetButtonDown("Input"))
+        if (Input.GetKeyDown(KeyCode.Return))
         {
             if (windowBool)
             {

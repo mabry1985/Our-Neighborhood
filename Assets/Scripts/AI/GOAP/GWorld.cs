@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ResourceQueue
@@ -28,6 +29,11 @@ public class ResourceQueue
     public void AddResource(GameObject r)
     {
         que.Enqueue(r);
+    }
+
+    public void RemoveResource(GameObject r)
+    {
+        que = new Queue<GameObject>(que.Where(p => p != r));
     }
 
     public GameObject RemoveResource()
@@ -60,10 +66,10 @@ public sealed class GWorld
         worldInventory.items.Add("Money", 0);
         worldInventory.items.Add("Population", 10);
         worldInventory.items.Add("Food", 0);
-        worldInventory.items.Add("Meds", 0);
-        worldInventory.items.Add("Wheat", 0);
-        worldInventory.items.Add("Wood", 0);
-        worldInventory.items.Add("Stone", 0);
+        worldInventory.items.Add("Water", 0);
+        worldInventory.items.Add("Wheat", 20);
+        worldInventory.items.Add("Wood", 25);
+        worldInventory.items.Add("Stone", 30);
         worldInventory.items.Add("Iron", 0);
 
         // money = new ResourceQueue("", "", world);
