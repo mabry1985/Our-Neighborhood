@@ -23,7 +23,7 @@ public static class CraftingRecipes
             new KeyValuePair<string, int>("Wheat", 5)
         };
 
-        recipes.Add("Food", materials);
+        recipes.Add("Bread", materials);
 
 
     }

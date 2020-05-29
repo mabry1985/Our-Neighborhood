@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 4961758313907634603}
   - component: {fileID: 4620062738306642888}
   - component: {fileID: 2290816232741551012}
+  - component: {fileID: 7757432027688948014}
+  - component: {fileID: 2942632068787762108}
   m_Layer: 0
   m_Name: Crafter
   m_TagString: Crafter
@@ -32,7 +34,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 9080208968154443188}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8261337414296966740
 MonoBehaviour:
@@ -111,6 +113,56 @@ MonoBehaviour:
     value: 0
   agent: {fileID: 0}
   running: 0
+--- !u!114 &7757432027688948014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 469634360735062792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c31387142956a1499d6a7f5735d97d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: Action
+  cost: 1
+  target: {fileID: 0}
+  targetTag: Warmth
+  duration: 10
+  preConditions:
+  - key: isCold
+    value: 0
+  afterEffects:
+  - key: isWarm
+    value: 0
+  agent: {fileID: 0}
+  running: 0
+--- !u!114 &2942632068787762108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 469634360735062792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e80aacb5332209e45801c65c673d96a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: Action
+  cost: 1
+  target: {fileID: 0}
+  targetTag: Streamer
+  duration: 10
+  preConditions:
+  - key: isLonely
+    value: 0
+  afterEffects:
+  - key: hasFriend
+    value: 0
+  agent: {fileID: 0}
+  running: 0
 --- !u!1 &1004721353689420178
 GameObject:
   m_ObjectHideFlags: 0
@@ -143,92 +195,6 @@ Transform:
   m_Father: {fileID: 3690598538115315818}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1221848223218196423
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4639666652668125099}
-  - component: {fileID: 7504601194714355359}
-  - component: {fileID: 8161469451185384770}
-  - component: {fileID: 3170487354482441360}
-  m_Layer: 0
-  m_Name: Idle
-  m_TagString: Idle
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4639666652668125099
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1221848223218196423}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.28380966, y: -4.61, z: 0}
-  m_LocalScale: {x: 2.0272, y: 2.0272, z: 2.0272}
-  m_Children: []
-  m_Father: {fileID: 9080208968154443188}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7504601194714355359
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1221848223218196423}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8342f132e9b418347ad81656290cdad0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agent: {fileID: 8819683794906953762}
---- !u!114 &8161469451185384770
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1221848223218196423}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90cee7a1fdf5e6748a348dfad758d7f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  actionName: Action
-  cost: 1
-  target: {fileID: 0}
-  targetTag: Home
-  duration: 5
-  preConditions:
-  - key: inDanger
-    value: 5
-  afterEffects:
-  - key: isSafe
-    value: 5
-  agent: {fileID: 0}
-  running: 0
---- !u!114 &3170487354482441360
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1221848223218196423}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d1585eb02a4aad4ca4eb3b290324fc6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  actions: []
-  currentAction: {fileID: 0}
-  distanceToTarget: 0
 --- !u!1 &1365365312696860982
 GameObject:
   m_ObjectHideFlags: 0
@@ -745,7 +711,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 0, z: -1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.000000037252978, y: 0.31198844, z: 0.000000018626476}
+  m_ConnectedAnchor: {x: 0.000000044703576, y: 0.31198847, z: 0.00000002235177}
   serializedVersion: 2
   m_SwingAxis: {x: -1, y: 0, z: 0}
   m_TwistLimitSpring:
@@ -791,14 +757,14 @@ GameObject:
   - component: {fileID: 3821231172790823935}
   - component: {fileID: 369121259721807079}
   - component: {fileID: 4204752717329720188}
-  - component: {fileID: 7121868456585443746}
+  - component: {fileID: 6463326923503605325}
   m_Layer: 0
   m_Name: GoHome
   m_TagString: GoHome
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8188538624323776168
 Transform:
   m_ObjectHideFlags: 0
@@ -811,7 +777,7 @@ Transform:
   m_LocalScale: {x: 2.0272, y: 2.0272, z: 2.0272}
   m_Children: []
   m_Father: {fileID: 9080208968154443188}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3821231172790823935
 MonoBehaviour:
@@ -863,8 +829,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aca5c26451d768a438d8f570463954bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thisAgent: {fileID: 0}
---- !u!114 &7121868456585443746
+  thisAgent: {fileID: 3821231172790823935}
+--- !u!114 &6463326923503605325
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -873,20 +839,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 3211569239277140131}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90cee7a1fdf5e6748a348dfad758d7f4, type: 3}
+  m_Script: {fileID: 11500000, guid: 3c31387142956a1499d6a7f5735d97d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   actionName: Action
   cost: 1
   target: {fileID: 0}
-  targetTag: Home
-  duration: 5
+  targetTag: Warmth
+  duration: 10
   preConditions:
-  - key: inDanger
-    value: 5
+  - key: isCold
+    value: 0
   afterEffects:
-  - key: isSafe
-    value: 5
+  - key: isWarm
+    value: 0
   agent: {fileID: 0}
   running: 0
 --- !u!1 &3287862889406967715
@@ -902,6 +868,8 @@ GameObject:
   - component: {fileID: 3287862889406967713}
   - component: {fileID: 3287862889406967712}
   - component: {fileID: 6860429516657895625}
+  - component: {fileID: 7727218874979125584}
+  - component: {fileID: 3961379223133277238}
   m_Layer: 0
   m_Name: Farmer
   m_TagString: Farmer
@@ -921,7 +889,7 @@ Transform:
   m_LocalScale: {x: 2.0272, y: 2.0272, z: 2.0272}
   m_Children: []
   m_Father: {fileID: 9080208968154443188}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4789092432901381329
 MonoBehaviour:
@@ -1001,6 +969,56 @@ MonoBehaviour:
   afterEffects:
   - key: isSafe
     value: 5
+  agent: {fileID: 0}
+  running: 0
+--- !u!114 &7727218874979125584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3287862889406967715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c31387142956a1499d6a7f5735d97d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: Action
+  cost: 1
+  target: {fileID: 0}
+  targetTag: Warmth
+  duration: 10
+  preConditions:
+  - key: isCold
+    value: 0
+  afterEffects:
+  - key: isWarm
+    value: 0
+  agent: {fileID: 0}
+  running: 0
+--- !u!114 &3961379223133277238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3287862889406967715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e80aacb5332209e45801c65c673d96a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: Action
+  cost: 1
+  target: {fileID: 0}
+  targetTag: Streamer
+  duration: 10
+  preConditions:
+  - key: isLonely
+    value: 0
+  afterEffects:
+  - key: hasFriend
+    value: 0
   agent: {fileID: 0}
   running: 0
 --- !u!1 &3349594664361184670
@@ -1852,7 +1870,6 @@ Transform:
   m_LocalPosition: {x: 0.14000082, y: 1.4399781, z: 0}
   m_LocalScale: {x: 0.49329123, y: 0.49329123, z: 0.49329123}
   m_Children:
-  - {fileID: 4639666652668125099}
   - {fileID: 3287862889406967721}
   - {fileID: 8188538624323776168}
   - {fileID: 151495799224468833}
@@ -2668,6 +2685,7 @@ MonoBehaviour:
   playerNameText: {fileID: 8819683795691413026}
   isDead: 0
   isWorking: 0
+  isStanding: 1
   inventorySize: 20
 --- !u!195 &8819683794906953762
 NavMeshAgent:
@@ -2679,10 +2697,10 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 5
-  m_Acceleration: 5
+  m_Speed: 10
+  m_Acceleration: 15
   avoidancePriority: 50
-  m_AngularSpeed: 455
+  m_AngularSpeed: 1000
   m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1

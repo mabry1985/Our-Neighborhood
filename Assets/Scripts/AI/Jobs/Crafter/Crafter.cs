@@ -23,6 +23,10 @@ public class Crafter : GAgent
         goals.Add(s1, 3);
         SubGoal s2 = new SubGoal("isSafe", 1, false);
         goals.Add(s2, 5);
+        SubGoal s3 = new SubGoal("isWarm", 1, false);
+        goals.Add(s3, 4);
+        SubGoal s4 = new SubGoal("isLonely", 1, false);
+        goals.Add(s4, 4);
 
         //this.GetComponent<GAgent>().beliefs.ModifyState("notWorking", 1);
         //Invoke("GetTired", Random.Range(2.0f, 20.0f))

@@ -17,8 +17,6 @@ public class PlayerController : MonoBehaviour
     private bool freeCamToggle = false;
     private bool showResourceCanvase = true;
 
-    private bool isStanding = true;
-
     private void Start() {
         brain = cam.GetComponent<Cinemachine.CinemachineBrain>();
         vcam = brain.GetComponent<Cinemachine.CinemachineFreeLook>();
@@ -45,26 +43,21 @@ public class PlayerController : MonoBehaviour
                 if (pawn != null && !player.isDead)
                     player.OnDeath(); 
             };
-            //pawn.GetComponentInChildren<GAgent>().beliefs.ModifyState("inDanger", 1);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            var pawns = GameObject.FindGameObjectsWithTag("Player");
+
+            foreach (var pawn in pawns)
+            {
+            pawn.GetComponentInChildren<GAgent>().beliefs.ModifyState("isCold", 1);
+            };
         }
 
         if (Input.GetKeyDown(KeyCode.C))
-        {   
-            if(isStanding)
-            {
-                //animator.SetFloat("speedPercent", 0.0f);
-                animator.SetBool("isSittingGround", true);
-                animator.SetBool("isStanding", false);
-                agent.enabled = false;
-                isStanding = false;
-            }
-            else
-            {
-                animator.SetBool("isSittingGround", false);
-                animator.SetBool("isStanding", true);
-                isStanding = true;
-            }
-
+        {
+            agent.transform.GetComponentInParent<Player>().SitDown();
         }
 
         if (Input.GetMouseButton(1))

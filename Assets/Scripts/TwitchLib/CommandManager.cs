@@ -31,7 +31,7 @@ public class CommandManager : MonoBehaviour
                     player.ChangeJobs("Farmer", arg[0]);
                 break;
             case "Craft":
-                if (!player.isDead && player != null)
+                if (!player.isDead && player != null && CraftingRecipes.recipes.ContainsKey(arg[0]))
                     player.ChangeJobs("Crafter", arg[0]);
                 break;
             case "Join":
@@ -55,8 +55,20 @@ public class CommandManager : MonoBehaviour
                 break;
             case "Place" :
                 if (!player.isDead && player != null)
-                    if (player.placeableItemManager.placeableItems.Contains(arg[0]))
+                    if (player.placeableItemManager.placeableItems.ContainsKey(arg[0]))
                         player.PlaceItem(arg[0]);
+                break;
+            case "Sit" :
+                if (!player.isDead && player != null && player.isStanding)
+                    player.SitDown();
+                break;
+            case "Stand" :
+                if (!player.isDead && player != null && !player.isStanding)
+                    player.SitDown();
+                break;
+            case "Follow" :
+                if (!player.isDead && player != null)
+                    player.following = !player.following;
                 break;
             case "Cancel":
                 if (!player.isDead && player != null)

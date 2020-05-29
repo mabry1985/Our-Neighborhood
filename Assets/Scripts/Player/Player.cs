@@ -27,6 +27,8 @@ public class Player : MonoBehaviour
     public Text playerNameText;
     public bool isDead = false;
     public bool isWorking = false;
+    public bool isStanding = true;
+    public bool following = false;
     
     public int inventorySize = 5;
 
@@ -66,6 +68,33 @@ public class Player : MonoBehaviour
     void LateUpdate()
     {
         playerNameCanvas.transform.rotation = Camera.main.transform.rotation;
+
+        if(following)
+            //reference streamer in gamemanager 
+            agent.SetDestination(GameObject.Find("Streamer").transform.position);
+    }
+
+    public void SitDown()
+    {
+        if (isStanding)
+        {
+            //animator.SetFloat("speedPercent", 0.0f);
+            animator.SetBool("isSittingGround", true);
+            animator.SetBool("isStanding", false);
+            agent.enabled = false;
+            isStanding = false;
+        }
+        else
+        {
+            animator.SetBool("isSittingGround", false);
+            animator.SetBool("isStanding", true);
+            isStanding = true;
+        }
+    }
+
+    public void FindFriend()
+    {
+        transform.GetChild(0).GetComponentInChildren<GAgent>().beliefs.ModifyState("isLonely", 1);
     }
 
     public void JobSwitch(List<string> arg)
@@ -140,6 +169,7 @@ public class Player : MonoBehaviour
 
     private void HandleCrafter(string material, GameObject job)
     {
+        
         var getMaterials = job.GetComponent<GetMaterials>();
         var goToWorkshop = job.GetComponent<GoToWorkshop>();
         job.GetComponent<Crafter>().material = material;  
@@ -147,6 +177,7 @@ public class Player : MonoBehaviour
 
     public void PlaceItem(string i)
     {
+        PlaceableItem placeableItem = new PlaceableItem();
         if (inventory.items.ContainsKey(i))
         {
             inventory.items[i] -= 1;
@@ -156,14 +187,23 @@ public class Player : MonoBehaviour
             {
                 inventory.items.Remove(i);
             }
-            
-            Instantiate(placeableItemManager.campfirePrefab, itemSpawnPoint.transform.position, transform.rotation);
+            if(placeableItemManager.placeableItems.ContainsKey(i))
+            {
+                placeableItem = placeableItemManager.placeableItems[i];
+                print(placeableItem.DecayTime);
+                ItemSpawn(placeableItem.Prefab, placeableItem.DecayTime);
+            }
         }
         else
         {
             questionMark.SetActive(true);
         }
 
+    }
+
+    public void ItemSpawn(GameObject item, int decayTime){
+        var i = Instantiate(item, itemSpawnPoint.transform.position, transform.rotation);
+        Destroy(i, decayTime);
     }
 
     public void OnDeath() 
