@@ -6,7 +6,9 @@ public class PlayerController : MonoBehaviour
     public NavMeshAgent agent;
     public Camera cam;
     private Cinemachine.CinemachineBrain brain;
-    public Cinemachine.CinemachineFreeLook vcam;    
+    public Cinemachine.CinemachineFreeLook vcam;
+
+    Animator animator;
 
     public GameObject resourceOverlayCanvas;
 
@@ -15,9 +17,12 @@ public class PlayerController : MonoBehaviour
     private bool freeCamToggle = false;
     private bool showResourceCanvase = true;
 
+    private bool isStanding = true;
+
     private void Start() {
         brain = cam.GetComponent<Cinemachine.CinemachineBrain>();
         vcam = brain.GetComponent<Cinemachine.CinemachineFreeLook>();
+        animator = agent.GetComponentInChildren<Animator>();
         agent.updateRotation = false;
     }
 
@@ -29,13 +34,37 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.LookRotation(agent.velocity.normalized);
         }
 
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.T))
         {
-            var pawn = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-
-            if (pawn != null && !pawn.isDead)
-                pawn.OnDeath();
+            var pawns = GameObject.FindGameObjectsWithTag("Player");
+            
+            foreach (var pawn in pawns)
+            {
+                var n = Random.Range(0, 100);
+                var player = pawn.GetComponent<Player>();
+                if (pawn != null && !player.isDead)
+                    player.OnDeath(); 
+            };
             //pawn.GetComponentInChildren<GAgent>().beliefs.ModifyState("inDanger", 1);
+        }
+
+        if (Input.GetKeyDown(KeyCode.C))
+        {   
+            if(isStanding)
+            {
+                //animator.SetFloat("speedPercent", 0.0f);
+                animator.SetBool("isSittingGround", true);
+                animator.SetBool("isStanding", false);
+                agent.enabled = false;
+                isStanding = false;
+            }
+            else
+            {
+                animator.SetBool("isSittingGround", false);
+                animator.SetBool("isStanding", true);
+                isStanding = true;
+            }
+
         }
 
         if (Input.GetMouseButton(1))
