@@ -66,6 +66,10 @@ public class CommandManager : MonoBehaviour
                 if (!player.isDead && player != null && !player.isStanding)
                     player.SitDown();
                 break;
+            case "Wave" :
+                if (!player.isDead && player != null && player.isStanding)
+                    player.WaveHello();
+                break;
             case "Follow" :
                 if (!player.isDead && player != null)
                     player.following = !player.following;

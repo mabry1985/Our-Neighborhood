@@ -92,6 +92,18 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void WaveHello()
+    {
+        animator.SetBool("isWaving", true);
+        agent.enabled = false;
+    }
+
+    public void Mining()
+    {
+        animator.SetBool("isChopping", true);
+        agent.enabled = false;
+    }
+
     public void FindFriend()
     {
         transform.GetChild(0).GetComponentInChildren<GAgent>().beliefs.ModifyState("isLonely", 1);
