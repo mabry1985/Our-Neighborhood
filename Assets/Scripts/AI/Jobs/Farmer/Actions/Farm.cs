@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class Farm : GAction
 {
@@ -49,6 +50,7 @@ public class Farm : GAction
             return false;
 
         AddToInventory(material);
+        player.GetComponentInChildren<Animator>().SetBool("isMining", false);
         return true;
     }
 

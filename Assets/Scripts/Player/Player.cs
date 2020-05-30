@@ -102,8 +102,8 @@ public class Player : MonoBehaviour
     public void Mining()
     {
         isChopping = !isChopping;
-        animator.SetBool("isChopping", !isChopping);
-        agent.enabled = false;
+        animator.SetBool("isMining", !isChopping);
+        //agent.enabled = false;
     }
 
     public void FindFriend()
@@ -218,6 +218,14 @@ public class Player : MonoBehaviour
     public void ItemSpawn(GameObject item, int decayTime){
         var i = Instantiate(item, itemSpawnPoint.transform.position, transform.rotation);
         Destroy(i, decayTime);
+    }
+
+    public void FaceTarget(Vector3 destination)
+    {
+        Vector3 lookPos = destination - transform.position;
+        lookPos.y = 0;
+        Quaternion rotation = Quaternion.LookRotation(lookPos);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime);
     }
 
     public void OnDeath() 

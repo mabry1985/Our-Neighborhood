@@ -79,9 +79,7 @@ public class CommandManager : MonoBehaviour
                     player.ChangeJobs("Idle", null);
                 break;
             case "Test":
-                var playerModel = playerManager.CreatePlayerModel(name, id);
-                playerManager.AddToPlayersDictionary(playerModel);
-                playerManager.PlayerSpawn(playerModel);
+                HandleTest(name, id);
                 break;
             case "Bot":
                 botManager.OnBotCommand(arg);
@@ -127,6 +125,16 @@ public class CommandManager : MonoBehaviour
 
         if (items.Length > 3)
             client.SendMessage(client.JoinedChannels[0], $"{items}");
+    }
+
+    public void HandleTest(string name, int id)
+    {
+        if (!playerManager.players.ContainsKey(id))
+        {
+            var playerModel = playerManager.CreatePlayerModel(name, id);
+            playerManager.AddToPlayersDictionary(playerModel);
+            playerManager.PlayerSpawn(playerModel);
+        }
     }
 
     // public void HandlePlace(int id, Client client, string name) {
