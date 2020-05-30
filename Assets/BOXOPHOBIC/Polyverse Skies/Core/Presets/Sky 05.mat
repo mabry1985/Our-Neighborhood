@@ -4,8 +4,9 @@
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Sky 05
   m_Shader: {fileID: 4800000, guid: 6fc9318f5193c094c98c0d450cd61e3b, type: 3}
   m_ShaderKeywords: _BUILTINFOG_ON _CLOUDS_ON _ENABLEBUILTINFOG_ON _ENABLECLOUDSROTATION_ON
@@ -172,6 +173,7 @@ Material:
     - _BumpScale: 1
     - _CloudHeight: -0.185
     - _Clouds: 1
+    - _CloudsCat1: 1
     - _CloudsHeight: 0.1
     - _CloudsLitbySun: 0
     - _CloudsRotation: 100
@@ -215,25 +217,29 @@ Material:
     - _Float4: -1
     - _Float5: -0.2
     - _Float6: 0.01
-    - _FogFill: 0
-    - _FogHeight: 0.7
+    - _FogCat1: 1
+    - _FogFill: 0.223
+    - _FogHeight: 0.54
     - _FogIntensity: 0.518
-    - _FogSmoothness: 0.3
+    - _FogSmoothness: 0.01
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _Keyword0: 0
     - _Metallic: 0
     - _Mode: 0
+    - _MoonCat: 1
     - _MoonIntensity: 1
     - _MoonSize: 0.5
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _PatternContrast: 1.102
+    - _PatternCat: 1
+    - _PatternContrast: 0.87
     - _PatternOverlay: 1
     - _RoatationSpeed: 0.4
     - _Rotation: 0
     - _RotationSpeed: 0.5
+    - _SkyCat1: 1
     - _SkyPatternContrast: 0.99
     - _SkyPatternOverlay: 1
     - _SmoothnessTextureChannel: 0
@@ -242,20 +248,23 @@ Material:
     - _StarFlikerSpeed: 0.05
     - _Stars: 1
     - _StarsAmount: 3
+    - _StarsCat1: 1
     - _StarsFlikerContrast: 1
     - _StarsHeightMask: 0.2
     - _StarsHeigntMask: 1
     - _StarsHorizonMask: 1
-    - _StarsIntensity: 2
+    - _StarsIntensity: 0.71
     - _StarsLayer: 3
     - _StarsMaskPower: 1
-    - _StarsSize: 0.8
+    - _StarsSize: 0.517
     - _StarsSunMask: 0.03
+    - _SunCat1: 1
     - _SunIntensity: 1
     - _SunRadiusB: 0
     - _SunRadoisA: 0
     - _SunSize: 0.9
     - _SunorMoon: 1
+    - _TITLE1: 1
     - _ToggleSwitch0: 0
     - _TwinklingContrast: 1
     - _TwinklingSpeed: 0.05
