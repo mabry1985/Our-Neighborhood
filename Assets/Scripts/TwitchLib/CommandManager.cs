@@ -103,8 +103,8 @@ public class CommandManager : MonoBehaviour
         }
         else
         {
-            //need to get a limit increase for whispering capabilities
-            //client.SendWhisper(name, $"Hi, {name}, you have already joined");
+            // need to get a limit increase for whispering capabilities
+            // client.SendWhisper(name, $"Hi, {name}, you have already joined");
             client.SendMessage(client.JoinedChannels[0], $"Hi, {name}, you have already joined our neighborhood");
         }
     }

@@ -8,8 +8,9 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Grass
-  m_Shader: {fileID: 4800000, guid: fea9ee138d4a84d90a0c3f187fb3cd8a, type: 3}
-  m_ShaderKeywords: DR_CEL_EXTRA_ON DR_GRADIENT_ON _CELPRIMARYMODE_STEPS _UNITYSHADOWMODE_MULTIPLY
+  m_Shader: {fileID: 4800000, guid: bee44b4a58655ee4cbff107302a3e131, type: 3}
+  m_ShaderKeywords: DR_CEL_EXTRA_ON DR_GRADIENT_ON SIMPLE_GRASS _CELPRIMARYMODE_STEPS
+    _TEXTUREBLENDINGMODE_MULTIPLY _UNITYSHADOWMODE_MULTIPLY
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -23,11 +24,23 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _BurnMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _CelCurveTexture:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _CelStepTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ColorMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DensityTexture:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -43,7 +56,31 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Displacement:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _GrassFloorColorTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _GrassTex00:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _GrassTex01:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _GrassTex02:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _GrassTex03:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -51,7 +88,15 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Mask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -64,12 +109,24 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - _AtlasOffset00: 0.01
+    - _AtlasOffset01: 0.01
+    - _AtlasOffset02: 0.01
+    - _AtlasOffset03: 0.01
     - _BumpScale: 1
+    - _BurnColorStrength: 0
+    - _BurnCutoff: 0.05
+    - _BurnStrength: 0
     - _CelExtraEnabled: 1
     - _CelNumSteps: 3
     - _CelPrimaryMode: 2
+    - _CullMode: 0
     - _Cutoff: 0.5
+    - _DensityFalloffPower: 1.3
+    - _DensityFalloffScale: 0.25
+    - _DensityFalloffStart: 5
     - _DetailNormalMapScale: 1
+    - _Disorder: 0.3
     - _DstBlend: 0
     - _FlatRimEdgeSmoothness: 0.5
     - _FlatRimLightAlign: 0
@@ -86,8 +143,23 @@ Material:
     - _GradientCenterY: 0
     - _GradientEnabled: 1
     - _GradientSize: 10
+    - _GrassFadeEnd: 100
+    - _GrassFadeStart: 50
+    - _InfluenceStrength: 1
+    - _InteractionStrength: 1
+    - _LODEnd: 100
+    - _LODMax: 6
+    - _LODStart: 20
     - _LightContribution: 0
+    - _MaxHeight00: 1.5
+    - _MaxHeight01: 1.5
+    - _MaxHeight02: 1.5
+    - _MaxHeight03: 1.5
     - _Metallic: 0
+    - _MinHeight00: 0.2
+    - _MinHeight01: 0.2
+    - _MinHeight02: 0.2
+    - _MinHeight03: 0.2
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
@@ -96,23 +168,73 @@ Material:
     - _SelfShadingSizeExtra: 0.695
     - _ShadowEdgeSize: 0.05
     - _ShadowEdgeSizeExtra: 0.329
+    - _Smoothness00: 0.5
+    - _Smoothness01: 0.5
+    - _Smoothness02: 0.5
+    - _Smoothness03: 0.5
     - _SmoothnessTextureChannel: 0
+    - _Softness00: 0.5
+    - _Softness01: 0.5
+    - _Softness02: 0.5
+    - _Softness03: 0.5
     - _SpecularEnabled: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
+    - _Subsurface00: 0.3
+    - _Subsurface01: 0.3
+    - _Subsurface02: 0.3
+    - _Subsurface03: 0.3
+    - _TargetDensity: 0.2
+    - _TextureAtlasHeight00: 1
+    - _TextureAtlasHeight01: 1
+    - _TextureAtlasHeight02: 1
+    - _TextureAtlasHeight03: 1
+    - _TextureAtlasWidth00: 1
+    - _TextureAtlasWidth01: 1
+    - _TextureAtlasWidth02: 1
+    - _TextureAtlasWidth03: 1
+    - _TextureBlendingMode: 0
+    - _TextureCutoff: 0.1
+    - _TextureImpact: 1
     - _UVSec: 0
     - _UnityShadowMode: 1
     - _UnityShadowPower: 0.784
     - _UnityShadowSharpness: 1.29
+    - _VertexColorsEnabled: 0
+    - _Weight00: 1.5
+    - _Weight01: 1.5
+    - _Weight02: 1.5
+    - _Weight03: 1.5
+    - _Width00: 0.1
+    - _Width01: 0.1
+    - _Width02: 0.1
+    - _Width03: 0.1
+    - _WindRotation: 0
     - _ZWrite: 1
     m_Colors:
+    - _BurnColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 0.1261968, g: 0.2735849, b: 0.073558204, a: 1}
+    - _Color00: {r: 0.5, g: 0.7, b: 0.3, a: 1}
+    - _Color01: {r: 0.5, g: 0.7, b: 0.3, a: 1}
+    - _Color02: {r: 0.5, g: 0.7, b: 0.3, a: 1}
+    - _Color03: {r: 0.5, g: 0.7, b: 0.3, a: 1}
     - _ColorDim: {r: 0.11755072, g: 0.2264151, b: 0.07796369, a: 1}
     - _ColorDimCurve: {r: 0.85023, g: 0.85034, b: 0.85045, a: 0.85056}
     - _ColorDimExtra: {r: 0.14038523, g: 0.2830189, b: 0.089444645, a: 1}
     - _ColorDimSteps: {r: 0.21404415, g: 0.3679245, b: 0.16140084, a: 1}
     - _ColorGradient: {r: 0.1261968, g: 0.2735849, b: 0.073558204, a: 1}
+    - _DensityValues: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FlatRimColor: {r: 0.85023, g: 0.85034, b: 0.85045, a: 0.85056}
     - _FlatSpecularColor: {r: 0.85023, g: 0.85034, b: 0.85045, a: 0.85056}
+    - _GrassFloorColor: {r: 0.35, g: 0.35, b: 0.35, a: 1}
+    - _SecColor00: {r: 0.2, g: 0.5, b: 0.15, a: 1}
+    - _SecColor01: {r: 0.2, g: 0.5, b: 0.15, a: 1}
+    - _SecColor02: {r: 0.2, g: 0.5, b: 0.15, a: 1}
+    - _SecColor03: {r: 0.2, g: 0.5, b: 0.15, a: 1}
+    - _SpecColor00: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+    - _SpecColor01: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+    - _SpecColor02: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+    - _SpecColor03: {r: 0.2, g: 0.2, b: 0.2, a: 1}
     - _UnityShadowColor: {r: 0.1261968, g: 0.2735849, b: 0.073558204, a: 1}
+    - _WindParams: {r: 0.3, g: 1.2, b: 0.15, a: 1.3}

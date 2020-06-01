@@ -16,7 +16,6 @@ public struct PlaceableItem
 
 }
 
-
 public class PlaceableItemManager : MonoBehaviour
 {
     public GameObject campfirePrefab;
