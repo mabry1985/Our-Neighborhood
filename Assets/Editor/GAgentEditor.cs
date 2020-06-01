@@ -45,7 +45,7 @@ public class GAgentVisualEditor : Editor
         }
 
         GUILayout.Label("Inventory: ");
-        foreach ( KeyValuePair<string, int> i in agent.transform.parent.GetComponentInParent<Player>().inventory.items)
+        foreach ( KeyValuePair<string, int> i in agent.GetComponent<Player>().inventory.items)
         {
             GUILayout.Label("====  " + i.Key + "=" + i.Value);
         }

@@ -39,7 +39,7 @@ public class GAgent : MonoBehaviour
             actions.Add(a);
         }
 
-        player = this.transform.parent.parent.gameObject.GetComponent<Player>();
+        player = this.GetComponent<Player>();
         playerAnimator = player.GetComponent<PlayerAnimator>();
     }
 
@@ -63,9 +63,8 @@ public class GAgent : MonoBehaviour
                 // Debug.Log("Distance to Goal: " + currentAction.agent.remainingDistance);
                 if (!invoked)
                 {
-
-                    print(currentAction.actionName);
-                    print(currentAction.targetTag);
+                    //print(currentAction.actionName);
+                    //print(currentAction.targetTag);
 
                     var entry = currentGoal.sGoals.First();
                     var first = currentGoal.sGoals.First();

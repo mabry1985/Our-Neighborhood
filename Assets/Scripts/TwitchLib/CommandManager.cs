@@ -28,11 +28,11 @@ public class CommandManager : MonoBehaviour
         {
             case "Farm":
                 if (!player.isDead && player != null)
-                    player.ChangeJobs("Farmer", arg[0]);
+                    player.HandleFarming(arg[0]);
                 break;
             case "Craft":
                 if (!player.isDead && player != null && CraftingRecipes.recipes.ContainsKey(arg[0]))
-                    player.ChangeJobs("Crafter", arg[0]);
+                    player.HandleCrafting(arg[0]);
                 break;
             case "Join":
                 HandleJoin(id, name, client);
@@ -41,13 +41,16 @@ public class CommandManager : MonoBehaviour
                 if (!player.isDead && player != null)
                     player.transform.GetChild(3).gameObject.SetActive(true);
                 break;
-            case "Home":
+            case "Depot":
                 if (!player.isDead && player != null)
-                    player.ChangeJobs("GoHome", null);
+                {
+                   player.CancelGoap();
+                   player.GetComponent<GAgent>().beliefs.ModifyState("depot", 1);
+                }
                 break;
             case "Worldinv":
                 if (!player.isDead && player != null)
-                HandleWorldInv(id, client, name);
+                    HandleWorldInv(id, client, name);
                 break;
             case "Inv" :
                 if (!player.isDead && player != null)
@@ -72,11 +75,11 @@ public class CommandManager : MonoBehaviour
                 break;
             case "Follow" :
                 if (!player.isDead && player != null)
-                    player.following = !player.following;
+                    player.isFollowing = !player.isFollowing;
                 break;
             case "Cancel":
-                if (!player.isDead && player != null)
-                    player.ChangeJobs("Idle", null);
+               if (!player.isDead && player != null)
+                   player.CancelGoap();
                 break;
             case "Test":
                 HandleTest(name, id);

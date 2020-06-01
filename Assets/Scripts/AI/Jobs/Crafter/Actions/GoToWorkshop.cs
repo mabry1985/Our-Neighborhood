@@ -5,30 +5,29 @@ using UnityEngine;
 public class GoToWorkshop : GAction
 {
     private GInventory inv;
-    private GAgent gAgent;
+    private PlayerGAgent gAgent;
     private Player player;
     private Bot bot;
     private List<KeyValuePair<string, int>> craftingMaterials = new List<KeyValuePair<string, int>>();
-    private string material;
+    private string craftingItem;
 
     public override bool PrePerform()
     {
-        player = gameObject.transform.parent.parent.GetComponent<Player>();
-        bot = gameObject.transform.parent.parent.GetComponent<Bot>();
-        gAgent = gameObject.GetComponent<GAgent>();
-        var job = this.gameObject.GetComponent<Crafter>();
-        material = job.material;
+        player = this.GetComponent<Player>();
+        //bot = gameObject.transform.parent.parent.GetComponent<Bot>();
+        gAgent = this.GetComponent<PlayerGAgent>();
+        craftingItem = gAgent.craftingItem;
         var hasMaterial = false;
-        craftingMaterials = CraftingRecipes.recipes[material];
+        craftingMaterials = CraftingRecipes.recipes[craftingItem];
         
-        if (gameObject.transform.parent.parent.tag == "Player")
+        if (gameObject.tag == "Player")
         {
             inv = player.inventory;
         }
-        else if (gameObject.transform.parent.parent.tag == "Bot")
-        {
-            inv = bot.inventory;
-        }
+        // else if (gameObject.transform.parent.parent.tag == "Bot")
+        // {
+        //     inv = bot.inventory;
+        // }
 
         foreach (KeyValuePair<string, int> item in craftingMaterials)
         {
@@ -51,6 +50,7 @@ public class GoToWorkshop : GAction
 
     public override bool PostPerform()
     {
+        print("in crafting postperform");
         foreach (KeyValuePair<string, int> item in craftingMaterials)
         {
             inv.items[item.Key] -= item.Value;
@@ -61,25 +61,27 @@ public class GoToWorkshop : GAction
             }
         }
 
-        AddToInventory(material, 1);
+        AddCraftedToInventory(craftingItem, 1);
 
-        this.GetComponent<GAgent>().beliefs.ModifyState("hasMaterials", -1);
+        gAgent.beliefs.RemoveState("hasMaterials");
+        gAgent.beliefs.RemoveState("isCrafting");
+
         return true;
     }
 
-    public bool AddToInventory(string material, int amount)
+    public bool AddCraftedToInventory(string craftedItem, int amount)
     {
-        if (gameObject.transform.parent.parent.tag == "Player")
+        if (gameObject.tag == "Player")
         {
-            if (inv.items.ContainsKey(material) && inv.invSpace >= amount)
+            if (inv.items.ContainsKey(craftedItem) && inv.invSpace >= amount)
             {
-                    inv.items[material] += amount;
+                    inv.items[craftedItem] += amount;
                     inv.invSpace -= amount;
             }
             else if (inv.invSpace >= amount)
             {
                     inv.invSpace -= amount;
-                    inv.AddItem(material, amount);
+                    inv.AddItem(craftedItem, amount);
             }
             else
                 return false;
@@ -95,7 +97,7 @@ public class GoToWorkshop : GAction
         //     GWorld.worldInventory.items[material] -= newAmount;
         // }
 
-        player.ChangeJobs("Idle", null);
+        //player.ChangeJobs("Idle", null);
         return true;
 
     }

@@ -5,34 +5,26 @@ using UnityEngine;
 public class GetMaterials : GAction
 {
     private GInventory inv;
-    private GAgent gAgent;
     private Player player;
     private Bot bot;
     private List<KeyValuePair<string, int>> craftingMaterials = new List<KeyValuePair<string, int>>();
-    private Crafter job;
-    private string material;
+    private string craftingItem;
     private bool hasMaterial;
+    private PlayerGAgent playerGAgent;
 
     public override bool PrePerform()
     {
-        job = this.gameObject.GetComponent<Crafter>();
-        material = job.material;
+        playerGAgent = this.GetComponent<PlayerGAgent>();
+        craftingItem = playerGAgent.craftingItem;
         hasMaterial = false;
-        player = gameObject.transform.parent.parent.GetComponent<Player>();
-        bot = gameObject.transform.parent.parent.GetComponent<Bot>();
-        gAgent = gameObject.GetComponent<GAgent>();
+        player = this.GetComponent<Player>();
+        bot = this.GetComponent<Bot>();
 
-        craftingMaterials = CraftingRecipes.recipes[material];
+        craftingMaterials = CraftingRecipes.recipes[craftingItem];
 
-        if (gameObject.transform.parent.parent.tag == "Player")
-        {
+        if (gameObject.tag == "Player")
             inv = player.inventory;
-        }
-        else if (gameObject.transform.parent.parent.tag == "Bot")
-        {
-            inv = bot.inventory;
-        }
-
+   
         foreach (KeyValuePair<string, int> item in craftingMaterials)
         {
             if (GWorld.worldInventory.items[item.Key] < item.Value)
@@ -53,18 +45,14 @@ public class GetMaterials : GAction
 
         return true;
     }
+
     public override bool PostPerform()
     {
-        craftingMaterials = CraftingRecipes.recipes[material];
-        if (gameObject.transform.parent.parent.tag == "Player" && inv.invSpace == 0)
+        craftingMaterials = CraftingRecipes.recipes[craftingItem];
+        if (this.tag == "Player" && inv.invSpace == 0)
         {
-            player.ChangeJobs("Idle", null);
+            //player.ChangeJobs("Idle", null);
             return false;      
-        }
-        else if (gameObject.transform.parent.parent.tag == "Bot" && inv.invSpace == 0)
-        {
-            bot.ChangeJobs("Idle", null);
-            return false;
         }
 
         foreach (KeyValuePair<string, int> item in craftingMaterials)
@@ -90,7 +78,7 @@ public class GetMaterials : GAction
 
     public bool AddToInventory(string material, int amount)
     {   
-        if (gameObject.transform.parent.parent.tag == "Player")
+        if (this.tag == "Player")
         {
             if(inv.items.ContainsKey(material))
             {
