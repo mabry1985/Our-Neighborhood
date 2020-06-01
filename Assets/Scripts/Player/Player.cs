@@ -29,6 +29,7 @@ public class Player : MonoBehaviour
     public bool isWorking = false;
     public bool isStanding = true;
     public bool following = false;
+    public bool isChopping = false;
     
     public int inventorySize = 5;
 
@@ -90,6 +91,19 @@ public class Player : MonoBehaviour
             animator.SetBool("isStanding", true);
             isStanding = true;
         }
+    }
+
+    public void WaveHello()
+    {
+        animator.SetBool("isWaving", true);
+        agent.enabled = false;
+    }
+
+    public void Mining()
+    {
+        isChopping = !isChopping;
+        animator.SetBool("isMining", !isChopping);
+        //agent.enabled = false;
     }
 
     public void FindFriend()
@@ -204,6 +218,14 @@ public class Player : MonoBehaviour
     public void ItemSpawn(GameObject item, int decayTime){
         var i = Instantiate(item, itemSpawnPoint.transform.position, transform.rotation);
         Destroy(i, decayTime);
+    }
+
+    public void FaceTarget(Vector3 destination)
+    {
+        Vector3 lookPos = destination - transform.position;
+        lookPos.y = 0;
+        Quaternion rotation = Quaternion.LookRotation(lookPos);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime);
     }
 
     public void OnDeath() 

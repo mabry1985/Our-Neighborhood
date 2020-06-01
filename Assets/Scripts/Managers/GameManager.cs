@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    
     public TwitchClient client;
     public TwitchAPI api;
     public PlayerManager playerManager;

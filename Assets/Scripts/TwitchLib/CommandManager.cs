@@ -66,6 +66,10 @@ public class CommandManager : MonoBehaviour
                 if (!player.isDead && player != null && !player.isStanding)
                     player.SitDown();
                 break;
+            case "Wave" :
+                if (!player.isDead && player != null && player.isStanding)
+                    player.WaveHello();
+                break;
             case "Follow" :
                 if (!player.isDead && player != null)
                     player.following = !player.following;
@@ -75,9 +79,7 @@ public class CommandManager : MonoBehaviour
                     player.ChangeJobs("Idle", null);
                 break;
             case "Test":
-                var playerModel = playerManager.CreatePlayerModel(name, id);
-                playerManager.AddToPlayersDictionary(playerModel);
-                playerManager.PlayerSpawn(playerModel);
+                HandleTest(name, id);
                 break;
             case "Bot":
                 botManager.OnBotCommand(arg);
@@ -101,8 +103,8 @@ public class CommandManager : MonoBehaviour
         }
         else
         {
-            //need to get a limit increase for whispering capabilities
-            //client.SendWhisper(name, $"Hi, {name}, you have already joined");
+            // need to get a limit increase for whispering capabilities
+            // client.SendWhisper(name, $"Hi, {name}, you have already joined");
             client.SendMessage(client.JoinedChannels[0], $"Hi, {name}, you have already joined our neighborhood");
         }
     }
@@ -123,6 +125,16 @@ public class CommandManager : MonoBehaviour
 
         if (items.Length > 3)
             client.SendMessage(client.JoinedChannels[0], $"{items}");
+    }
+
+    public void HandleTest(string name, int id)
+    {
+        if (!playerManager.players.ContainsKey(id))
+        {
+            var playerModel = playerManager.CreatePlayerModel(name, id);
+            playerManager.AddToPlayersDictionary(playerModel);
+            playerManager.PlayerSpawn(playerModel);
+        }
     }
 
     // public void HandlePlace(int id, Client client, string name) {

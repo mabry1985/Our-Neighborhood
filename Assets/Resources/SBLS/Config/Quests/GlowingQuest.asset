@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b821195c09aaa4fc381acb1cbed32908, type: 3}
+  m_Name: GlowingQuest
+  m_EditorClassIdentifier: 
+  quest:
+    questName: Go Somewhere
+    questDescription: There's a glowing thing.  Go check it out.
+    steps:
+    - stepName: Go to the glowing area
+      stepDescription: Go to the part of the map that is glowing
+      active: 0
+      completed: 1
+      optional: 0
+      rewardXP: 0
+    - stepName: Report back to the NPC
+      stepDescription: Go back to the quest giver
+      active: 0
+      completed: 1
+      optional: 0
+      rewardXP: 0
+    currentStep: 1
+    rewardXp: 100
+    complete: 1
+    started: 0
+    requiredLevel: 1
+    character: {fileID: 0}

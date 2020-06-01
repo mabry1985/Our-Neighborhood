@@ -1,0 +1,18 @@
+
+SBLS - Skill Based Leveling System - V 1.1
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+(C) 2015-2018 Mute Colossus Pty. Ltd. http://www.mutecolossus.com
+
+All documentation can be found at https://www.mutecolossus.com/documentation/sbls-documentation/
+
+Change Log
+
+ SBLS 1.1
+ * Removed Javascript as per Unity requirements for 2018 versions
+ * Added an overload method for getProgress that returns a float between 0 and 1
+ * Fixed bug where mutliplier wasn't working correctly
+ * Removed old demo scene and replaced it with a brand spanking new one
+ * Cleaned up code and added comments
+
+ SBLS 1.0
+ * First version
