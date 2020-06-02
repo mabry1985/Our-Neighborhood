@@ -16300,6 +16300,7 @@ MonoBehaviour:
   home: {fileID: 0}
   farm: {fileID: 0}
   depot: {fileID: 2822170841504707083}
+  progressBar: {fileID: 0}
   questionMark: {fileID: 0}
   itemSpawnPoint: {fileID: 0}
   playerID: 0
@@ -17705,6 +17706,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 891822148}
     m_Modifications:
+    - target: {fileID: 2033650861550496613, guid: cf129a2792b1f904db46afd24e29c3a8,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2033650861550496635, guid: cf129a2792b1f904db46afd24e29c3a8,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.029
+      objectReference: {fileID: 0}
+    - target: {fileID: 2033650861550496635, guid: cf129a2792b1f904db46afd24e29c3a8,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.032
+      objectReference: {fileID: 0}
     - target: {fileID: 2033650863323108264, guid: cf129a2792b1f904db46afd24e29c3a8,
         type: 3}
       propertyPath: m_LocalPosition.x
