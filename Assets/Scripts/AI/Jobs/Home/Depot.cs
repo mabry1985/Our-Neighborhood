@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GoHome : GAction
+public class Depot : GAction
 {
     public override bool PrePerform()
     {
@@ -12,8 +12,9 @@ public class GoHome : GAction
     
     public override bool PostPerform()
     {
-        this.transform.parent.GetComponentInParent<Player>().inventory.TransferToWorldInventory();
-        //print("Im home");
+        this.GetComponent<Player>().inventory.TransferToWorldInventory();
+        beliefs.RemoveState("depot");
+        print("Im home");
         return true;
     }
 }

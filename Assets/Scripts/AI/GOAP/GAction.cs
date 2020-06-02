@@ -31,7 +31,7 @@ public abstract class GAction : MonoBehaviour
     }
 
     public void Awake() {
-        agent = this.transform.parent.parent.GetComponent<NavMeshAgent>();
+        agent = this.GetComponent<NavMeshAgent>();
         
         if(preConditions != null) {
             foreach(WorldState w in preConditions)

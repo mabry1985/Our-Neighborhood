@@ -8,13 +8,19 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    public NavMeshAgent agent;
-    public GInventory inventory;
     public PlayerManager playerManager;
     public PlayerController playerController;
     public PlaceableItemManager placeableItemManager;
+    public Renderer playerRenderer;
+
+    public NavMeshAgent navAgent;
+    public PlayerGAgent playerGAgent;
+    public GInventory inventory;
     public Animator animator;
     public Transform home;
+    public GAction farm;
+    //public GAction craft;
+    public GAction depot;
 
     public GameObject questionMark;
     public GameObject itemSpawnPoint;
@@ -23,56 +29,61 @@ public class Player : MonoBehaviour
    
     public int playerID;
     public string playerName;
+    public int inventorySize = 20;
+
     public Canvas playerNameCanvas;
     public Text playerNameText;
+
     public bool isDead = false;
     public bool isWorking = false;
     public bool isStanding = true;
-    public bool following = false;
+    public bool isFollowing = false;
     public bool isChopping = false;
+
+    private Vector3 destination;
+    private float distanceToTarget;
     
-    public int inventorySize = 5;
-
-    private enum Job
-    {
-        Idle,
-        GoHome,
-       // Baker,
-        Farmer
-    }
-
-    private Job job;
 
     private void Start() {
-        animator = this.GetComponentInChildren<Animator>();
-        playerController = this.GetComponent<PlayerController>();
+        playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
         placeableItemManager = GameObject.Find("PlaceableItemManager").GetComponent<PlaceableItemManager>();
         home = playerManager.spawnPoint;
-
+        depot.targetTag = "Home";
         playerManager.playerReferences[playerID] = this;
         inventory = new GInventory() {};
         inventory.invSpace = inventorySize;
         inventory.player = this;
+        playerRenderer = gameObject.GetComponentInChildren<Renderer>();
+        
+        if(this.tag == "Streamer")
+        {
+            playerController = this.GetComponent<PlayerController>();
+        }
     }
 
     private void Awake() 
     {
-        playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
         if (instance == null)
         {
             instance = this;
         }
-
-        var playerRenderer = gameObject.GetComponentInChildren<Renderer>();
     }
 
     void LateUpdate()
     {
         playerNameCanvas.transform.rotation = Camera.main.transform.rotation;
+        if(isFollowing)
+        {
+            destination = GameObject.Find("Streamer").transform.position;
+            distanceToTarget = Vector3.Distance(destination, transform.position);
 
-        if(following)
-            //reference streamer in gamemanager 
-            agent.SetDestination(GameObject.Find("Streamer").transform.position);
+            if(navAgent.enabled == true)
+                navAgent.SetDestination(destination);
+            
+            if(distanceToTarget <= 2f)
+                isFollowing = false;
+        }
+
     }
 
     public void SitDown()
@@ -82,7 +93,7 @@ public class Player : MonoBehaviour
             //animator.SetFloat("speedPercent", 0.0f);
             animator.SetBool("isSittingGround", true);
             animator.SetBool("isStanding", false);
-            agent.enabled = false;
+            navAgent.enabled = false;
             isStanding = false;
         }
         else
@@ -96,97 +107,42 @@ public class Player : MonoBehaviour
     public void WaveHello()
     {
         animator.SetBool("isWaving", true);
-        agent.enabled = false;
+        navAgent.enabled = false;
     }
 
     public void Mining()
     {
         isChopping = !isChopping;
         animator.SetBool("isMining", !isChopping);
-        //agent.enabled = false;
+        //navAgent.enabled = false;
     }
 
-    public void FindFriend()
+    // public void FindFriend()
+    // {
+    //     this.GetComponent<GAgent>().beliefs.ModifyState("isLonely", 1);
+    // }
+
+    public void HandleFarming(string material)
     {
-        transform.GetChild(0).GetComponentInChildren<GAgent>().beliefs.ModifyState("isLonely", 1);
-    }
-
-    public void JobSwitch(List<string> arg)
-    {
-        var jobEnum = Enum.Parse(typeof(Job), arg[0]);
-        var job = arg[0];
-        switch (jobEnum)
-        {
-            case Job.Idle:
-                ChangeJobs(job, null);
-                break;
-            case Job.GoHome:
-                ChangeJobs(job, null);
-                break;
-            // case Job.Baker:
-            //     ChangeJobs(arg);
-            //     break;
-            case Job.Farmer:
-                var material = arg[1];
-                print(material);
-                ChangeJobs(job, material);
-                break;
-            default:
-                break;
-        }
-    }
-
-    public void ChangeJobs(string job, string material)
-    {
-        var jobCount = Enum.GetNames(typeof(Job)).Length;
-        var gAgents = transform.GetChild(0).GetComponentsInChildren<GAgent>(true);
-
-        foreach (var gAgent in gAgents)
-        {
-            var gameObject = gAgent.gameObject;
-            if (gameObject.activeSelf)
-            {
-                CancelGoap(gAgent.transform);
-                gameObject.SetActive(false);
-            }
-
-            if (gameObject.tag == job)
-            {
-                if (job == "Farmer")
-                {
-                    HandleFarmer(material, gameObject);
-                }
-
-                if (job == "Crafter")
-                {
-                    HandleCrafter(material, gameObject);
-                }
-
-                gameObject.SetActive(true);
-            }
-        }
-    }
-
-    private void HandleFarmer(string material, GameObject job)
-    {
-        var farm = job.GetComponent<Farm>();
-
+        CancelFarming();
+        playerGAgent.beliefs.ModifyState("isFarming", 1);
         var d = GameObject.FindGameObjectWithTag(material) ?? null;
 
         if (d != null){
-            job.GetComponent<Farmer>().material = material;
+            playerGAgent.material = material;
             farm.targetTag = material;
             farm.target = d; 
-            farm.afterEffects[0].key = "farm" + material;
+            //farm.afterEffects[0].key = "farm" + material;
         }
     }
 
-    private void HandleCrafter(string material, GameObject job)
+    public void HandleCrafting(string craftingItem)
     {
-        
-        var getMaterials = job.GetComponent<GetMaterials>();
-        var goToWorkshop = job.GetComponent<GoToWorkshop>();
-        job.GetComponent<Crafter>().material = material;  
+        CancelFarming();
+        playerGAgent.beliefs.ModifyState("isCrafting", 1);
+        var getMaterials = this.GetComponent<GetMaterials>();
+        var goToWorkshop = this.GetComponent<GoToWorkshop>();
+        this.GetComponent<PlayerGAgent>().craftingItem = craftingItem;  
     }
 
     public void PlaceItem(string i)
@@ -204,7 +160,6 @@ public class Player : MonoBehaviour
             if(placeableItemManager.placeableItems.ContainsKey(i))
             {
                 placeableItem = placeableItemManager.placeableItems[i];
-                print(placeableItem.DecayTime);
                 ItemSpawn(placeableItem.Prefab, placeableItem.DecayTime);
             }
         }
@@ -212,7 +167,6 @@ public class Player : MonoBehaviour
         {
             questionMark.SetActive(true);
         }
-
     }
 
     public void ItemSpawn(GameObject item, int decayTime){
@@ -230,8 +184,8 @@ public class Player : MonoBehaviour
 
     public void OnDeath() 
     {
+        playerNameCanvas.enabled = false;
         isDead = true;
-        Transform job = gameObject.transform.GetChild(0);
 
         if (this.tag == "Streamer")
         {
@@ -239,30 +193,20 @@ public class Player : MonoBehaviour
             //cam.m_Follow = null;       
         }
 
-        for (int i = 0; i < job.childCount; i++)
-        {
-            if (job.GetChild(i).gameObject.activeSelf == true)
-            {
-                var gAgent = job.GetChild(i);
-                CancelGoap(gAgent);
-                gAgent.gameObject.SetActive(false);
-                //ChangeJobs("Idle", null);
-            }
-        }
-
-        agent.enabled = false;
+        navAgent.enabled = false;
         animator.enabled = false;
 
-        Invoke("OnRevive", 5);
+        Invoke("OnRevive", 10);
     }
 
     public void OnRevive() 
     {
         isDead = false;
-        agent.enabled = true;
-        agent.isStopped = false;
+        playerNameCanvas.enabled = true;
+        navAgent.enabled = true;
+        navAgent.isStopped = false;
 
-        agent.transform.position = home.position;
+        navAgent.transform.position = home.position;
         
         if (this.tag == "Streamer")
         {
@@ -273,14 +217,36 @@ public class Player : MonoBehaviour
         animator.enabled = true;
     }
 
-    public void CancelGoap(Transform gAgent)
-    {
-        var actionQueue = gAgent.GetComponent<GAgent>().actionQueue ?? null;
+    public void CancelGoap()
+    {   
+        var currentAction = playerGAgent.currentAction ?? null;
+        GameObject currentActionTarget;
+
+        if (currentAction != null)
+        {
+            currentActionTarget = currentAction.target;
+            playerGAgent.currentAction.target = null;
+            //playerGAgent.planner = null;
+            playerGAgent.invoked = false;
+        }
+        
+        var actionQueue = playerGAgent.actionQueue ?? null;
         if (actionQueue != null)
         {
-            actionQueue.Clear();
-            gAgent.GetComponent<GAgent>().currentAction.running = false;
-        }    
+            playerGAgent.actionQueue.Clear();
+            playerGAgent.currentAction.running = false;
+        }
+
+    }
+
+    public void CancelFarming()
+    {
+        playerGAgent.material = "";
+        farm.targetTag = "";
+        farm.target = null;
+        playerGAgent.beliefs.RemoveState("isFarming");
+
+        CancelGoap();
     }
 }
     
