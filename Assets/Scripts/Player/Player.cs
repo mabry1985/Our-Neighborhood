@@ -228,6 +228,7 @@ public class Player : MonoBehaviour
 
     public void CancelGoap()
     {   
+        progressBar.gameObject.SetActive(false);
         var currentAction = playerGAgent.currentAction ?? null;
         GameObject currentActionTarget;
 
