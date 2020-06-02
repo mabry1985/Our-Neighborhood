@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
     public GAction farm;
     //public GAction craft;
     public GAction depot;
+    public Slider progressBar;
 
     public GameObject questionMark;
     public GameObject itemSpawnPoint;
@@ -84,7 +85,6 @@ public class Player : MonoBehaviour
             if(distanceToTarget <= 2f)
                 isFollowing = false;
         }
-
     }
 
     public void SitDown()
@@ -180,6 +180,15 @@ public class Player : MonoBehaviour
         lookPos.y = 0;
         Quaternion rotation = Quaternion.LookRotation(lookPos);
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime);
+    }
+
+    public void RotateTowards(Transform target)
+    {
+        navAgent.updateRotation = false;
+        Vector3 direction = (target.position - transform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));    // flattens the vector3
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime);
+        navAgent.updateRotation = true;
     }
 
     public void OnDeath() 
