@@ -76,11 +76,14 @@ public class Player : MonoBehaviour
         {
             destination = GameObject.Find("Streamer").transform.position;
             distanceToTarget = Vector3.Distance(destination, transform.position);
-            navAgent.SetDestination(destination);
-        }
 
+            if(navAgent.enabled == true)
+                navAgent.SetDestination(destination);
+            
             if(distanceToTarget <= 2f)
                 isFollowing = false;
+        }
+
     }
 
     public void SitDown()
@@ -157,7 +160,6 @@ public class Player : MonoBehaviour
             if(placeableItemManager.placeableItems.ContainsKey(i))
             {
                 placeableItem = placeableItemManager.placeableItems[i];
-                print(placeableItem.DecayTime);
                 ItemSpawn(placeableItem.Prefab, placeableItem.DecayTime);
             }
         }
@@ -182,8 +184,8 @@ public class Player : MonoBehaviour
 
     public void OnDeath() 
     {
+        playerNameCanvas.enabled = false;
         isDead = true;
-        Transform job = gameObject.transform.GetChild(0);
 
         if (this.tag == "Streamer")
         {
@@ -191,26 +193,16 @@ public class Player : MonoBehaviour
             //cam.m_Follow = null;       
         }
 
-        for (int i = 0; i < job.childCount; i++)
-        {
-            if (job.GetChild(i).gameObject.activeSelf == true)
-            {
-                var gAgent = job.GetChild(i);
-                CancelGoap();
-                gAgent.gameObject.SetActive(false);
-                //ChangeJobs("Idle", null);
-            }
-        }
-
         navAgent.enabled = false;
         animator.enabled = false;
 
-        Invoke("OnRevive", 5);
+        Invoke("OnRevive", 10);
     }
 
     public void OnRevive() 
     {
         isDead = false;
+        playerNameCanvas.enabled = true;
         navAgent.enabled = true;
         navAgent.isStopped = false;
 
