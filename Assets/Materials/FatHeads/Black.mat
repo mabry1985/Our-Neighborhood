@@ -67,7 +67,7 @@ Material:
     m_Floats:
     - _BumpScale: 1
     - _CelExtraEnabled: 1
-    - _CelNumSteps: 7
+    - _CelNumSteps: 3
     - _CelPrimaryMode: 2
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
