@@ -1,18 +1,38 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class PlayerAnimController : MonoBehaviour
+public class PlayerAnimController
 {
-    // Start is called before the first frame update
-    void Start()
+    public void FarmAnimHandler(Player player, string material)
     {
-        
+        switch (material)
+        {
+            case "Stone":
+                player.animator.SetBool("isMining", true);
+                break;
+            case "Wood":
+                player.animator.SetBool("isChopping", true);
+                break;
+            case "Wheat":
+                player.animator.SetBool("isGathering", true);
+                break;
+            case "Water":
+                player.animator.SetBool("isGathering", true);
+                break;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void CancelAnimations(Player player)
     {
+        //var anim = player.GetComponentInChildren<Animation>();
+        player.animator.SetBool("isMining", false);
+        //anim.Stop("isMining");
+
+        player.animator.SetBool("isChopping", false);
+        //anim.Stop("isChopping");
         
+        player.animator.SetBool("isGathering", false);
+        //anim.Stop("isGathering");
+        
+        player.animator.SetBool("isStanding", true);
     }
 }

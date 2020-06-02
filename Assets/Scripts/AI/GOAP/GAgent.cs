@@ -69,7 +69,7 @@ public class GAgent : MonoBehaviour
                     string key = first.Key;
                     if(currentAction.actionName == "Farm")
                     {
-                        //playerAnimator.FarmAnimHandler(player, currentAction.targetTag);
+                        player.playerAnimController.FarmAnimHandler(player, currentAction.targetTag);
                     }
                     Invoke("CompleteAction", currentAction.duration);
                     invoked = true;

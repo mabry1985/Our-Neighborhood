@@ -1457,7 +1457,9 @@ MonoBehaviour:
   actions: []
   playerAnimator: {fileID: 0}
   currentAction: {fileID: 0}
+  destination: {x: 0, y: 0, z: 0}
   distanceToTarget: 0
+  invoked: 0
   material: 
   craftingItem: 
 --- !u!114 &5251554557510803493
@@ -1500,7 +1502,7 @@ MonoBehaviour:
   cost: 1
   target: {fileID: 0}
   targetTag: 
-  duration: 2
+  duration: 5
   preConditions:
   - key: isFarming
     value: 0
@@ -1528,7 +1530,7 @@ MonoBehaviour:
   cost: 1
   target: {fileID: 0}
   targetTag: Home
-  duration: 5
+  duration: 10
   preConditions:
   - key: inDanger
     value: 5
@@ -1578,7 +1580,7 @@ MonoBehaviour:
   cost: 1
   target: {fileID: 0}
   targetTag: Streamer
-  duration: 10
+  duration: 1
   preConditions:
   - key: isLonely
     value: 0
@@ -1628,7 +1630,7 @@ MonoBehaviour:
   cost: 1
   target: {fileID: 0}
   targetTag: Home
-  duration: 0
+  duration: 5
   preConditions:
   - key: isCrafting
     value: 0
@@ -1653,7 +1655,7 @@ MonoBehaviour:
   cost: 1
   target: {fileID: 0}
   targetTag: Workshop
-  duration: 0
+  duration: 5
   preConditions:
   - key: hasMaterials
     value: 0

@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     public PlayerController playerController;
     public PlaceableItemManager placeableItemManager;
     public Renderer playerRenderer;
+    public PlayerAnimController playerAnimController = new PlayerAnimController();
 
     public NavMeshAgent navAgent;
     public PlayerGAgent playerGAgent;
@@ -131,8 +132,7 @@ public class Player : MonoBehaviour
         if (d != null){
             playerGAgent.material = material;
             farm.targetTag = material;
-            farm.target = d; 
-            //farm.afterEffects[0].key = "farm" + material;
+            farm.target = d;
         }
     }
 
