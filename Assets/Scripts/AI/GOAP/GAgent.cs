@@ -23,14 +23,15 @@ public class GAgent : MonoBehaviour
     public WorldStates beliefs = new WorldStates();
     public PlayerAnimator playerAnimator;
 
-    GPlanner planner;
+    public GPlanner planner;
     public Queue<GAction> actionQueue;
     public GAction currentAction;
     SubGoal currentGoal;
-    Vector3 destination = Vector3.zero;
+    public Vector3 destination = Vector3.zero;
 
     Player player;
     public float distanceToTarget;
+    public bool invoked = false;
 
     public void Start()
     {
@@ -43,7 +44,6 @@ public class GAgent : MonoBehaviour
         playerAnimator = player.GetComponent<PlayerAnimator>();
     }
 
-    bool invoked = false;
     void CompleteAction()
     {
         currentAction.running = false;
@@ -56,15 +56,15 @@ public class GAgent : MonoBehaviour
         if (currentAction != null && currentAction.running)
         {
             distanceToTarget = Vector3.Distance(destination, this.transform.position);
-           //Debug.Log(currentAction.agent.hasPath + "   " + distanceToTarget);
-            if (distanceToTarget < 2f)
+           Debug.Log(currentAction.agent.hasPath + "   " + distanceToTarget);
+            if (currentAction.agent.hasPath
+                && !currentAction.agent.pathPending
+                && currentAction.agent.remainingDistance < 1f)
             {
 
                 // Debug.Log("Distance to Goal: " + currentAction.agent.remainingDistance);
                 if (!invoked)
                 {
-                    //print(currentAction.actionName);
-                    //print(currentAction.targetTag);
 
                     var entry = currentGoal.sGoals.First();
                     var first = currentGoal.sGoals.First();
@@ -115,7 +115,7 @@ public class GAgent : MonoBehaviour
                 if(currentAction.target == null && currentAction.targetTag != "")
                     currentAction.target = GameObject.FindWithTag(currentAction.targetTag);
 
-                //print(currentAction.target + " is the current action target");
+                print(currentAction.target + " is the current action target");
                 if(currentAction.target != null)
                 {
                     currentAction.running = true;

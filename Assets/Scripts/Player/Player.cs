@@ -67,7 +67,6 @@ public class Player : MonoBehaviour
         {
             instance = this;
         }
-
     }
 
     void LateUpdate()
@@ -233,8 +232,10 @@ public class Player : MonoBehaviour
 
         if (currentAction != null)
         {
-            currentActionTarget = playerGAgent.currentAction.target ?? null;
+            currentActionTarget = currentAction.target;
             playerGAgent.currentAction.target = null;
+            //playerGAgent.planner = null;
+            playerGAgent.invoked = false;
         }
         
         var actionQueue = playerGAgent.actionQueue ?? null;

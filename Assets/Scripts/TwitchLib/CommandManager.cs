@@ -44,7 +44,7 @@ public class CommandManager : MonoBehaviour
             case "Depot":
                 if (!player.isDead && player != null)
                 {
-                   player.CancelGoap();
+                   player.CancelFarming();
                    player.GetComponent<GAgent>().beliefs.ModifyState("depot", 1);
                 }
                 break;

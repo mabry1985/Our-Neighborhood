@@ -14,7 +14,7 @@ public class Depot : GAction
     {
         this.GetComponent<Player>().inventory.TransferToWorldInventory();
         beliefs.RemoveState("depot");
-        //print("Im home");
+        print("Im home");
         return true;
     }
 }
