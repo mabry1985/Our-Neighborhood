@@ -28,11 +28,17 @@ public class CommandManager : MonoBehaviour
         {
             case "Farm":
                 if (!player.isDead && player != null)
+                {
+                    player.playerAnimController.CancelAnimations(player);
                     player.HandleFarming(arg[0]);
+                }
                 break;
             case "Craft":
                 if (!player.isDead && player != null && CraftingRecipes.recipes.ContainsKey(arg[0]))
+                {
+                    player.playerAnimController.CancelAnimations(player);
                     player.HandleCrafting(arg[0]);
+                }
                 break;
             case "Join":
                 HandleJoin(id, name, client);
@@ -44,8 +50,9 @@ public class CommandManager : MonoBehaviour
             case "Depot":
                 if (!player.isDead && player != null)
                 {
-                   player.CancelFarming();
-                   player.GetComponent<GAgent>().beliefs.ModifyState("depot", 1);
+                    player.playerAnimController.CancelAnimations(player);
+                    player.CancelFarming();
+                    player.GetComponent<GAgent>().beliefs.ModifyState("depot", 1);
                 }
                 break;
             case "Worldinv":
@@ -63,11 +70,17 @@ public class CommandManager : MonoBehaviour
                 break;
             case "Sit" :
                 if (!player.isDead && player != null && player.isStanding)
+                {
+                    player.playerAnimController.CancelAnimations(player);
                     player.SitDown();
+                }
                 break;
             case "Stand" :
                 if (!player.isDead && player != null && !player.isStanding)
+                {
+                    player.playerAnimController.CancelAnimations(player);
                     player.SitDown();
+                }
                 break;
             case "Wave" :
                 if (!player.isDead && player != null && player.isStanding)
@@ -75,7 +88,10 @@ public class CommandManager : MonoBehaviour
                 break;
             case "Follow" :
                 if (!player.isDead && player != null)
+                {
+                    player.playerAnimController.CancelAnimations(player);
                     player.isFollowing = !player.isFollowing;
+                }
                 break;
             case "Cancel":
                if (!player.isDead && player != null)

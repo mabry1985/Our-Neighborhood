@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     public PlayerController playerController;
     public PlaceableItemManager placeableItemManager;
     public Renderer playerRenderer;
+    public PlayerAnimController playerAnimController = new PlayerAnimController();
 
     public NavMeshAgent navAgent;
     public PlayerGAgent playerGAgent;
@@ -21,6 +22,7 @@ public class Player : MonoBehaviour
     public GAction farm;
     //public GAction craft;
     public GAction depot;
+    public Slider progressBar;
 
     public GameObject questionMark;
     public GameObject itemSpawnPoint;
@@ -83,7 +85,6 @@ public class Player : MonoBehaviour
             if(distanceToTarget <= 2f)
                 isFollowing = false;
         }
-
     }
 
     public void SitDown()
@@ -131,8 +132,7 @@ public class Player : MonoBehaviour
         if (d != null){
             playerGAgent.material = material;
             farm.targetTag = material;
-            farm.target = d; 
-            //farm.afterEffects[0].key = "farm" + material;
+            farm.target = d;
         }
     }
 
@@ -182,6 +182,15 @@ public class Player : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime);
     }
 
+    public void RotateTowards(Transform target)
+    {
+        navAgent.updateRotation = false;
+        Vector3 direction = (target.position - transform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));    // flattens the vector3
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime);
+        navAgent.updateRotation = true;
+    }
+
     public void OnDeath() 
     {
         playerNameCanvas.enabled = false;
@@ -219,6 +228,7 @@ public class Player : MonoBehaviour
 
     public void CancelGoap()
     {   
+        progressBar.gameObject.SetActive(false);
         var currentAction = playerGAgent.currentAction ?? null;
         GameObject currentActionTarget;
 
