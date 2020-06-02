@@ -12,12 +12,12 @@ GameObject:
   - component: {fileID: 8268656246792163654}
   - component: {fileID: 8268656246792163649}
   - component: {fileID: 8268656246792163648}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wheat
   m_TagString: Wheat
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 1
   m_IsActive: 1
 --- !u!4 &8268656246792163655
 Transform:
@@ -81,6 +81,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -129,13 +130,12 @@ GameObject:
   - component: {fileID: 8268656247913630324}
   - component: {fileID: 8268656247913630283}
   - component: {fileID: 8268656247913630282}
-  - component: {fileID: 8268656247913630325}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Destination
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 1
   m_IsActive: 1
 --- !u!4 &8268656247913630324
 Transform:
@@ -145,8 +145,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8268656247913630327}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.76, y: 0.5, z: -0.006275072}
-  m_LocalScale: {x: 0.0708069, y: 1, z: 0.06275048}
+  m_LocalPosition: {x: 0.038, y: 3.8, z: -0.006275072}
+  m_LocalScale: {x: 0.08995201, y: 6.4649887, z: 0.07971726}
   m_Children: []
   m_Father: {fileID: 8268656246792163655}
   m_RootOrder: 0
@@ -173,6 +173,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -197,19 +198,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &8268656247913630325
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8268656247913630327}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &204251823705993108
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2377,10 +2365,40 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8268656246792163655}
     m_Modifications:
+    - target: {fileID: 8687073255330576211, guid: 61999c328b190a843993f348564a20ff,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8687073255330576211, guid: 61999c328b190a843993f348564a20ff,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8687073255777759872, guid: 61999c328b190a843993f348564a20ff,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8687073255777759872, guid: 61999c328b190a843993f348564a20ff,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8687073255892262498, guid: 61999c328b190a843993f348564a20ff,
         type: 3}
       propertyPath: m_Name
       value: WheatGrass (199)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8687073255892262498, guid: 61999c328b190a843993f348564a20ff,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8687073255892262498, guid: 61999c328b190a843993f348564a20ff,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8687073255892262499, guid: 61999c328b190a843993f348564a20ff,
         type: 3}
@@ -2451,6 +2469,46 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.68033355
+      objectReference: {fileID: 0}
+    - target: {fileID: 8687073256019457087, guid: 61999c328b190a843993f348564a20ff,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8687073256019457087, guid: 61999c328b190a843993f348564a20ff,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8687073256348302259, guid: 61999c328b190a843993f348564a20ff,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8687073256348302259, guid: 61999c328b190a843993f348564a20ff,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8687073256797566461, guid: 61999c328b190a843993f348564a20ff,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8687073256797566461, guid: 61999c328b190a843993f348564a20ff,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8687073257439204552, guid: 61999c328b190a843993f348564a20ff,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8687073257439204552, guid: 61999c328b190a843993f348564a20ff,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 61999c328b190a843993f348564a20ff, type: 3}

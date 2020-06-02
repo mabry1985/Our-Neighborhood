@@ -22,6 +22,7 @@ public class Farm : GAction
             inv = player.inventory;
             if (inv.invSpace == 0) 
             {
+                print("inventory is full");
                 //player.ChangeJobs("Idle", null);
                 beliefs.ModifyState("isFarming", -1);
                 return false;
@@ -35,7 +36,7 @@ public class Farm : GAction
         //         return false;
         //     }
         // }
-        
+        print("in farming preperform");
         return true;
     }
 
@@ -46,6 +47,8 @@ public class Farm : GAction
         
         if (gAgent.distanceToTarget > 2f)
             return false;
+
+        print("in farming postperform");
 
         AddToInventory(material);
         //player.GetComponentInChildren<Animator>().SetBool("isMining", false);
