@@ -67,7 +67,7 @@ Material:
     m_Floats:
     - _BumpScale: 1
     - _CelExtraEnabled: 1
-    - _CelNumSteps: 3
+    - _CelNumSteps: 4
     - _CelPrimaryMode: 2
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
@@ -78,7 +78,7 @@ Material:
     - _FlatSpecularEdgeSmoothness: 0
     - _FlatSpecularSize: 0.1
     - _Flatness: 1
-    - _FlatnessExtra: 1
+    - _FlatnessExtra: 0.46
     - _GlossMapScale: 1
     - _Glossiness: 0
     - _GlossyReflections: 1
@@ -94,9 +94,9 @@ Material:
     - _Parallax: 0.02
     - _RimEnabled: 0
     - _SelfShadingSize: 0.5
-    - _SelfShadingSizeExtra: 0.892
+    - _SelfShadingSizeExtra: 0.45
     - _ShadowEdgeSize: 0.05
-    - _ShadowEdgeSizeExtra: 0.05
+    - _ShadowEdgeSizeExtra: 0.064
     - _SmoothnessTextureChannel: 0
     - _SpecularEnabled: 0
     - _SpecularHighlights: 1
@@ -113,8 +113,8 @@ Material:
     - _Color: {r: 0.6981132, g: 0.5095559, b: 0.38527945, a: 1}
     - _ColorDim: {r: 1, g: 0.827451, b: 0.7137255, a: 1}
     - _ColorDimCurve: {r: 0.85023, g: 0.85034, b: 0.85045, a: 0.85056}
-    - _ColorDimExtra: {r: 0.6037736, g: 0.44558078, b: 0.3446066, a: 1}
-    - _ColorDimSteps: {r: 0.6981132, g: 0.5095559, b: 0.38527945, a: 1}
+    - _ColorDimExtra: {r: 0.33962262, g: 0.25321206, b: 0.1970452, a: 1}
+    - _ColorDimSteps: {r: 0.6037736, g: 0.49270207, b: 0.41865435, a: 1}
     - _ColorGradient: {r: 0.85023, g: 0.85034, b: 0.85045, a: 0.85056}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FlatRimColor: {r: 0.85023, g: 0.85034, b: 0.85045, a: 0.85056}
