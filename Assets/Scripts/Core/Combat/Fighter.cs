@@ -7,6 +7,9 @@ public class Fighter : MonoBehaviour, IAction
     [SerializeField] float weaponRange = 5f;
     [SerializeField] float timeBetweenAttack = 1f;
     [SerializeField] float weaponDamage = 1f;
+    [SerializeField] GameObject projectilePrefab;
+    [SerializeField] Transform projectileSpawnPoint;
+
 
     Health target;
     float timeSinceLastAttack = Mathf.Infinity;
@@ -53,6 +56,13 @@ public class Fighter : MonoBehaviour, IAction
     {
         if (target == null) return;
         target.TakeDamage(weaponDamage);
+    }
+
+    //animation event
+    void LaunchProjectile()
+    {
+        if (target == null) return;
+        Instantiate(projectilePrefab, projectileSpawnPoint.position, transform.rotation);
     }
 
     public bool CanAttack(GameObject combatTarget)
