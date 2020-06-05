@@ -18,8 +18,7 @@ public class PlayerAnimator : MonoBehaviour
 
     void Update()
     {
-        float speedPercent =  agent.velocity.magnitude / agent.speed;
-        animator.SetFloat("speedPercent", speedPercent, animSmoothTime, Time.deltaTime);
+
     }
 
 }
