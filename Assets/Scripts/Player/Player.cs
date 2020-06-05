@@ -15,14 +15,14 @@ public class Player : MonoBehaviour
     public PlayerAnimController playerAnimController = new PlayerAnimController();
 
     public NavMeshAgent navAgent;
+    public Animator animator;
     public PlayerGAgent playerGAgent;
     public GInventory inventory;
-    public Animator animator;
-    public Transform home;
     public GAction farm;
     //public GAction craft;
     public GAction depot;
     public Slider progressBar;
+    public Transform home;
 
     public GameObject questionMark;
     public GameObject itemSpawnPoint;
@@ -49,18 +49,18 @@ public class Player : MonoBehaviour
     private void Start() {
         playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
         placeableItemManager = GameObject.Find("PlaceableItemManager").GetComponent<PlaceableItemManager>();
-        home = playerManager.spawnPoint;
+        depot = GetComponent<Depot>(); 
+        farm = GetComponent<Farm>();
+        animator = GetComponent<Animator>();
         depot.targetTag = "Home";
+        home = playerManager.spawnPoint;
         playerManager.playerReferences[playerID] = this;
         inventory = new GInventory() {};
         inventory.invSpace = inventorySize;
         inventory.player = this;
         playerRenderer = gameObject.GetComponentInChildren<Renderer>();
+        playerController = this.GetComponent<PlayerController>();
         
-        if(this.tag == "Streamer")
-        {
-            playerController = this.GetComponent<PlayerController>();
-        }
     }
 
     private void Awake() 
@@ -69,6 +69,11 @@ public class Player : MonoBehaviour
         {
             instance = this;
         }
+    }
+
+    private void Update() 
+    {
+        UpdateAnimator();    
     }
 
     void LateUpdate()
@@ -182,50 +187,6 @@ public class Player : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime);
     }
 
-    public void RotateTowards(Transform target)
-    {
-        navAgent.updateRotation = false;
-        Vector3 direction = (target.position - transform.position).normalized;
-        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));    // flattens the vector3
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime);
-        navAgent.updateRotation = true;
-    }
-
-    public void OnDeath() 
-    {
-        playerNameCanvas.enabled = false;
-        isDead = true;
-
-        if (this.tag == "Streamer")
-        {
-            var cam = playerController.vcam;
-            //cam.m_Follow = null;       
-        }
-
-        navAgent.enabled = false;
-        animator.enabled = false;
-
-        Invoke("OnRevive", 10);
-    }
-
-    public void OnRevive() 
-    {
-        isDead = false;
-        playerNameCanvas.enabled = true;
-        navAgent.enabled = true;
-        navAgent.isStopped = false;
-
-        navAgent.transform.position = home.position;
-        
-        if (this.tag == "Streamer")
-        {
-            var cam = playerController.vcam;
-           // cam.m_Follow = this.transform;
-        }
-
-        animator.enabled = true;
-    }
-
     public void CancelGoap()
     {   
         progressBar.gameObject.SetActive(false);
@@ -257,6 +218,14 @@ public class Player : MonoBehaviour
         playerGAgent.beliefs.RemoveState("isFarming");
 
         CancelGoap();
+    }
+
+    private void UpdateAnimator()
+    {
+        Vector3 velocity = GetComponent<NavMeshAgent>().velocity;
+        Vector3 localVelocity = transform.InverseTransformDirection(velocity);
+        float speed = localVelocity.z;
+        GetComponent<Animator>().SetFloat("forwardSpeed", speed);
     }
 }
     

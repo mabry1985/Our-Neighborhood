@@ -87,9 +87,9 @@ public class PlayerController : MonoBehaviour
         foreach (var pawn in pawns)
         {
             var n = Random.Range(0, 100);
-            var player = pawn.GetComponent<Player>();
-            if (pawn != null && !player.isDead && n > 50)
-                player.OnDeath();
+            var health = pawn.GetComponent<Health>();
+            if (pawn != null && !health.IsDead() && n > 50)
+                health.Die();
         };
     }
 

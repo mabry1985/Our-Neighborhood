@@ -73,7 +73,6 @@ public class Fireball : MonoBehaviour
         float relativeDistance = (explosionRadius - explosionDistance) / explosionRadius;
         float damage = relativeDistance * maxDamage;
         damage = Mathf.Max(0f, damage);
-        print(damage);
 
         return damage;
     }

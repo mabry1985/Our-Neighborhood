@@ -69,6 +69,7 @@ public class GAgent : MonoBehaviour
                     string key = first.Key;
                     player.progressBar.gameObject.SetActive(true);
                     StartCoroutine(player.progressBar.GetComponent<ActionProgressBar>().IncrementProgress(currentAction.duration));
+                    
                     if(currentAction.actionName == "Farm")
                     {
                         player.playerAnimController.FarmAnimHandler(player, currentAction.targetTag);

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LumpyBoiController : MonoBehaviour
+public class FlameyBoiController : MonoBehaviour
 {
     [SerializeField] float chaseDistance = 5f;
     [SerializeField] float suspicionTime = 3f;
@@ -11,9 +11,11 @@ public class LumpyBoiController : MonoBehaviour
     [SerializeField] float waypointPauseTime = 3f;
 
     Fighter fighter;
-    GameObject player;
+    GameObject[] players;
+    GameObject targetPlayer;
     Mover mover;
     Health health;
+    ParticleSystem particle;
 
     Vector3 guardPosition;
     float timeSinceLastSawPlayer = Mathf.Infinity;
@@ -24,16 +26,23 @@ public class LumpyBoiController : MonoBehaviour
         health = GetComponent<Health>();
         fighter = GetComponent<Fighter>();
         mover = GetComponent<Mover>();
-        player = GameObject.FindGameObjectWithTag("Streamer");
-
+        particle = GetComponentInChildren<ParticleSystem>();
         guardPosition = transform.position;
     }
 
     private void Update()
     {
-        if (health.IsDead()) return;
+        if (health.IsDead())
+        {
+            particle.Stop();
+            return;
+        } 
 
-        if (InAttackRange() && fighter.CanAttack(player))
+        players = GameObject.FindGameObjectsWithTag("Player");
+        targetPlayer = GetClosestEnemy(players).gameObject;
+        print(targetPlayer.name);
+
+        if (InAttackRange() && fighter.CanAttack(targetPlayer))
         {
             AttackBehaviour();
         }
@@ -67,7 +76,6 @@ public class LumpyBoiController : MonoBehaviour
                 CycleWaypoint();
             }
             nextPosition = GetCurrentWaypoint();
-            print(gameObject.name + nextPosition);
         }
         if(timeSinceArrivedAtWaypoint > waypointPauseTime)
         {
@@ -99,13 +107,33 @@ public class LumpyBoiController : MonoBehaviour
     private void AttackBehaviour()
     {
         timeSinceLastSawPlayer = 0;
-        fighter.Attack(player);
+        fighter.Attack(targetPlayer);
     }
 
     private bool InAttackRange()
     {
-        float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
+        float distanceToPlayer = Vector3.Distance(targetPlayer.transform.position, transform.position);
+        print(targetPlayer.name + distanceToPlayer);
         return distanceToPlayer < chaseDistance;
+    }
+
+    Transform GetClosestEnemy(GameObject[] enemies)
+    {
+        Transform bestTarget = null;
+        float closestDistanceSqr = Mathf.Infinity;
+        Vector3 currentPosition = transform.position;
+        foreach (GameObject potentialTarget in enemies)
+        {
+            Vector3 directionToTarget = potentialTarget.transform.position - currentPosition;
+            float dSqrToTarget = directionToTarget.sqrMagnitude;
+            if (dSqrToTarget < closestDistanceSqr)
+            {
+                closestDistanceSqr = dSqrToTarget;
+                bestTarget = potentialTarget.transform;
+            }
+        }
+
+        return bestTarget;
     }
 
     private void OnDrawGizmosSelected() 
