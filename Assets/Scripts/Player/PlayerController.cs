@@ -54,9 +54,14 @@ public class PlayerController : MonoBehaviour
             navAgent.transform.GetComponentInParent<Player>().Mining();
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftControl))
+        if (Input.GetKeyDown(KeyCode.LeftControl) || Input.GetMouseButtonDown(2))
         {
             ToggleFreeCam();
+        }
+        
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetMouseButtonDown(1))
+        {
+            print("im running!");
         }
 
         if (CombatInteraction()) return;
