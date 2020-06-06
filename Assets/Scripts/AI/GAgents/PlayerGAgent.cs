@@ -40,4 +40,9 @@ public class PlayerGAgent : GAgent
         Invoke("GetTired", Random.Range(0.0f, 20.0f));
     }
 
+    public void SetFear()
+    {
+        beliefs.ModifyState("inDanger", 0);
+    }
+
 }

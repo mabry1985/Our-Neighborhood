@@ -15,7 +15,7 @@ public class FlameyBoiController : MonoBehaviour
     GameObject targetPlayer;
     Mover mover;
     Health health;
-    ParticleSystem particle;
+    ParticleSystem flameParticle;
 
     Vector3 guardPosition;
     float timeSinceLastSawPlayer = Mathf.Infinity;
@@ -26,7 +26,7 @@ public class FlameyBoiController : MonoBehaviour
         health = GetComponent<Health>();
         fighter = GetComponent<Fighter>();
         mover = GetComponent<Mover>();
-        particle = GetComponentInChildren<ParticleSystem>();
+        flameParticle = GetComponentInChildren<ParticleSystem>();
         guardPosition = transform.position;
     }
 
@@ -34,13 +34,13 @@ public class FlameyBoiController : MonoBehaviour
     {
         if (health.IsDead())
         {
-            particle.Stop();
+            flameParticle.Stop();
             return;
         } 
 
         players = GameObject.FindGameObjectsWithTag("Player");
         targetPlayer = GetClosestEnemy(players).gameObject;
-        print(targetPlayer.name);
+        //print(targetPlayer.name);
 
         if (InAttackRange() && fighter.CanAttack(targetPlayer))
         {

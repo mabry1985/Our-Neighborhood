@@ -21,7 +21,6 @@ public class GAgent : MonoBehaviour
     public List<GAction> actions = new List<GAction>();
     public Dictionary<SubGoal, int> goals = new Dictionary<SubGoal, int>();
     public WorldStates beliefs = new WorldStates();
-    public PlayerAnimator playerAnimator;
 
     public GPlanner planner;
     public Queue<GAction> actionQueue;
@@ -41,7 +40,6 @@ public class GAgent : MonoBehaviour
         }
 
         player = this.GetComponent<Player>();
-        playerAnimator = player.GetComponent<PlayerAnimator>();
     }
 
     void CompleteAction()

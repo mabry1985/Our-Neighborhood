@@ -45,7 +45,6 @@ public class Player : MonoBehaviour
     private Vector3 destination;
     private float distanceToTarget;
     
-
     private void Start() {
         playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
         placeableItemManager = GameObject.Find("PlaceableItemManager").GetComponent<PlaceableItemManager>();
@@ -78,7 +77,9 @@ public class Player : MonoBehaviour
 
     void LateUpdate()
     {
-        playerNameCanvas.transform.rotation = Camera.main.transform.rotation;
+        if (playerNameCanvas != null)
+            playerNameCanvas.transform.rotation = Camera.main.transform.rotation;
+        
         if(isFollowing)
         {
             destination = GameObject.Find("Streamer").transform.position;

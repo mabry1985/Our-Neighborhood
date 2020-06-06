@@ -59,14 +59,42 @@ public class PlayerController : MonoBehaviour
             ToggleFreeCam();
         }
         
-        if (Input.GetKey(KeyCode.LeftShift) && Input.GetMouseButtonDown(1))
+        if (Input.GetKey(KeyCode.LeftShift))
         {
+            navAgent.speed = 20f;
             print("im running!");
+        }
+        else if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            navAgent.speed = 10f;
         }
 
         if (CombatInteraction()) return;
         if (MovementInteraction()) return;
 
+    }
+
+    private void LateUpdate()
+    {
+        if (showResourceCanvas)
+            resourceOverlayCanvas.SetActive(true);
+        else
+            resourceOverlayCanvas.SetActive(false);
+
+        if (freeCamToggle)
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            vcam.m_XAxis.m_InputAxisName = "Mouse X";
+            vcam.m_YAxis.m_InputAxisName = "Mouse Y";
+        }
+        else
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            vcam.m_XAxis.m_InputAxisName = "";
+            vcam.m_YAxis.m_InputAxisName = "";
+        }
     }
 
     private void ToggleFreeCam()
@@ -145,27 +173,6 @@ public class PlayerController : MonoBehaviour
         return cam.ScreenPointToRay(Input.mousePosition);
     }
 
-    private void LateUpdate()
-    {
-        if (showResourceCanvas)
-            resourceOverlayCanvas.SetActive(true);
-        else
-            resourceOverlayCanvas.SetActive(false);
 
-        if (freeCamToggle)
-        {
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
-            vcam.m_XAxis.m_InputAxisName = "Mouse X";
-            vcam.m_YAxis.m_InputAxisName = "Mouse Y";
-        }
-        else
-        {
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
-            vcam.m_XAxis.m_InputAxisName = "";
-            vcam.m_YAxis.m_InputAxisName = "";
-        }
-    }
 
 }
