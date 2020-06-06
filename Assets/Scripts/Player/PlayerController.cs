@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            MakePlayersCold();
+            MakePlayersScared();
         }
 
         if (Input.GetKeyDown(KeyCode.C))
@@ -103,13 +103,14 @@ public class PlayerController : MonoBehaviour
         freeCamToggle = !freeCamToggle;
     }
 
-    private static void MakePlayersCold()
+    private void MakePlayersScared()
     {
         var pawns = GameObject.FindGameObjectsWithTag("Player");
 
         foreach (var pawn in pawns)
         {
-            pawn.GetComponentInChildren<GAgent>().beliefs.ModifyState("isCold", 1);
+            if(pawn.gameObject != this.gameObject) 
+                pawn.GetComponentInChildren<Player>().InDanger();
         };
     }
 

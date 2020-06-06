@@ -63,16 +63,18 @@ public class Health : MonoBehaviour
 
     public void OnRevive()
     {
+        Player player = GetComponent<Player>();
+        if(player == null ) return;
+
+        navMeshAgent.transform.position = player.home.position;
+        
         isDead = false;
         //player.playerNameCanvas.enabled = true;
         navMeshAgent.enabled = true;
         navMeshAgent.isStopped = false;
-        Player player = GetComponent<Player>();
         animator.enabled = true;
 
-        if(player == null ) return;
         
-        navMeshAgent.transform.position = player.home.position;
 
         if (this.tag == "Streamer")
         {

@@ -51,6 +51,7 @@ public class Player : MonoBehaviour
         depot = GetComponent<Depot>(); 
         farm = GetComponent<Farm>();
         animator = GetComponent<Animator>();
+        playerGAgent = GetComponent<PlayerGAgent>();
         depot.targetTag = "Home";
         home = playerManager.spawnPoint;
         playerManager.playerReferences[playerID] = this;
@@ -214,11 +215,19 @@ public class Player : MonoBehaviour
     public void CancelFarming()
     {
         playerGAgent.material = "";
+        print(farm.targetTag);
         farm.targetTag = "";
         farm.target = null;
         playerGAgent.beliefs.RemoveState("isFarming");
 
         CancelGoap();
+        playerAnimController.CancelAnimations(this);
+    }
+
+    public void InDanger()
+    {
+        CancelFarming();
+        playerGAgent.beliefs.ModifyState("inDanger", 1);
     }
 
     private void UpdateAnimator()

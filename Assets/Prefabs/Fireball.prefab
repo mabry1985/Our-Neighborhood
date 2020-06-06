@@ -115,7 +115,7 @@ MonoBehaviour:
   maxLifeTime: 30
   minDamage: 20
   maxDamage: 35
-  explosionRadius: 1
+  explosionRadius: 1.5
 --- !u!1001 &387192370104709815
 PrefabInstance:
   m_ObjectHideFlags: 0
