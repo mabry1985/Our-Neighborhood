@@ -106,7 +106,7 @@ public class PlayerController : MonoBehaviour
                 continue;
             }
 
-            if (Input.GetMouseButton(1))
+            if (Input.GetMouseButton(0))
             {
                 GetComponent<Fighter>().Attack(target.gameObject);
             }

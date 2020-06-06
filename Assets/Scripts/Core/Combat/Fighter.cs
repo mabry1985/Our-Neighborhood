@@ -6,13 +6,18 @@ public class Fighter : MonoBehaviour, IAction
 {
     [SerializeField] float weaponRange = 5f;
     [SerializeField] float timeBetweenAttack = 1f;
+    [SerializeField] float timeBetweenAttackMin = 1f;
+    [SerializeField] float timeBetweenAttackMax = 1f;
     [SerializeField] float weaponDamage = 1f;
     [SerializeField] GameObject projectilePrefab;
     [SerializeField] Transform projectileSpawnPoint;
 
-
     Health target;
     float timeSinceLastAttack = Mathf.Infinity;
+
+    private void Start() {
+        projectileSpawnPoint = GetComponentInChildren<ProjectileSpawnPoint>().transform ?? null;
+    }
 
     private void Update()
     {
@@ -31,7 +36,6 @@ public class Fighter : MonoBehaviour, IAction
             GetComponent<Mover>().Cancel();
             AttackBehaviour();
         }
-
     }
 
     private void AttackBehaviour()
@@ -39,9 +43,9 @@ public class Fighter : MonoBehaviour, IAction
         transform.LookAt(target.transform);
         if (timeSinceLastAttack >= timeBetweenAttack)
         {
-            //this will trigger the Hit() event
             TriggerAttack();
             timeSinceLastAttack = 0;
+            timeBetweenAttack = Random.Range(timeBetweenAttackMin, timeBetweenAttackMax);
         }
     }
 

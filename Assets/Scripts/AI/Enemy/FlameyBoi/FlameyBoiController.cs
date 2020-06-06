@@ -113,7 +113,6 @@ public class FlameyBoiController : MonoBehaviour
     private bool InAttackRange()
     {
         float distanceToPlayer = Vector3.Distance(targetPlayer.transform.position, transform.position);
-        print(targetPlayer.name + distanceToPlayer);
         return distanceToPlayer < chaseDistance;
     }
 

@@ -36,6 +36,7 @@ TagManager:
   - Workshop
   - Campfire
   - Warmth
+  - Projectile Spawn
   layers:
   - Default
   - TransparentFX
