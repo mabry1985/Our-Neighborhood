@@ -45,7 +45,8 @@ public class Player : MonoBehaviour
     private Vector3 destination;
     private float distanceToTarget;
     
-    private void Start() {
+    private void Start() 
+    {
         playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
         placeableItemManager = GameObject.Find("PlaceableItemManager").GetComponent<PlaceableItemManager>();
         depot = GetComponent<Depot>(); 

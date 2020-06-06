@@ -7,6 +7,7 @@ public class PlayerGAgent : GAgent
 {
     public string material = "";
     public string craftingItem = "";
+    public float senseDistance = 50f;
 
     new void Start()
     {
@@ -24,13 +25,11 @@ public class PlayerGAgent : GAgent
         SubGoal s6 = new SubGoal("depotInventory", 1, false);
         goals.Add(s6, 4);
 
-        //this.GetComponent<GAgent>().beliefs.ModifyState("notWorking", 1);
         //Invoke("GetTired", Random.Range(2.0f, 20.0f))
     }
 
     private void Update() {
     }
-
 
     void GetTired()
     {
@@ -45,4 +44,28 @@ public class PlayerGAgent : GAgent
         beliefs.ModifyState("inDanger", 0);
     }
 
+    public void RemoveFear()
+    {
+        beliefs.RemoveState("inDanger");
+    }
+
+    IEnumerator CheckSurroundings(Vector3 center, float radius)
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1);
+            Collider[] hitColliders = Physics.OverlapSphere(center, radius);
+            int i = 0;
+            while (i < hitColliders.Length)
+            {
+                if(hitColliders[i].GetComponent<CombatTarget>())
+                {
+                    SetFear();
+                }
+                i++;
+            }
+            yield return new WaitForSeconds(5);
+            RemoveFear();
+        }
+    }
 }
