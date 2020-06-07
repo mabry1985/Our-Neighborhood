@@ -19,7 +19,7 @@ public class Run : GAction
     public override bool PostPerform()
     {
         agent.speed = originalSpeed;
-        this.GetComponent<GAgent>().beliefs.ModifyState("inDanger", -1);
+        this.GetComponent<PlayerGAgent>().RemoveFear();
         return true;
     }
 }

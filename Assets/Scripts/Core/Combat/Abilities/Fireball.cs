@@ -25,9 +25,7 @@ public class Fireball : MonoBehaviour
     void OnCollisionEnter(Collision col)
     {
         float randomDamage = Random.Range(minDamage, maxDamage);
-        //Explosion();
         Destroy(this.gameObject);
-        print(col.transform.root.name);
         Health targetHealth = col.transform.root.GetComponent<Health>();
         if (targetHealth == null) return;
         targetHealth.TakeDamage(randomDamage);

@@ -49,7 +49,7 @@ public class GAgent : MonoBehaviour
         invoked = false;
     }
 
-    void LateUpdate()
+    protected void LateUpdate()
     {
         if (currentAction != null && currentAction.running)
         {
@@ -114,7 +114,7 @@ public class GAgent : MonoBehaviour
                 if(currentAction.target == null && currentAction.targetTag != "")
                     currentAction.target = GameObject.FindWithTag(currentAction.targetTag);
 
-                print(currentAction.target + " is the current action target");
+                //print(currentAction.target + " is the current action target");
                 if(currentAction.target != null)
                 {
                     currentAction.running = true;
@@ -125,7 +125,7 @@ public class GAgent : MonoBehaviour
                     if(dest != null)
                         destination = dest.position;
 
-                    if (!player.isDead)
+                    if (!player.GetComponent<Health>().IsDead())
                         currentAction.agent.SetDestination(destination);
                 }
             }

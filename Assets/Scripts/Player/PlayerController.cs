@@ -110,7 +110,7 @@ public class PlayerController : MonoBehaviour
         foreach (var pawn in pawns)
         {
             if(pawn.gameObject != this.gameObject) 
-                pawn.GetComponentInChildren<Player>().InDanger();
+                pawn.GetComponent<Player>().InDanger();
         };
     }
 

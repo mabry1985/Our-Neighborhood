@@ -6,6 +6,8 @@ using UnityEngine.AI;
 public class Health : MonoBehaviour
 {
     [SerializeField] float health = 100f;
+    float originalHealth;
+
     bool isDead = false;
     Player player;
     NavMeshAgent navMeshAgent;
@@ -13,6 +15,7 @@ public class Health : MonoBehaviour
 
     private void Start() 
     {
+        originalHealth = health;
         navMeshAgent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         player = GetComponent<Player>();
@@ -33,8 +36,13 @@ public class Health : MonoBehaviour
     public void Die()
     {
         if (isDead) return;
+        
         isDead = true;
-        GetComponent<ActionScheduler>().CancelCurrentAction();
+        
+        ActionScheduler actionScheduler = GetComponent<ActionScheduler>();
+        if (actionScheduler != false)
+            GetComponent<ActionScheduler>().CancelCurrentAction();
+        
         navMeshAgent.enabled = false;
         animator.enabled = false;
 
@@ -48,7 +56,7 @@ public class Health : MonoBehaviour
         
         Invoke("OnRevive", 10);
         
-        Canvas nameCanvas = player.playerNameCanvas ?? null;
+        Canvas nameCanvas = player.playerNameCanvas;
 
         if (nameCanvas == null) return;
 
@@ -62,7 +70,7 @@ public class Health : MonoBehaviour
         navMeshAgent.enabled = true;
         navMeshAgent.isStopped = false;
         animator.enabled = true;
-        
+        health = originalHealth;   
 
         // if (this.tag == "Streamer")
         // {

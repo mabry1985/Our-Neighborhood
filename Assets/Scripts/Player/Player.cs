@@ -210,13 +210,12 @@ public class Player : MonoBehaviour
             playerGAgent.actionQueue.Clear();
             playerGAgent.currentAction.running = false;
         }
-
     }
 
     public void CancelFarming()
     {
         playerGAgent.material = "";
-        print(farm.targetTag);
+        //print(farm.targetTag);
         farm.targetTag = "";
         farm.target = null;
         playerGAgent.beliefs.RemoveState("isFarming");
@@ -228,7 +227,7 @@ public class Player : MonoBehaviour
     public void InDanger()
     {
         CancelFarming();
-        playerGAgent.beliefs.ModifyState("inDanger", 1);
+        playerGAgent.SetFear();
     }
 
     private void UpdateAnimator()

@@ -7,7 +7,9 @@ public class PlayerGAgent : GAgent
 {
     public string material = "";
     public string craftingItem = "";
-    public float senseDistance = 50f;
+    public float senseDistance = 100f;
+    CapsuleCollider senseTrigger;
+    Player player;
 
     new void Start()
     {
@@ -25,23 +27,27 @@ public class PlayerGAgent : GAgent
         SubGoal s6 = new SubGoal("depotInventory", 1, false);
         goals.Add(s6, 4);
 
-        //Invoke("GetTired", Random.Range(2.0f, 20.0f))
+        player = GetComponent<Player>();
+
     }
 
-    private void Update() {
-    }
+    float lastUpdate;
+    float updateInterval = 2.0f;
 
-    void GetTired()
+    new void LateUpdate()
     {
-        beliefs.ModifyState("exhausted", 0);
-        //call the get tired method over and over at random times to make the nurse
-        //get tired again
-        Invoke("GetTired", Random.Range(0.0f, 20.0f));
+        base.LateUpdate();
+
+        if (Time.time > lastUpdate + updateInterval)
+        {
+            CheckSurroundings();
+            lastUpdate = Time.time;
+        }
     }
 
     public void SetFear()
     {
-        beliefs.ModifyState("inDanger", 0);
+        beliefs.ModifyState("inDanger", 1);
     }
 
     public void RemoveFear()
@@ -49,23 +55,29 @@ public class PlayerGAgent : GAgent
         beliefs.RemoveState("inDanger");
     }
 
-    IEnumerator CheckSurroundings(Vector3 center, float radius)
+    void CheckSurroundings()
     {
-        while (true)
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, senseDistance);
+        int i = 0;
+        while (i < hitColliders.Length)
         {
-            yield return new WaitForSeconds(1);
-            Collider[] hitColliders = Physics.OverlapSphere(center, radius);
-            int i = 0;
-            while (i < hitColliders.Length)
+            CombatTarget target = hitColliders[i].transform.root.GetComponent<CombatTarget>();
+            print(hitColliders[i].transform.root.name);
+
+            if (target != null)
             {
-                if(hitColliders[i].GetComponent<CombatTarget>())
-                {
-                    SetFear();
-                }
-                i++;
+                print("Im scared");
+                player.InDanger();
+                break;
             }
-            yield return new WaitForSeconds(5);
-            RemoveFear();
+            i++;
         }
+
+    }
+
+    private void OnDrawGizmos() 
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, senseDistance);    
     }
 }
