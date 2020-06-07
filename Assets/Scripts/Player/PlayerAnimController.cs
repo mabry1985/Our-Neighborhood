@@ -23,15 +23,11 @@ public class PlayerAnimController
 
     public void CancelAnimations(Player player)
     {
-        //var anim = player.GetComponentInChildren<Animation>();
         player.animator.SetBool("isMining", false);
-        //anim.Stop("isMining");
 
         player.animator.SetBool("isChopping", false);
-        //anim.Stop("isChopping");
         
         player.animator.SetBool("isGathering", false);
-        //anim.Stop("isGathering");
         
         player.animator.SetBool("isStanding", true);
     }

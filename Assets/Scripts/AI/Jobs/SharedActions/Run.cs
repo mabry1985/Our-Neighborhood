@@ -4,13 +4,22 @@ using UnityEngine;
 
 public class Run : GAction
 {
+    float originalSpeed;
+
+    private void Start() {
+        originalSpeed = agent.speed;
+    }
+
     public override bool PrePerform()
     {
+        agent.speed = originalSpeed * 2f;
         return true;
     }
+
     public override bool PostPerform()
     {
-        this.GetComponent<GAgent>().beliefs.ModifyState("inDanger", -1);
+        agent.speed = originalSpeed;
+        this.GetComponent<PlayerGAgent>().RemoveFear();
         return true;
     }
 }

@@ -13,7 +13,7 @@ public class DefaultBehaviour : StateMachineBehaviour
         animator.SetBool("isWaving", false);
         animator.SetBool("isStanding", true);
 
-        animator.transform.parent.GetComponentInParent<Player>().isStanding = true;
+        animator.GetComponent<Player>().isStanding = true;
     }
 
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

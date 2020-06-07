@@ -109,18 +109,18 @@ Material:
     - _DstBlend: 0
     - _EdgeLength: 20
     - _Glossiness: 0.5
-    - _GrassFadeEnd: 150
+    - _GrassFadeEnd: 500
     - _GrassFadeStart: 8.9
     - _LODEnd: 100
     - _LODMax: 6
     - _LODStart: 20
-    - _MaxHeight00: 42.45
+    - _MaxHeight00: 11.4
     - _MaxHeight01: 1.5
     - _MaxHeight02: 1.5
     - _MaxHeight03: 1.5
     - _MaxTessellation: 3
     - _Metallic: 0
-    - _MinHeight00: 0.1
+    - _MinHeight00: 2.9
     - _MinHeight01: 0.2
     - _MinHeight02: 0.2
     - _MinHeight03: 0.2
@@ -140,7 +140,7 @@ Material:
     - _Subsurface01: 0.3
     - _Subsurface02: 0.3
     - _Subsurface03: 0.3
-    - _TargetDensity: 0.01
+    - _TargetDensity: 0.54
     - _TextureAtlasHeight00: 1
     - _TextureAtlasHeight01: 1
     - _TextureAtlasHeight02: 1

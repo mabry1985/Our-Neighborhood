@@ -79,12 +79,12 @@ public class Train : MonoBehaviour
                 Destroy(this.gameObject, 5f);
                 break;
             case "Player":
-                other.GetComponent<Player>().OnDeath();
+                other.GetComponent<Health>().Die();
             break;
-            case "Streamer":
-                other.GetComponent<Player>().OnDeath();
-                //other.GetComponentInChildren<Rigidbody>().AddForce(transform.forward * 40, ForceMode.Impulse);
-            break;
+            // case "Streamer":
+            //     other.GetComponent<Health>().Die();
+            //     //other.GetComponentInChildren<Rigidbody>().AddForce(transform.forward * 40, ForceMode.Impulse);
+            // break;
             default:
                 break;
         }

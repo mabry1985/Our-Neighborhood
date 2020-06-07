@@ -21,7 +21,6 @@ public class GAgent : MonoBehaviour
     public List<GAction> actions = new List<GAction>();
     public Dictionary<SubGoal, int> goals = new Dictionary<SubGoal, int>();
     public WorldStates beliefs = new WorldStates();
-    public PlayerAnimator playerAnimator;
 
     public GPlanner planner;
     public Queue<GAction> actionQueue;
@@ -41,7 +40,6 @@ public class GAgent : MonoBehaviour
         }
 
         player = this.GetComponent<Player>();
-        playerAnimator = player.GetComponent<PlayerAnimator>();
     }
 
     void CompleteAction()
@@ -51,7 +49,7 @@ public class GAgent : MonoBehaviour
         invoked = false;
     }
 
-    void LateUpdate()
+    protected void LateUpdate()
     {
         if (currentAction != null && currentAction.running)
         {
@@ -69,6 +67,7 @@ public class GAgent : MonoBehaviour
                     string key = first.Key;
                     player.progressBar.gameObject.SetActive(true);
                     StartCoroutine(player.progressBar.GetComponent<ActionProgressBar>().IncrementProgress(currentAction.duration));
+                    
                     if(currentAction.actionName == "Farm")
                     {
                         player.playerAnimController.FarmAnimHandler(player, currentAction.targetTag);
@@ -115,7 +114,7 @@ public class GAgent : MonoBehaviour
                 if(currentAction.target == null && currentAction.targetTag != "")
                     currentAction.target = GameObject.FindWithTag(currentAction.targetTag);
 
-                print(currentAction.target + " is the current action target");
+                //print(currentAction.target + " is the current action target");
                 if(currentAction.target != null)
                 {
                     currentAction.running = true;
@@ -126,7 +125,7 @@ public class GAgent : MonoBehaviour
                     if(dest != null)
                         destination = dest.position;
 
-                    if (!player.isDead)
+                    if (!player.GetComponent<Health>().IsDead())
                         currentAction.agent.SetDestination(destination);
                 }
             }
