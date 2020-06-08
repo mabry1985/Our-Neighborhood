@@ -25,7 +25,7 @@ public class EnemyGAgent : GAgent
         beliefs.ModifyState("canAttack", 1);
     }
 
-    private void Update() 
+    new private void Update() 
     {
         base.Update();
         print(timeSinceLastAttack + " / " + timeBetweenAttack);

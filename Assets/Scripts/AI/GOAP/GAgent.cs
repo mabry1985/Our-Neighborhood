@@ -68,23 +68,11 @@ public class GAgent : MonoBehaviour
                 // Debug.Log("Distance to Goal: " + currentAction.agent.remainingDistance);
                 if (!invoked)
                 {
+                    // var entry = currentGoal.sGoals.First();
+                    // var first = currentGoal.sGoals.First();
+                    // string key = first.Key;
 
-                    var entry = currentGoal.sGoals.First();
-                    var first = currentGoal.sGoals.First();
-                    string key = first.Key;
-
-                    Player player = GetComponent<Player>();
-
-                    if (player != null)
-                    {
-                        player.progressBar.gameObject.SetActive(true);
-                        StartCoroutine(player.progressBar.GetComponent<ActionProgressBar>().IncrementProgress(currentAction.duration));
-
-                        if (currentAction.actionName == "Farm")
-                        {
-                            player.playerAnimController.FarmAnimHandler(player.animator, currentAction.targetTag);
-                        }
-                    }
+                    HandlePlayer();
                     Invoke("CompleteAction", currentAction.duration);
                     invoked = true;
                 }
@@ -148,6 +136,23 @@ public class GAgent : MonoBehaviour
             }
         }
     }
+
+    private void HandlePlayer()
+    {
+        Player player = GetComponent<Player>();
+
+        if (player != null)
+        {
+            player.progressBar.gameObject.SetActive(true);
+            StartCoroutine(player.progressBar.GetComponent<ActionProgressBar>().IncrementProgress(currentAction.duration));
+
+            if (currentAction.actionName == "Farm")
+            {
+                player.playerAnimController.FarmAnimHandler(player.animator, currentAction.targetTag);
+            }
+        }
+    }
+
 
     private void ActionAnimHandler()
     {
