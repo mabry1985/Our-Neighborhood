@@ -13,7 +13,7 @@ public abstract class GAction : MonoBehaviour
     public float range = 2.0f;
     public WorldState[] preConditions;
     public WorldState[] afterEffects;
-    public NavMeshAgent agent;
+    public NavMeshAgent navMeshAgent;
 
     public Dictionary<string, int> preconditions;
     public Dictionary<string, int> effects;
@@ -32,7 +32,7 @@ public abstract class GAction : MonoBehaviour
     }
 
     public void Awake() {
-        agent = this.GetComponent<NavMeshAgent>();
+        navMeshAgent = this.GetComponent<NavMeshAgent>();
         
         if(preConditions != null) {
             foreach(WorldState w in preConditions)

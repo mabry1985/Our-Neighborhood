@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class EnemyGAgent : GAgent
 {
-    public string material = "";
-    public string craftingItem = "";
     public float senseDistance = 100f;
     CapsuleCollider senseTrigger;
     List<GameObject> players = new List<GameObject>();
@@ -23,10 +21,22 @@ public class EnemyGAgent : GAgent
         {
             beliefs.ModifyState("hasProjectile", 1);
         }
+
+        beliefs.ModifyState("canAttack", 1);
+    }
+
+    private void Update() 
+    {
+        base.Update();
+        print(timeSinceLastAttack + " / " + timeBetweenAttack);
+        if (timeSinceLastAttack >= timeBetweenAttack)
+        {
+            beliefs.ModifyState("canAttack", 1);
+        }
     }
 
     float lastUpdate;
-    float updateInterval = 2.0f;
+    float updateInterval = .5f;
 
     new void LateUpdate()
     {
@@ -71,7 +81,7 @@ public class EnemyGAgent : GAgent
             i++;
         }
 
-        print(playerCount);
+        //print(playerCount);
         if (players.Count == 0) 
         {
             beliefs.RemoveState("playerNear");

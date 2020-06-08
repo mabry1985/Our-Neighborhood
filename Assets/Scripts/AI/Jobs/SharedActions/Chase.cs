@@ -11,6 +11,7 @@ public class Chase : GAction
     }
     public override bool PostPerform()
     {
+        navMeshAgent.ResetPath();
         return true;
     }
 }

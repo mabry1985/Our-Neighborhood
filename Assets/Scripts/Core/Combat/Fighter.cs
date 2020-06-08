@@ -5,7 +5,6 @@ using UnityEngine;
 public class Fighter : MonoBehaviour, IAction
 {
     [SerializeField] float weaponRange = 5f;
-    [SerializeField] float timeBetweenAttack = 1f;
     [SerializeField] float timeBetweenAttackMin = 1f;
     [SerializeField] float timeBetweenAttackMax = 1f;
     [SerializeField] float weaponDamage = 1f;
@@ -13,30 +12,31 @@ public class Fighter : MonoBehaviour, IAction
     [SerializeField] Transform projectileSpawnPoint;
 
     Health target;
+    [SerializeField] float timeBetweenAttack = 1f;
     float timeSinceLastAttack = Mathf.Infinity;
 
     private void Start() {
         projectileSpawnPoint = GetComponentInChildren<ProjectileSpawnPoint>().transform ?? null;
     }
 
-    // private void Update()
-    // {
-    //     timeSinceLastAttack += Time.deltaTime;
+    private void Update()
+    {
+        timeSinceLastAttack += Time.deltaTime;
 
-    //     if (target == null) return;
-    //     if (target.IsDead()) return;
+        if (target == null) return;
+        if (target.IsDead()) return;
 
-    //     bool isInRange = Vector3.Distance(transform.position, target.transform.position) < weaponRange;
-    //     if (target != null && !isInRange)
-    //     {
-    //         GetComponent<Mover>().MoveTo(target.transform.position);
-    //     }
-    //     else
-    //     {
-    //         GetComponent<Mover>().Cancel();
-    //         AttackBehaviour();
-    //     }
-    // }
+        bool isInRange = Vector3.Distance(transform.position, target.transform.position) < weaponRange;
+        // if (target != null && !isInRange)
+        // {
+        //     GetComponent<Mover>().MoveTo(target.transform.position);
+        // }
+        // else
+        // {
+        //     GetComponent<Mover>().Cancel();
+        //     AttackBehaviour();
+        // }
+    }
 
     private void AttackBehaviour()
     {

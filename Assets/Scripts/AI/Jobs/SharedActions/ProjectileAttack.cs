@@ -5,33 +5,46 @@ using UnityEngine.AI;
 
 public class ProjectileAttack : GAction
 {
-    float weaponDamage = 2f;
     Transform projectileSpawnPoint;
     public GameObject projectilePrefab;
     // [SerializeField] float projectileRange = 10f;
+    GAgent gAgent;
 
     private void Start() 
     {
         projectileSpawnPoint = GetComponentInChildren<ProjectileSpawnPoint>().transform ?? null;
+        gAgent = GetComponent<GAgent>();
     }
 
     public override bool PrePerform()
     {   
-        if (GetComponent<GAgent>().distanceToTarget > this.range) 
+        if (gAgent.distanceToTarget > this.range) 
         {
-            GetComponent<GAgent>().beliefs.RemoveState("inRange");
+            gAgent.beliefs.RemoveState("inRange");
             return false;
-        }
-
+        } 
         return true;
     }
 
     public override bool PostPerform()
     {
-        GetComponent<NavMeshAgent>().enabled = false;
-        FaceTarget(target.transform.position);
-        GetComponent<Animator>().SetTrigger("projectileAttack");
+        HandleAttack();
+        ResetAgentAttack();
+
         return true;
+    }
+    
+    private void HandleAttack()
+    {
+        GetComponent<NavMeshAgent>().enabled = false;
+        transform.LookAt(target.transform);
+        GetComponent<Animator>().SetTrigger("projectileAttack");
+    }
+
+    private void ResetAgentAttack()
+    {
+        gAgent.timeSinceLastAttack = 0;
+        gAgent.beliefs.RemoveState("canAttack");
     }
 
     //animation event
@@ -40,14 +53,6 @@ public class ProjectileAttack : GAction
         Health target = GetComponent<Health>();
         if (target == null) return;
         Instantiate(projectilePrefab, projectileSpawnPoint.position, transform.rotation);
-    }
-
-    public void FaceTarget(Vector3 destination)
-    {
-        Vector3 lookPos = destination - transform.position;
-        lookPos.y = 0;
-        Quaternion rotation = Quaternion.LookRotation(lookPos);
-        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime);
     }
 
     private void OnDrawGizmos() {

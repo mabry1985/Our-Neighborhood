@@ -5038,7 +5038,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.2122481, y: 0.35670385, z: -0.02246239}
+  m_ConnectedAnchor: {x: -0.2122493, y: 0.35670388, z: -0.022463113}
   serializedVersion: 2
   m_SwingAxis: {x: -1, y: 0, z: 0}
   m_TwistLimitSpring:
@@ -5211,7 +5211,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.0000012108859, y: 0.2267715, z: -0.004333645}
+  m_ConnectedAnchor: {x: -0.0000011545962, y: 0.2267715, z: -0.0043352544}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 1}
   m_TwistLimitSpring:
@@ -5415,7 +5415,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.13771765, y: 0.0324047, z: 0.00389364}
+  m_ConnectedAnchor: {x: -0.13771646, y: 0.032404702, z: 0.0038944148}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: -1}
   m_TwistLimitSpring:
@@ -5647,9 +5647,9 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 15
-  m_Acceleration: 10
+  m_Acceleration: 20
   avoidancePriority: 50
-  m_AngularSpeed: 1000
+  m_AngularSpeed: 2000
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -5741,7 +5741,7 @@ MonoBehaviour:
   afterEffects:
   - key: attackPlayer
     value: 0
-  agent: {fileID: 0}
+  navMeshAgent: {fileID: 0}
   running: 0
 --- !u!114 &7094158813169354328
 MonoBehaviour:
@@ -5766,10 +5766,12 @@ MonoBehaviour:
     value: 0
   - key: inRange
     value: 0
+  - key: canAttack
+    value: 0
   afterEffects:
   - key: attackPlayer
     value: 0
-  agent: {fileID: 0}
+  navMeshAgent: {fileID: 0}
   running: 0
   projectilePrefab: {fileID: 387192370330184006, guid: da62bc8d33dbcde42be22ab79d51808f,
     type: 3}
@@ -5790,8 +5792,8 @@ MonoBehaviour:
   destination: {x: 0, y: 0, z: 0}
   distanceToTarget: 0
   invoked: 0
-  material: 
-  craftingItem: 
+  timeSinceLastAttack: 0
+  timeBetweenAttack: 2
   senseDistance: 100
 --- !u!114 &555254637797248765
 MonoBehaviour:
@@ -5858,7 +5860,7 @@ MonoBehaviour:
   afterEffects:
   - key: inRange
     value: 0
-  agent: {fileID: 0}
+  navMeshAgent: {fileID: 0}
   running: 0
 --- !u!1 &4774674003794747361
 GameObject:
@@ -6025,7 +6027,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.0036539626, y: 0.5423503, z: 0.056532178}
+  m_ConnectedAnchor: {x: 0.0036527799, y: 0.54235035, z: 0.056531463}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 1}
   m_TwistLimitSpring:
@@ -6274,7 +6276,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.00000026449564, y: 0.21563101, z: -0.0000014305115}
+  m_ConnectedAnchor: {x: 0.00000078603637, y: 0.21563283, z: 0.0000006556511}
   serializedVersion: 2
   m_SwingAxis: {x: -1, y: 0, z: 0}
   m_TwistLimitSpring:
@@ -6475,7 +6477,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.00000291224, y: 0.26609755, z: -0.00000024959434}
+  m_ConnectedAnchor: {x: 0.0000004759049, y: 0.26609737, z: 0.0000012177038}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: -1}
   m_TwistLimitSpring:
@@ -6584,7 +6586,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.0000035613323, y: 0.26609725, z: 0.00000018719508}
+  m_ConnectedAnchor: {x: 0.0000012693765, y: 0.2660973, z: 0.0000018752105}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: -1}
   m_TwistLimitSpring:

@@ -7,18 +7,18 @@ public class Run : GAction
     float originalSpeed;
 
     private void Start() {
-        originalSpeed = agent.speed;
+        originalSpeed = navMeshAgent.speed;
     }
 
     public override bool PrePerform()
     {
-        agent.speed = originalSpeed * 2f;
+        navMeshAgent.speed = originalSpeed * 2f;
         return true;
     }
 
     public override bool PostPerform()
     {
-        agent.speed = originalSpeed;
+        navMeshAgent.speed = originalSpeed;
         this.GetComponent<PlayerGAgent>().RemoveFear();
         return true;
     }

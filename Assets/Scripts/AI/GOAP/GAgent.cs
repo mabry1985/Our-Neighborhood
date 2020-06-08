@@ -30,13 +30,23 @@ public class GAgent : MonoBehaviour
     public float distanceToTarget;
     public bool invoked = false;
 
-    public void Start()
+    public float timeSinceLastAttack;
+    public float timeBetweenAttack = 10f;
+
+
+    protected void Start()
     {
         GAction[] acts = this.GetComponents<GAction>();
         foreach(GAction a in acts) {
             actions.Add(a);
         }
 
+    }
+
+    protected void Update()
+    {
+        timeSinceLastAttack += Time.deltaTime;
+        print(timeSinceLastAttack);
     }
 
     void CompleteAction()
@@ -117,7 +127,7 @@ public class GAgent : MonoBehaviour
                         destination = dest.position;
 
                     if (!GetComponent<Health>().IsDead())
-                        currentAction.agent.SetDestination(destination);
+                        currentAction.navMeshAgent.SetDestination(destination);
                 }
             }
             else
