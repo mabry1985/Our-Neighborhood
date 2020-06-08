@@ -5851,7 +5851,7 @@ MonoBehaviour:
   target: {fileID: 0}
   targetTag: 
   duration: 0
-  range: 2
+  range: 20
   preConditions:
   - key: playerNear
     value: 0
