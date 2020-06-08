@@ -25,7 +25,6 @@ public abstract class GAction : MonoBehaviour
     
     public bool running = false;
 
-
     public GAction() {
         preconditions = new Dictionary<string, int>();
         effects = new Dictionary<string, int>();

@@ -42,20 +42,6 @@ public class PlayerGAgent : GAgent
             CheckSurroundings();
             lastUpdate = Time.time;
         }
-
-        if (currentAction != null && currentAction.running)
-        {
-
-            if (distanceToTarget < 2f)
-            {
-                if (!invoked)
-                {
-                    player.progressBar.gameObject.SetActive(true);
-                    StartCoroutine(player.progressBar.GetComponent<ActionProgressBar>().IncrementProgress(currentAction.duration));
-                }
-            }
-            return;
-        }
     }
 
     public void SetFear()
