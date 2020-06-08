@@ -12,9 +12,7 @@ public class Farm : GAction
 
     public override bool PrePerform()
     {
-
         player = this.GetComponent<Player>();
-        //bot = gameObject.transform.parent.parent.GetComponent<Bot>();
         gAgent = gameObject.GetComponent<GAgent>();
 
         if (gameObject.tag == "Player")
@@ -22,21 +20,13 @@ public class Farm : GAction
             inv = player.inventory;
             if (inv.invSpace == 0) 
             {
-                player.playerAnimController.CancelAnimations(player);
+                player.playerAnimController.CancelAnimations(player.GetComponent<Animator>());
                 print("inventory is full");
-                //player.ChangeJobs("Idle", null);
                 beliefs.RemoveState("isFarming");
                 return false;
             }
         }
-        // else if (gameObject.transform.parent.parent.tag == "Bot")
-        // {
-        //     inv = bot.inventory;
-        //     if (inv.invSpace == 0) {
-        //         bot.ChangeJobs("Idle", null);
-        //         return false;
-        //     }
-        // }
+
         return true;
     }
 

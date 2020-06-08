@@ -5,11 +5,13 @@ public class DefaultBehaviour : StateMachineBehaviour
 {
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        var navAgent = animator.GetComponentInParent<NavMeshAgent>();
+        var navAgent = animator.GetComponent<NavMeshAgent>();
         
         if (navAgent.enabled == false)
             navAgent.enabled = true;
 
+        if (navAgent.tag != "Player") return;
+        
         animator.SetBool("isWaving", false);
         animator.SetBool("isStanding", true);
 

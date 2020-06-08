@@ -19,24 +19,24 @@ public class Fighter : MonoBehaviour, IAction
         projectileSpawnPoint = GetComponentInChildren<ProjectileSpawnPoint>().transform ?? null;
     }
 
-    private void Update()
-    {
-        timeSinceLastAttack += Time.deltaTime;
+    // private void Update()
+    // {
+    //     timeSinceLastAttack += Time.deltaTime;
 
-        if (target == null) return;
-        if (target.IsDead()) return;
+    //     if (target == null) return;
+    //     if (target.IsDead()) return;
 
-        bool isInRange = Vector3.Distance(transform.position, target.transform.position) < weaponRange;
-        if (target != null && !isInRange)
-        {
-            GetComponent<Mover>().MoveTo(target.transform.position);
-        }
-        else
-        {
-            GetComponent<Mover>().Cancel();
-            AttackBehaviour();
-        }
-    }
+    //     bool isInRange = Vector3.Distance(transform.position, target.transform.position) < weaponRange;
+    //     if (target != null && !isInRange)
+    //     {
+    //         GetComponent<Mover>().MoveTo(target.transform.position);
+    //     }
+    //     else
+    //     {
+    //         GetComponent<Mover>().Cancel();
+    //         AttackBehaviour();
+    //     }
+    // }
 
     private void AttackBehaviour()
     {

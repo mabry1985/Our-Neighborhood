@@ -27,8 +27,6 @@ public class GAgent : MonoBehaviour
     public GAction currentAction;
     SubGoal currentGoal;
     public Vector3 destination = Vector3.zero;
-
-    Player player;
     public float distanceToTarget;
     public bool invoked = false;
 
@@ -39,7 +37,6 @@ public class GAgent : MonoBehaviour
             actions.Add(a);
         }
 
-        player = this.GetComponent<Player>();
     }
 
     void CompleteAction()
@@ -55,7 +52,7 @@ public class GAgent : MonoBehaviour
         {
             distanceToTarget = Vector3.Distance(destination, this.transform.position);
            //Debug.Log(currentAction.agent.hasPath + "   " + distanceToTarget);
-            if (distanceToTarget < 2f)
+            if (distanceToTarget < currentAction.range)
             {
 
                 // Debug.Log("Distance to Goal: " + currentAction.agent.remainingDistance);
@@ -65,13 +62,7 @@ public class GAgent : MonoBehaviour
                     var entry = currentGoal.sGoals.First();
                     var first = currentGoal.sGoals.First();
                     string key = first.Key;
-                    player.progressBar.gameObject.SetActive(true);
-                    StartCoroutine(player.progressBar.GetComponent<ActionProgressBar>().IncrementProgress(currentAction.duration));
-                    
-                    if(currentAction.actionName == "Farm")
-                    {
-                        player.playerAnimController.FarmAnimHandler(player, currentAction.targetTag);
-                    }
+                    ActionAnimHandler();
                     Invoke("CompleteAction", currentAction.duration);
                     invoked = true;
                 }
@@ -125,7 +116,7 @@ public class GAgent : MonoBehaviour
                     if(dest != null)
                         destination = dest.position;
 
-                    if (!player.GetComponent<Health>().IsDead())
+                    if (!GetComponent<Health>().IsDead())
                         currentAction.agent.SetDestination(destination);
                 }
             }
@@ -133,6 +124,14 @@ public class GAgent : MonoBehaviour
             {
                 actionQueue = null;
             }
+        }
+    }
+
+    private void ActionAnimHandler()
+    {
+        if (currentAction.actionName == "Farm")
+        {
+            GetComponent<AnimController>().FarmAnimHandler(GetComponent<Animator>(), currentAction.targetTag);
         }
     }
 }

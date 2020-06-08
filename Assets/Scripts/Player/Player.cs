@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     public PlayerController playerController;
     public PlaceableItemManager placeableItemManager;
     public Renderer playerRenderer;
-    public PlayerAnimController playerAnimController = new PlayerAnimController();
+    public AnimController playerAnimController = new AnimController();
 
     public NavMeshAgent navAgent;
     public Animator animator;
@@ -221,7 +221,7 @@ public class Player : MonoBehaviour
         playerGAgent.beliefs.RemoveState("isFarming");
 
         CancelGoap();
-        playerAnimController.CancelAnimations(this);
+        playerAnimController.CancelAnimations(animator);
     }
 
     public void InDanger()

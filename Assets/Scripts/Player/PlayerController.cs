@@ -62,7 +62,6 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift))
         {
             navAgent.speed = 20f;
-            print("im running!");
         }
         else if (Input.GetKeyUp(KeyCode.LeftShift))
         {
@@ -161,7 +160,7 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetMouseButton(1))
             {
-                this.GetComponent<Mover>().StartMoveAction(hit.point);
+                this.MoveTo(hit.point);
             }
             return true;
         }
@@ -174,6 +173,12 @@ public class PlayerController : MonoBehaviour
         return cam.ScreenPointToRay(Input.mousePosition);
     }
 
+    public void MoveTo(Vector3 destination)
+    {
+        navAgent.isStopped = false;
+        navAgent.SetDestination(destination);
+        //navAgent.u
+    }
 
 
 }

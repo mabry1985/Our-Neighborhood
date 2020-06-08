@@ -4820,7 +4820,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.13771701, y: 0.03240485, z: 0.003895454}
+  m_ConnectedAnchor: {x: 0.13771583, y: 0.03240486, z: 0.0038972422}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: -1}
   m_TwistLimitSpring:
@@ -4929,7 +4929,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.21224971, y: 0.35670406, z: -0.02246312}
+  m_ConnectedAnchor: {x: 0.21225089, y: 0.3567042, z: -0.022464886}
   serializedVersion: 2
   m_SwingAxis: {x: 1, y: 0, z: 0}
   m_TwistLimitSpring:
@@ -5038,7 +5038,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.2122493, y: 0.35670388, z: -0.022463113}
+  m_ConnectedAnchor: {x: -0.2122481, y: 0.35670385, z: -0.02246239}
   serializedVersion: 2
   m_SwingAxis: {x: -1, y: 0, z: 0}
   m_TwistLimitSpring:
@@ -5211,7 +5211,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.00000003196604, y: 0.22677149, z: -0.0043370426}
+  m_ConnectedAnchor: {x: 0.0000012108859, y: 0.2267715, z: -0.004333645}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 1}
   m_TwistLimitSpring:
@@ -5415,7 +5415,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.13771684, y: 0.032404702, z: 0.0038950108}
+  m_ConnectedAnchor: {x: -0.13771765, y: 0.0324047, z: 0.00389364}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: -1}
   m_TwistLimitSpring:
@@ -5601,13 +5601,16 @@ GameObject:
   - component: {fileID: 4774674003794969599}
   - component: {fileID: 4774674003794747270}
   - component: {fileID: 4774674003802139703}
-  - component: {fileID: 4774674003794747290}
   - component: {fileID: 4774674003794747292}
-  - component: {fileID: 4774674003794747264}
-  - component: {fileID: 4774674003794747288}
-  - component: {fileID: 4774674003794747268}
-  - component: {fileID: 4774674003794747266}
+  - component: {fileID: 741770648320904696}
+  - component: {fileID: 4774674003794747290}
+  - component: {fileID: 268271974103988731}
+  - component: {fileID: 7094158813169354328}
+  - component: {fileID: 5605444764855907819}
+  - component: {fileID: 555254637797248765}
+  - component: {fileID: 3413780484262829062}
   - component: {fileID: 4774674003794747278}
+  - component: {fileID: 4116697891630053585}
   m_Layer: 0
   m_Name: FlamingBoi
   m_TagString: Untagged
@@ -5674,6 +5677,31 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &4774674003794747292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4774674003794747295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 767a400028d49cf4a9fc09704efe7429, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &741770648320904696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4774674003794747295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aca5c26451d768a438d8f570463954bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thisAgent: {fileID: 5605444764855907819}
 --- !u!114 &4774674003794747290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5687,7 +5715,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 20
---- !u!114 &4774674003794747292
+--- !u!114 &268271974103988731
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5696,10 +5724,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 4774674003794747295}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 767a400028d49cf4a9fc09704efe7429, type: 3}
+  m_Script: {fileID: 11500000, guid: 617c4ffb4ccfbc94c91691a8e60e39c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4774674003794747264
+  actionName: Attack
+  cost: 1
+  target: {fileID: 0}
+  targetTag: 
+  duration: 0
+  range: 2
+  preConditions:
+  - key: playerNear
+    value: 0
+  - key: hasMelee
+    value: 0
+  afterEffects:
+  - key: attackPlayer
+    value: 0
+  agent: {fileID: 0}
+  running: 0
+--- !u!114 &7094158813169354328
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5708,18 +5752,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 4774674003794747295}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2789961d40574794d94583242cc0f215, type: 3}
+  m_Script: {fileID: 11500000, guid: 72487fafade889d42b3d22dfc3f6aba4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponRange: 30
-  timeBetweenAttack: 5
-  timeBetweenAttackMin: 2
-  timeBetweenAttackMax: 5
-  weaponDamage: 30
+  actionName: ProjectileAttack
+  cost: 1
+  target: {fileID: 0}
+  targetTag: 
+  duration: 0
+  range: 20
+  preConditions:
+  - key: hasProjectile
+    value: 0
+  - key: inRange
+    value: 0
+  afterEffects:
+  - key: attackPlayer
+    value: 0
+  agent: {fileID: 0}
+  running: 0
   projectilePrefab: {fileID: 387192370330184006, guid: da62bc8d33dbcde42be22ab79d51808f,
     type: 3}
-  projectileSpawnPoint: {fileID: 3524856195919700013}
---- !u!114 &4774674003794747288
+--- !u!114 &5605444764855907819
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5728,10 +5782,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 4774674003794747295}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9840e242f4f6a6444a94876b09dc64ef, type: 3}
+  m_Script: {fileID: 11500000, guid: 1bdcfff3564f6b54ebc29aa53133756e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4774674003794747268
+  actions: []
+  currentAction: {fileID: 0}
+  destination: {x: 0, y: 0, z: 0}
+  distanceToTarget: 0
+  invoked: 0
+  material: 
+  craftingItem: 
+  senseDistance: 100
+--- !u!114 &555254637797248765
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5740,10 +5802,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4774674003794747295}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ebd58fb375923d42b0ff6029af56dfa, type: 3}
+  m_Script: {fileID: 11500000, guid: b35a5118514fe1b48a02222503cb6f14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4774674003794747266
+--- !u!114 &3413780484262829062
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5752,12 +5814,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4774674003794747295}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48c95217914ee184e896ce255b8578e8, type: 3}
+  m_Script: {fileID: 11500000, guid: e02464c15e0cdf3469bfae96c0095bac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chaseDistance: 80
-  suspicionTime: 15
-  wanderRadius: 80
+  suspicionTime: 3
+  wanderRadius: 50
   wanderingPauseTime: 2
 --- !u!136 &4774674003794747278
 CapsuleCollider:
@@ -5773,6 +5834,32 @@ CapsuleCollider:
   m_Height: 2.29
   m_Direction: 1
   m_Center: {x: 0, y: 0.88, z: 0}
+--- !u!114 &4116697891630053585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4774674003794747295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 703466aec79829443928bd97a0b43e6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: Chase
+  cost: 1
+  target: {fileID: 0}
+  targetTag: 
+  duration: 0
+  range: 2
+  preConditions:
+  - key: playerNear
+    value: 0
+  afterEffects:
+  - key: inRange
+    value: 0
+  agent: {fileID: 0}
+  running: 0
 --- !u!1 &4774674003794747361
 GameObject:
   m_ObjectHideFlags: 0
@@ -5938,7 +6025,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.0036531752, y: 0.5423504, z: 0.056530874}
+  m_ConnectedAnchor: {x: 0.0036539626, y: 0.5423503, z: 0.056532178}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 1}
   m_TwistLimitSpring:
@@ -6078,7 +6165,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.00000064075, y: 0.21563257, z: 0.0000002756715}
+  m_ConnectedAnchor: {x: 0.00000083446514, y: 0.21563132, z: -0.0000018775465}
   serializedVersion: 2
   m_SwingAxis: {x: 1, y: 0, z: 0}
   m_TwistLimitSpring:
@@ -6187,7 +6274,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.00000019744041, y: 0.21563324, z: 0.00000045448542}
+  m_ConnectedAnchor: {x: 0.00000026449564, y: 0.21563101, z: -0.0000014305115}
   serializedVersion: 2
   m_SwingAxis: {x: -1, y: 0, z: 0}
   m_TwistLimitSpring:
@@ -6388,7 +6475,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.00000025797584, y: 0.26609737, z: -0.00000003864987}
+  m_ConnectedAnchor: {x: 0.00000291224, y: 0.26609755, z: -0.00000024959434}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: -1}
   m_TwistLimitSpring:
@@ -6497,7 +6584,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.000000013969661, y: 0.26609743, z: 0.00000014342311}
+  m_ConnectedAnchor: {x: 0.0000035613323, y: 0.26609725, z: 0.00000018719508}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: -1}
   m_TwistLimitSpring:

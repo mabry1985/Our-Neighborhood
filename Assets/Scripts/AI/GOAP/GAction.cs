@@ -10,6 +10,7 @@ public abstract class GAction : MonoBehaviour
     public GameObject target;
     public string targetTag;
     public float duration = 0;
+    public float range = 2.0f;
     public WorldState[] preConditions;
     public WorldState[] afterEffects;
     public NavMeshAgent agent;

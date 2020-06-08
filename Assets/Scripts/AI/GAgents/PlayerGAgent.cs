@@ -28,7 +28,6 @@ public class PlayerGAgent : GAgent
         goals.Add(s6, 4);
 
         player = GetComponent<Player>();
-
     }
 
     float lastUpdate;
@@ -42,6 +41,20 @@ public class PlayerGAgent : GAgent
         {
             CheckSurroundings();
             lastUpdate = Time.time;
+        }
+
+        if (currentAction != null && currentAction.running)
+        {
+
+            if (distanceToTarget < 2f)
+            {
+                if (!invoked)
+                {
+                    player.progressBar.gameObject.SetActive(true);
+                    StartCoroutine(player.progressBar.GetComponent<ActionProgressBar>().IncrementProgress(currentAction.duration));
+                }
+            }
+            return;
         }
     }
 
@@ -72,7 +85,6 @@ public class PlayerGAgent : GAgent
             }
             i++;
         }
-
     }
 
     private void OnDrawGizmos() 
@@ -80,4 +92,5 @@ public class PlayerGAgent : GAgent
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, senseDistance);    
     }
+
 }
