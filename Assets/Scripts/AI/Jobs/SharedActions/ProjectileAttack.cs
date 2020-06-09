@@ -18,9 +18,13 @@ public class ProjectileAttack : GAction
 
     private void Update() 
     {
-        transform.LookAt(target.transform);
+        // if (target != null)
+        // {
+        //     transform.LookAt(target.transform);
+        // }
+        
     }
-    
+
     public override bool PrePerform()
     {   
         print("in projectile attack preperform");
@@ -44,7 +48,7 @@ public class ProjectileAttack : GAction
     
     private void HandleAttack()
     {
-        //GetComponent<NavMeshAgent>().enabled = false;
+        // GetComponent<NavMeshAgent>().enabled = false;
         
         GetComponent<Animator>().SetTrigger("projectileAttack");
     }
@@ -60,6 +64,8 @@ public class ProjectileAttack : GAction
     {
         Health target = GetComponent<Health>();
         if (target == null) return;
+
+        transform.LookAt(target.transform);
         Instantiate(projectilePrefab, projectileSpawnPoint.position, transform.rotation);
     }
 

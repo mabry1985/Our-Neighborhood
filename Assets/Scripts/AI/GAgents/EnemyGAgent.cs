@@ -39,7 +39,7 @@ public class EnemyGAgent : GAgent
     }
 
     float lastUpdate;
-    float updateInterval = .5f;
+    float updateInterval = .2f;
 
     new void LateUpdate()
     {
@@ -91,9 +91,12 @@ public class EnemyGAgent : GAgent
             i++;
         }
         //print(playerCount);
-        if (players.Count == 0) 
+        if (playerCount == 0) 
         {
             beliefs.RemoveState("playerNear");
+            beliefs.ModifyState("idle", 1);
+            beliefs.RemoveState("inRange");
+            players.Clear();
             RemoveAttackTarget();
             return;
         }
