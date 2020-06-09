@@ -23,18 +23,19 @@ public class EnemyGAgent : GAgent
         {
             beliefs.ModifyState("hasProjectile", 1);
         }
-
-        beliefs.ModifyState("canAttack", 1);
-        SetMovementTarget();
     }
 
-    new private void Update() 
+    new private void Update()
     {
         base.Update();
+
         if (timeSinceLastAttack >= timeBetweenAttack)
         {
             beliefs.ModifyState("canAttack", 1);
         }
+
+        IdleCheck();
+
     }
 
     float lastUpdate;
@@ -51,14 +52,16 @@ public class EnemyGAgent : GAgent
         }
     }
 
-    public void SetFear()
+    private void IdleCheck()
     {
-        beliefs.ModifyState("inDanger", 1);
-    }
-
-    public void RemoveFear()
-    {
-        beliefs.RemoveState("inDanger");
+        if (players.Count > 0)
+        {
+            beliefs.RemoveState("idle");
+        }
+        else
+        {
+            beliefs.ModifyState("idle", 1);
+        }
     }
 
     void CheckSurroundings()
@@ -71,19 +74,22 @@ public class EnemyGAgent : GAgent
             Player target = hitColliders[i].transform.root.GetComponent<Player>();
             if (target != null)
             {
-                if(DeathCheck(target)) break;
+                if(DeathCheck(target))
+                {
+                    players.Remove(target.gameObject);
+                    break;
+                }
             }
             
-            if (target != null && !players.Contains(target.gameObject))
+            if (target != null)
             {
-                beliefs.RemoveState("idle");
+
                 players.Add(target.gameObject);
                 beliefs.ModifyState("playerNear", 1);
                 playerCount++;
             }
             i++;
         }
-
         //print(playerCount);
         if (players.Count == 0) 
         {
@@ -98,12 +104,9 @@ public class EnemyGAgent : GAgent
     private bool DeathCheck(Player target)
     {
         if (target.GetComponent<Health>().IsDead())
-        {
-            players.Remove(target.gameObject);
-            beliefs.ModifyState("playerNear", -1);
             return true;
-        }
-        return false;
+        else 
+            return false;
     }      
 
     private void SetAttackTarget()
@@ -121,10 +124,15 @@ public class EnemyGAgent : GAgent
         GetComponent<ProjectileAttack>().target = null;
     }
 
-    private void SetMovementTarget()
-    {
-        GetComponent<Wander>().target = GetComponentInChildren<TravelPoint>().gameObject;   
-    }
+    // public void SetFear()
+    // {
+    //     beliefs.ModifyState("inDanger", 1);
+    // }
+
+    // public void RemoveFear()
+    // {
+    //     beliefs.RemoveState("inDanger");
+    // }
 
     private void OnDrawGizmos()
     {

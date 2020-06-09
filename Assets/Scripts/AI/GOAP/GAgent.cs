@@ -37,7 +37,8 @@ public class GAgent : MonoBehaviour
     protected void Start()
     {
         GAction[] acts = this.GetComponents<GAction>();
-        foreach(GAction a in acts) {
+        foreach(GAction a in acts) 
+        {
             actions.Add(a);
         }
     }
@@ -59,10 +60,10 @@ public class GAgent : MonoBehaviour
         if (currentAction != null && currentAction.running)
         {
             distanceToTarget = Vector3.Distance(destination, this.transform.position);
-            Debug.Log(currentAction.navMeshAgent.hasPath + "   " + distanceToTarget);
+            //Debug.Log(currentAction.navMeshAgent.hasPath + "   " + distanceToTarget);
             if (distanceToTarget < currentAction.range)
             {
-                Debug.Log("Distance to Goal: " + currentAction.navMeshAgent.remainingDistance);
+                //Debug.Log("Distance to Goal: " + currentAction.navMeshAgent.remainingDistance);
                 if (!invoked)
                 {
                     HandlePlayer();

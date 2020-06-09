@@ -20,6 +20,7 @@ public class Wander : GAction
 
     private void Wandering()
     {
+        Vector3 travelPoint = GetComponentInChildren<TravelPoint>().transform.position;
         Vector3 newPos = RandomNavSphere(transform.position, wanderRadius, -1);
         GetComponentInChildren<TravelPoint>().transform.position = newPos;
     }

@@ -16,8 +16,14 @@ public class ProjectileAttack : GAction
         gAgent = GetComponent<GAgent>();
     }
 
+    private void Update() 
+    {
+        transform.LookAt(target.transform);
+    }
+    
     public override bool PrePerform()
     {   
+        print("in projectile attack preperform");
         if (gAgent.distanceToTarget > this.range) 
         {
             gAgent.beliefs.RemoveState("inRange");
@@ -28,6 +34,8 @@ public class ProjectileAttack : GAction
 
     public override bool PostPerform()
     {
+        print("in projectile attack postperform");
+
         HandleAttack();
         ResetAgentAttack();
 
@@ -37,7 +45,7 @@ public class ProjectileAttack : GAction
     private void HandleAttack()
     {
         //GetComponent<NavMeshAgent>().enabled = false;
-        transform.LookAt(target.transform);
+        
         GetComponent<Animator>().SetTrigger("projectileAttack");
     }
 
