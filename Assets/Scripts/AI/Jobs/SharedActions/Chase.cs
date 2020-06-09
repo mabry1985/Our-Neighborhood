@@ -5,6 +5,10 @@ using UnityEngine.AI;
 
 public class Chase : GAction
 {
+    private void Update() 
+    {
+        
+    }
     public override bool PrePerform()
     {
         return true;

@@ -48,6 +48,7 @@ public class GPlanner
         if (!success)
         {
             Debug.Log("NO PLAN");
+            usableActions[0].GetComponent<GAgent>().SetHasPlan();
             return null;
         }
 

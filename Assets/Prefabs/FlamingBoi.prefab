@@ -4820,7 +4820,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.13771583, y: 0.03240486, z: 0.0038972422}
+  m_ConnectedAnchor: {x: 0.13771741, y: 0.032404847, z: 0.003894858}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: -1}
   m_TwistLimitSpring:
@@ -4929,7 +4929,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.21225089, y: 0.3567042, z: -0.022464886}
+  m_ConnectedAnchor: {x: 0.21224931, y: 0.356704, z: -0.022462532}
   serializedVersion: 2
   m_SwingAxis: {x: 1, y: 0, z: 0}
   m_TwistLimitSpring:
@@ -5211,7 +5211,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.0000011545962, y: 0.2267715, z: -0.0043352544}
+  m_ConnectedAnchor: {x: 0.00000042794994, y: 0.22677149, z: -0.0043376386}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 1}
   m_TwistLimitSpring:
@@ -5611,6 +5611,7 @@ GameObject:
   - component: {fileID: 3413780484262829062}
   - component: {fileID: 4774674003794747278}
   - component: {fileID: 4116697891630053585}
+  - component: {fileID: 8479916092079258802}
   m_Layer: 0
   m_Name: FlamingBoi
   m_TagString: Untagged
@@ -5633,6 +5634,7 @@ Transform:
   - {fileID: 4774674003794969597}
   - {fileID: 4774674003794969595}
   - {fileID: 3524856195919700013}
+  - {fileID: 5066747602064734485}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 123.76601, z: 0}
@@ -5760,7 +5762,7 @@ MonoBehaviour:
   target: {fileID: 0}
   targetTag: 
   duration: 0
-  range: 20
+  range: 30
   preConditions:
   - key: hasProjectile
     value: 0
@@ -5819,9 +5821,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e02464c15e0cdf3469bfae96c0095bac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  suspicionTime: 3
-  wanderRadius: 50
-  wanderingPauseTime: 2
 --- !u!136 &4774674003794747278
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -5853,7 +5852,7 @@ MonoBehaviour:
   target: {fileID: 0}
   targetTag: 
   duration: 0
-  range: 20
+  range: 40
   preConditions:
   - key: playerNear
     value: 0
@@ -5862,6 +5861,33 @@ MonoBehaviour:
     value: 0
   navMeshAgent: {fileID: 0}
   running: 0
+--- !u!114 &8479916092079258802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4774674003794747295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55d798c221bc5a445a3b7c847695bad5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: Wander
+  cost: 1
+  target: {fileID: 4774674003794747295}
+  targetTag: 
+  duration: 2
+  range: 2
+  preConditions:
+  - key: idle
+    value: 0
+  afterEffects:
+  - key: lookingForPlayer
+    value: 0
+  navMeshAgent: {fileID: 0}
+  running: 0
+  wanderRadius: 50
 --- !u!1 &4774674003794747361
 GameObject:
   m_ObjectHideFlags: 0
@@ -6167,7 +6193,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.00000083446514, y: 0.21563132, z: -0.0000018775465}
+  m_ConnectedAnchor: {x: -0.00000064075, y: 0.21563257, z: 0.0000002756715}
   serializedVersion: 2
   m_SwingAxis: {x: 1, y: 0, z: 0}
   m_TwistLimitSpring:
@@ -6586,7 +6612,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.0000012693765, y: 0.2660973, z: 0.0000018752105}
+  m_ConnectedAnchor: {x: -0.0000004144333, y: 0.26609743, z: -0.00000040372672}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: -1}
   m_TwistLimitSpring:
@@ -6744,3 +6770,46 @@ Transform:
   m_Father: {fileID: 4774674003794969559}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5474017158830077002
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5066747602064734485}
+  - component: {fileID: 8565361933584935294}
+  m_Layer: 0
+  m_Name: TravelPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5066747602064734485
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5474017158830077002}
+  m_LocalRotation: {x: -0, y: -0.8819871, z: -0, w: 0.47127363}
+  m_LocalPosition: {x: -0.936, y: 0.429, z: 3.983}
+  m_LocalScale: {x: 0.37296873, y: 0.37296876, z: 0.37296873}
+  m_Children: []
+  m_Father: {fileID: 4774674003794969599}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8565361933584935294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5474017158830077002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b02dbf309fd3a644bf94798ac9856db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

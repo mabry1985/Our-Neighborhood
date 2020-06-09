@@ -36,7 +36,7 @@ public class ProjectileAttack : GAction
     
     private void HandleAttack()
     {
-        GetComponent<NavMeshAgent>().enabled = false;
+        //GetComponent<NavMeshAgent>().enabled = false;
         transform.LookAt(target.transform);
         GetComponent<Animator>().SetTrigger("projectileAttack");
     }

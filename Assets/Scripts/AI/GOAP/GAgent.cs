@@ -32,7 +32,7 @@ public class GAgent : MonoBehaviour
 
     public float timeSinceLastAttack;
     public float timeBetweenAttack = 10f;
-
+    bool hasPlan;
 
     protected void Start()
     {
@@ -40,13 +40,11 @@ public class GAgent : MonoBehaviour
         foreach(GAction a in acts) {
             actions.Add(a);
         }
-
     }
 
     protected void Update()
     {
         timeSinceLastAttack += Time.deltaTime;
-        print(timeSinceLastAttack);
     }
 
     void CompleteAction()
@@ -68,10 +66,6 @@ public class GAgent : MonoBehaviour
                 // Debug.Log("Distance to Goal: " + currentAction.agent.remainingDistance);
                 if (!invoked)
                 {
-                    // var entry = currentGoal.sGoals.First();
-                    // var first = currentGoal.sGoals.First();
-                    // string key = first.Key;
-
                     HandlePlayer();
                     Invoke("CompleteAction", currentAction.duration);
                     invoked = true;
@@ -97,9 +91,9 @@ public class GAgent : MonoBehaviour
             }
         }
 
-        if(actionQueue != null && actionQueue.Count == 0)
+        if (actionQueue != null && actionQueue.Count == 0)
         {
-            if(currentGoal.remove)
+            if (currentGoal.remove)
             {
                 goals.Remove(currentGoal);
             }
@@ -107,23 +101,23 @@ public class GAgent : MonoBehaviour
             planner = null;
         }        
 
-        if(actionQueue != null && actionQueue.Count > 0)
+        if (actionQueue != null && actionQueue.Count > 0)
         {
             currentAction = actionQueue.Dequeue();
-            if(currentAction.PrePerform())
+            if (currentAction.PrePerform())
             {
-                if(currentAction.target == null && currentAction.targetTag != "")
+                if (currentAction.target == null && currentAction.targetTag != "")
                     currentAction.target = GameObject.FindWithTag(currentAction.targetTag);
 
                 //print(currentAction.target + " is the current action target");
-                if(currentAction.target != null)
+                if (currentAction.target != null)
                 {
                     currentAction.running = true;
 
                     destination = currentAction.target.transform.position;
                     Transform dest = currentAction.target.transform.Find("Destination");
 
-                    if(dest != null)
+                    if (dest != null)
                         destination = dest.position;
 
                     if (!GetComponent<Health>().IsDead())
@@ -153,12 +147,13 @@ public class GAgent : MonoBehaviour
         }
     }
 
-
-    private void ActionAnimHandler()
+    public bool HasPlan()
     {
-        if (currentAction.actionName == "Farm")
-        {
-            GetComponent<AnimController>().FarmAnimHandler(GetComponent<Animator>(), currentAction.targetTag);
-        }
+        return hasPlan;
+    }
+
+    public void SetHasPlan()
+    {
+        beliefs.ModifyState("idle" ,1);
     }
 }

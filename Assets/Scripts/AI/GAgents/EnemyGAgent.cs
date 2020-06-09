@@ -16,6 +16,8 @@ public class EnemyGAgent : GAgent
         goals.Add(s1, 4);
         SubGoal s2 = new SubGoal("isSafe", 1, false);
         goals.Add(s2, 5);
+        SubGoal s3 = new SubGoal("lookingForPlayer", 1, false);
+        goals.Add(s3, 3);
 
         if (GetComponentInChildren<ProjectileSpawnPoint>() != null)
         {
@@ -23,12 +25,12 @@ public class EnemyGAgent : GAgent
         }
 
         beliefs.ModifyState("canAttack", 1);
+        SetMovementTarget();
     }
 
     new private void Update() 
     {
         base.Update();
-        print(timeSinceLastAttack + " / " + timeBetweenAttack);
         if (timeSinceLastAttack >= timeBetweenAttack)
         {
             beliefs.ModifyState("canAttack", 1);
@@ -74,6 +76,7 @@ public class EnemyGAgent : GAgent
             
             if (target != null && !players.Contains(target.gameObject))
             {
+                beliefs.RemoveState("idle");
                 players.Add(target.gameObject);
                 beliefs.ModifyState("playerNear", 1);
                 playerCount++;
@@ -85,10 +88,11 @@ public class EnemyGAgent : GAgent
         if (players.Count == 0) 
         {
             beliefs.RemoveState("playerNear");
+            RemoveAttackTarget();
             return;
         }
 
-        SetTarget();
+        SetAttackTarget();
     }
 
     private bool DeathCheck(Player target)
@@ -102,12 +106,24 @@ public class EnemyGAgent : GAgent
         return false;
     }      
 
-    private void SetTarget()
+    private void SetAttackTarget()
     {
         GameObject target = GetComponent<EnemyController>().GetClosestEnemy(players).gameObject;
         GetComponent<Attack>().target = target;
         GetComponent<ProjectileAttack>().target = target;
         GetComponent<Chase>().target = target;
+    }
+
+    private void RemoveAttackTarget()
+    {
+        GetComponent<Chase>().target = null;
+        GetComponent<Attack>().target = null;
+        GetComponent<ProjectileAttack>().target = null;
+    }
+
+    private void SetMovementTarget()
+    {
+        GetComponent<Wander>().target = GetComponentInChildren<TravelPoint>().gameObject;   
     }
 
     private void OnDrawGizmos()
