@@ -24,16 +24,6 @@ public class Wander : GAction
         GetComponentInChildren<TravelPoint>().transform.position = newPos;
     }
 
-    public static Vector3 RandomNavSphere(Vector3 origin, float dist, int layermask)
-    {
-        Vector3 randDirection = UnityEngine.Random.insideUnitSphere * dist;
-        randDirection += origin;
-        NavMeshHit navHit;
-        NavMesh.SamplePosition(randDirection, out navHit, dist, layermask);
-
-        return navHit.position;
-    }
-
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.blue;

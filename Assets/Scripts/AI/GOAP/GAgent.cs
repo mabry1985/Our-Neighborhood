@@ -59,11 +59,10 @@ public class GAgent : MonoBehaviour
         if (currentAction != null && currentAction.running)
         {
             distanceToTarget = Vector3.Distance(destination, this.transform.position);
-           //Debug.Log(currentAction.agent.hasPath + "   " + distanceToTarget);
+            Debug.Log(currentAction.navMeshAgent.hasPath + "   " + distanceToTarget);
             if (distanceToTarget < currentAction.range)
             {
-
-                // Debug.Log("Distance to Goal: " + currentAction.agent.remainingDistance);
+                Debug.Log("Distance to Goal: " + currentAction.navMeshAgent.remainingDistance);
                 if (!invoked)
                 {
                     HandlePlayer();

@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     Health health;
     private bool freeCamToggle = false;
     private bool showResourceCanvas = true;
+    private bool isSprinting = false;
 
     private void Start()
     {
@@ -24,6 +25,15 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (isSprinting)
+        {
+            navAgent.speed = 20f;
+        }
+        else
+        {
+            navAgent.speed = 10f;
+        }
+
         if (health.IsDead())
         {
             
@@ -59,13 +69,9 @@ public class PlayerController : MonoBehaviour
             ToggleFreeCam();
         }
         
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            navAgent.speed = 20f;
-        }
-        else if (Input.GetKeyUp(KeyCode.LeftShift))
-        {
-            navAgent.speed = 10f;
+            isSprinting = !isSprinting;
         }
 
         if (CombatInteraction()) return;
