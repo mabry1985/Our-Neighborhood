@@ -9,7 +9,6 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
     public PlayerManager playerManager;
-    public PlayerController playerController;
     public PlaceableItemManager placeableItemManager;
     public Renderer playerRenderer;
     public AnimController playerAnimController = new AnimController();
@@ -35,8 +34,6 @@ public class Player : MonoBehaviour
     public Canvas playerNameCanvas;
     public Text playerNameText;
 
-    public bool isDead = false;
-    public bool isWorking = false;
     public bool isStanding = true;
     public bool isFollowing = false;
     public bool isChopping = false;
@@ -58,9 +55,7 @@ public class Player : MonoBehaviour
         inventory = new GInventory() {};
         inventory.invSpace = inventorySize;
         inventory.player = this;
-        playerRenderer = gameObject.GetComponentInChildren<Renderer>();
-        playerController = this.GetComponent<PlayerController>();
-        
+        playerRenderer = gameObject.GetComponentInChildren<Renderer>();        
     }
 
     private void Awake() 

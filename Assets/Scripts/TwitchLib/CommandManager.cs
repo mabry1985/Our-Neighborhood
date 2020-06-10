@@ -114,7 +114,7 @@ public class CommandManager : MonoBehaviour
 
     private bool PlayerCheck()
     {
-        return !player.isDead && player != null;
+        return !player.GetComponent<Health>().IsDead() && player != null;
     }
 
     private string StringFormatter(string command){
