@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     public PlayerManager playerManager;
     public PlaceableItemManager placeableItemManager;
     public Renderer playerRenderer;
-    public AnimController playerAnimController = new AnimController();
+    public AnimController playerAnimController;
 
     public NavMeshAgent navAgent;
     public Animator animator;
@@ -34,10 +34,6 @@ public class Player : MonoBehaviour
     public Canvas playerNameCanvas;
     public Text playerNameText;
 
-    public bool isStanding = true;
-    public bool isFollowing = false;
-    public bool isChopping = false;
-
     private Vector3 destination;
     private float distanceToTarget;
     
@@ -55,7 +51,8 @@ public class Player : MonoBehaviour
         inventory = new GInventory() {};
         inventory.invSpace = inventorySize;
         inventory.player = this;
-        playerRenderer = gameObject.GetComponentInChildren<Renderer>();        
+        playerRenderer = gameObject.GetComponentInChildren<Renderer>();      
+        playerAnimController = GetComponent<AnimController>();  
     }
 
     private void Awake() 
@@ -76,58 +73,12 @@ public class Player : MonoBehaviour
         if (playerNameCanvas != null)
             playerNameCanvas.transform.rotation = Camera.main.transform.rotation;
         
-        if(isFollowing)
-        {
-            destination = GameObject.Find("Streamer").transform.position;
-            distanceToTarget = Vector3.Distance(destination, transform.position);
-
-            if(navAgent.enabled == true)
-                navAgent.SetDestination(destination);
-            
-            if(distanceToTarget <= 2f)
-                isFollowing = false;
-        }
     }
-
-    public void SitDown()
-    {
-        if (isStanding)
-        {
-            //animator.SetFloat("speedPercent", 0.0f);
-            animator.SetBool("isSittingGround", true);
-            animator.SetBool("isStanding", false);
-            navAgent.enabled = false;
-            isStanding = false;
-        }
-        else
-        {
-            animator.SetBool("isSittingGround", false);
-            animator.SetBool("isStanding", true);
-            isStanding = true;
-        }
-    }
-
-    public void WaveHello()
-    {
-        animator.SetBool("isWaving", true);
-        navAgent.enabled = false;
-    }
-
-    public void Mining()
-    {
-        isChopping = !isChopping;
-        animator.SetBool("isMining", !isChopping);
-        //navAgent.enabled = false;
-    }
-
-    // public void FindFriend()
-    // {
-    //     this.GetComponent<GAgent>().beliefs.ModifyState("isLonely", 1);
-    // }
 
     public void HandleFarming(string material)
     {
         CancelFarming();
+        playerGAgent.CancelGoap();
         playerGAgent.beliefs.ModifyState("isFarming", 1);
         var d = GameObject.FindGameObjectWithTag(material) ?? null;
 
@@ -144,7 +95,7 @@ public class Player : MonoBehaviour
         playerGAgent.beliefs.ModifyState("isCrafting", 1);
         var getMaterials = this.GetComponent<GetMaterials>();
         var goToWorkshop = this.GetComponent<GoToWorkshop>();
-        this.GetComponent<PlayerGAgent>().craftingItem = craftingItem;  
+        playerGAgent.craftingItem = craftingItem;  
     }
 
     public void PlaceItem(string i)

@@ -15,7 +15,7 @@ public class GetWarm : GAction
     }
     public override bool PostPerform()
     {
-        player.SitDown();
+        //player.SitDown();
         //agent.GetComponent<GAgent>().beliefs.SetState("isWarm", 1);
         return true;
     }

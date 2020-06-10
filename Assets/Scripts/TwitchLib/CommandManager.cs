@@ -10,6 +10,7 @@ public class CommandManager : MonoBehaviour
     public BotManager botManager;
     Player player;
     Animator animator;
+    AnimController animController;
 
     public void CheckCommand(int id, string name, string command, List<string> arg, Client client)
     {
@@ -26,6 +27,7 @@ public class CommandManager : MonoBehaviour
         {
             player = refDictionary[id];
             animator = player.GetComponent<Animator>();
+            animController = player.GetComponent<AnimController>();
         }
 
         switch (command)
@@ -33,14 +35,14 @@ public class CommandManager : MonoBehaviour
             case "Farm":
                 if (PlayerCheck())
                 {
-                    player.playerAnimController.CancelAnimations(animator);
+                    animController.CancelAnimations(animator);
                     player.HandleFarming(arg[0]);
                 }
                 break;
             case "Craft":
                 if (PlayerCheck() && CraftingRecipes.recipes.ContainsKey(arg[0]))
                 {
-                    player.playerAnimController.CancelAnimations(animator);
+                    animController.CancelAnimations(animator);
                     player.HandleCrafting(arg[0]);
                 }
                 break;
@@ -54,7 +56,7 @@ public class CommandManager : MonoBehaviour
             case "Depot":
                 if (PlayerCheck())
                 {
-                    player.playerAnimController.CancelAnimations(animator);
+                    animController.CancelAnimations(animator);
                     player.CancelFarming();
                     player.GetComponent<GAgent>().beliefs.ModifyState("depot", 1);
                 }
@@ -73,28 +75,28 @@ public class CommandManager : MonoBehaviour
                         player.PlaceItem(arg[0]);
                 break;
             case "Sit":
-                if (PlayerCheck() && player.isStanding)
+                if (PlayerCheck() && animController.isStanding)
                 {
-                    player.playerAnimController.CancelAnimations(animator);
-                    player.SitDown();
+                    animController.CancelAnimations(animator);
+                    animController.SitDown();
                 }
                 break;
             case "Stand":
-                if (PlayerCheck() && !player.isStanding)
+                if (PlayerCheck() && !animController.isStanding)
                 {
-                    player.playerAnimController.CancelAnimations(animator);
-                    player.SitDown();
+                    animController.CancelAnimations(animator);
+                    animController.SitDown();
                 }
                 break;
             case "Wave":
-                if (PlayerCheck() && player.isStanding)
-                    player.WaveHello();
+                if (PlayerCheck() && animController.isStanding)
+                    animController.WaveHello();
                 break;
             case "Follow":
                 if (PlayerCheck())
                 {
-                    player.playerAnimController.CancelAnimations(animator);
-                    player.isFollowing = !player.isFollowing;
+                    animController.CancelAnimations(animator);
+                    animController.isFollowing = !animController.isFollowing;
                 }
                 break;
             case "Cancel":
