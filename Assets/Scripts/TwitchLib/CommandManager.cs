@@ -99,7 +99,7 @@ public class CommandManager : MonoBehaviour
                 break;
             case "Cancel":
                 if (PlayerCheck())
-                    player.CancelGoap();
+                    player.GetComponent<GAgent>().CancelGoap();
                 break;
             case "Test":
                 HandleTest(name, id);

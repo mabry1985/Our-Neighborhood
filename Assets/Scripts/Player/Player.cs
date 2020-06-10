@@ -19,7 +19,6 @@ public class Player : MonoBehaviour
     public PlayerGAgent playerGAgent;
     public GInventory inventory;
     public GAction farm;
-    //public GAction craft;
     public GAction depot;
     public Slider progressBar;
     public Transform home;
@@ -190,28 +189,6 @@ public class Player : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime);
     }
 
-    public void CancelGoap()
-    {   
-        progressBar.gameObject.SetActive(false);
-        var currentAction = playerGAgent.currentAction ?? null;
-        GameObject currentActionTarget;
-
-        if (currentAction != null)
-        {
-            currentActionTarget = currentAction.target;
-            playerGAgent.currentAction.target = null;
-            //playerGAgent.planner = null;
-            playerGAgent.invoked = false;
-        }
-        
-        var actionQueue = playerGAgent.actionQueue ?? null;
-        if (actionQueue != null)
-        {
-            playerGAgent.actionQueue.Clear();
-            playerGAgent.currentAction.running = false;
-        }
-    }
-
     public void CancelFarming()
     {
         playerGAgent.material = "";
@@ -220,7 +197,8 @@ public class Player : MonoBehaviour
         farm.target = null;
         playerGAgent.beliefs.RemoveState("isFarming");
 
-        CancelGoap();
+        progressBar.gameObject.SetActive(false);
+        playerGAgent.CancelGoap();
         playerAnimController.CancelAnimations(animator);
     }
 

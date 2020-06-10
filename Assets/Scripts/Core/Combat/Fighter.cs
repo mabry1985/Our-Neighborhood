@@ -5,14 +5,12 @@ using UnityEngine;
 public class Fighter : MonoBehaviour, IAction
 {
     [SerializeField] float weaponRange = 5f;
-    [SerializeField] float timeBetweenAttackMin = 1f;
-    [SerializeField] float timeBetweenAttackMax = 1f;
+    [SerializeField] float timeBetweenAttack = 1f;
     [SerializeField] float weaponDamage = 1f;
     [SerializeField] GameObject projectilePrefab;
     [SerializeField] Transform projectileSpawnPoint;
 
     Health target;
-    [SerializeField] float timeBetweenAttack = 1f;
     float timeSinceLastAttack = Mathf.Infinity;
 
     private void Start() {
@@ -27,15 +25,15 @@ public class Fighter : MonoBehaviour, IAction
         if (target.IsDead()) return;
 
         bool isInRange = Vector3.Distance(transform.position, target.transform.position) < weaponRange;
-        // if (target != null && !isInRange)
-        // {
-        //     GetComponent<Mover>().MoveTo(target.transform.position);
-        // }
-        // else
-        // {
-        //     GetComponent<Mover>().Cancel();
-        //     AttackBehaviour();
-        // }
+        if (target != null && !isInRange)
+        {
+            GetComponent<Mover>().MoveTo(target.transform.position);
+        }
+        else
+        {
+            GetComponent<Mover>().Cancel();
+            AttackBehaviour();
+        }
     }
 
     private void AttackBehaviour()
@@ -45,7 +43,6 @@ public class Fighter : MonoBehaviour, IAction
         {
             TriggerAttack();
             timeSinceLastAttack = 0;
-            timeBetweenAttack = Random.Range(timeBetweenAttackMin, timeBetweenAttackMax);
         }
     }
 

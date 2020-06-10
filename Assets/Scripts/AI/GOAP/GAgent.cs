@@ -32,7 +32,6 @@ public class GAgent : MonoBehaviour
 
     public float timeSinceLastAttack;
     public float timeBetweenAttack = 10f;
-    bool hasPlan;
 
     protected void Start()
     {
@@ -147,9 +146,23 @@ public class GAgent : MonoBehaviour
         }
     }
 
-    public bool HasPlan()
+    public void CancelGoap()
     {
-        return hasPlan;
+        GameObject currentActionTarget;
+
+        if (currentAction != null)
+        {
+            currentActionTarget = currentAction.target;
+            currentAction.target = null;
+            //playerGAgent.planner = null;
+            invoked = false;
+        }
+
+        if (actionQueue != null)
+        {
+            actionQueue.Clear();
+            currentAction.running = false;
+        }
     }
 
     public void SetHasPlan()
