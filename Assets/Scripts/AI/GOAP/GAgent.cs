@@ -27,19 +27,27 @@ public class GAgent : MonoBehaviour
     public GAction currentAction;
     SubGoal currentGoal;
     public Vector3 destination = Vector3.zero;
-
-    Player player;
     public float distanceToTarget;
     public bool invoked = false;
 
-    public void Start()
+    public float timeSinceLastAttack;
+    public float timeBetweenAttack = 10f;
+
+    //set in get closest enemy function
+    public float closestTargetDistance;
+
+    protected void Start()
     {
         GAction[] acts = this.GetComponents<GAction>();
-        foreach(GAction a in acts) {
+        foreach(GAction a in acts) 
+        {
             actions.Add(a);
         }
+    }
 
-        player = this.GetComponent<Player>();
+    protected void Update()
+    {
+        timeSinceLastAttack += Time.deltaTime;
     }
 
     void CompleteAction()
@@ -54,24 +62,14 @@ public class GAgent : MonoBehaviour
         if (currentAction != null && currentAction.running)
         {
             distanceToTarget = Vector3.Distance(destination, this.transform.position);
-           //Debug.Log(currentAction.agent.hasPath + "   " + distanceToTarget);
-            if (distanceToTarget < 2f)
+            //Debug.Log(currentAction.navMeshAgent.hasPath + "   " + distanceToTarget);
+            if (distanceToTarget < currentAction.range)
             {
-
-                // Debug.Log("Distance to Goal: " + currentAction.agent.remainingDistance);
+                //Debug.Log("Distance to Goal: " + currentAction.navMeshAgent.remainingDistance);
                 if (!invoked)
                 {
-
-                    var entry = currentGoal.sGoals.First();
-                    var first = currentGoal.sGoals.First();
-                    string key = first.Key;
-                    player.progressBar.gameObject.SetActive(true);
-                    StartCoroutine(player.progressBar.GetComponent<ActionProgressBar>().IncrementProgress(currentAction.duration));
-                    
-                    if(currentAction.actionName == "Farm")
-                    {
-                        player.playerAnimController.FarmAnimHandler(player, currentAction.targetTag);
-                    }
+                    // Placed HandlePlayer here instead of PlayerGAgent because not sure how to call it from a class that uses this as a base
+                    HandlePlayer();
                     Invoke("CompleteAction", currentAction.duration);
                     invoked = true;
                 }
@@ -96,9 +94,9 @@ public class GAgent : MonoBehaviour
             }
         }
 
-        if(actionQueue != null && actionQueue.Count == 0)
+        if (actionQueue != null && actionQueue.Count == 0)
         {
-            if(currentGoal.remove)
+            if (currentGoal.remove)
             {
                 goals.Remove(currentGoal);
             }
@@ -106,27 +104,27 @@ public class GAgent : MonoBehaviour
             planner = null;
         }        
 
-        if(actionQueue != null && actionQueue.Count > 0)
+        if (actionQueue != null && actionQueue.Count > 0)
         {
             currentAction = actionQueue.Dequeue();
-            if(currentAction.PrePerform())
+            if (currentAction.PrePerform())
             {
-                if(currentAction.target == null && currentAction.targetTag != "")
+                if (currentAction.target == null && currentAction.targetTag != "")
                     currentAction.target = GameObject.FindWithTag(currentAction.targetTag);
 
                 //print(currentAction.target + " is the current action target");
-                if(currentAction.target != null)
+                if (currentAction.target != null)
                 {
                     currentAction.running = true;
 
                     destination = currentAction.target.transform.position;
                     Transform dest = currentAction.target.transform.Find("Destination");
 
-                    if(dest != null)
+                    if (dest != null)
                         destination = dest.position;
 
-                    if (!player.GetComponent<Health>().IsDead())
-                        currentAction.agent.SetDestination(destination);
+                    if (!GetComponent<Health>().IsDead())
+                        currentAction.navMeshAgent.SetDestination(destination);
                 }
             }
             else
@@ -134,5 +132,83 @@ public class GAgent : MonoBehaviour
                 actionQueue = null;
             }
         }
+    }
+
+    private void HandlePlayer()
+    {
+        Player player = GetComponent<Player>();
+
+        if (player != null)
+        {
+            player.progressBar.gameObject.SetActive(true);
+            StartCoroutine(player.progressBar.GetComponent<ActionProgressBar>().IncrementProgress(currentAction.duration));
+
+            if (currentAction.actionName == "Farm")
+            {
+                player.playerAnimController.FarmAnimHandler(player.animator, currentAction.targetTag);
+            }
+        }
+    }
+
+    public Transform GetClosestTarget(List<GameObject> targets)
+    {
+        Transform bestTarget = null;
+        float closestDistanceSqr = Mathf.Infinity;
+        Vector3 currentPosition = transform.position;
+        foreach (GameObject potentialTarget in targets)
+        {
+            Vector3 directionToTarget = potentialTarget.transform.position - currentPosition;
+            float dSqrToTarget = directionToTarget.sqrMagnitude;
+
+            if (dSqrToTarget < closestDistanceSqr)
+            {
+                closestTargetDistance = dSqrToTarget;
+                closestDistanceSqr = dSqrToTarget;
+                bestTarget = potentialTarget.transform;
+            }
+        }
+
+        return bestTarget;
+    }
+
+    public void SetClosestDistance(List<GameObject> friendsAndFoes)
+    {
+        float closestDistanceSqr = Mathf.Infinity;
+        Vector3 currentPosition = transform.position;
+        foreach (GameObject potentialTarget in friendsAndFoes)
+        {
+            Vector3 directionToTarget = potentialTarget.transform.position - currentPosition;
+            float dSqrToTarget = directionToTarget.sqrMagnitude;
+
+            if (dSqrToTarget < closestDistanceSqr)
+            {
+                closestTargetDistance = dSqrToTarget;
+            }
+        }
+
+    }
+
+    public void CancelGoap()
+    {
+        GameObject currentActionTarget;
+
+        if (currentAction != null)
+        {
+            currentActionTarget = currentAction.target;
+            currentAction.target = null;
+            //playerGAgent.planner = null;
+            invoked = false;
+        }
+
+        if (actionQueue != null)
+        {
+            actionQueue.Clear();
+            currentAction.running = false;
+        }
+    }
+
+    public void SetHasPlan()
+    {
+        beliefs.ModifyState("idle" ,1);
     }
 }

@@ -9,34 +9,40 @@ public class CommandManager : MonoBehaviour
     public PlayerManager playerManager;
     public BotManager botManager;
     Player player;
+    Animator animator;
+    AnimController animController;
 
-    public void CheckCommand(int id, string name, string command, List<string> arg, Client client) 
+    public void CheckCommand(int id, string name, string command, List<string> arg, Client client)
     {
         var refDictionary = playerManager.playerReferences;
         command = StringFormatter(command);
 
-        
+
         for (int i = 0; i < arg.Count; i++)
         {
             arg[i] = StringFormatter(arg[i]);
         }
-    
+
         if (refDictionary.ContainsKey(id))
+        {
             player = refDictionary[id];
-        
+            animator = player.GetComponent<Animator>();
+            animController = player.GetComponent<AnimController>();
+        }
+
         switch (command)
         {
             case "Farm":
-                if (!player.isDead && player != null)
+                if (PlayerCheck())
                 {
-                    player.playerAnimController.CancelAnimations(player);
+                    animController.CancelAnimations(animator);
                     player.HandleFarming(arg[0]);
                 }
                 break;
             case "Craft":
-                if (!player.isDead && player != null && CraftingRecipes.recipes.ContainsKey(arg[0]))
+                if (PlayerCheck() && CraftingRecipes.recipes.ContainsKey(arg[0]))
                 {
-                    player.playerAnimController.CancelAnimations(player);
+                    animController.CancelAnimations(animator);
                     player.HandleCrafting(arg[0]);
                 }
                 break;
@@ -44,58 +50,58 @@ public class CommandManager : MonoBehaviour
                 HandleJoin(id, name, client);
                 break;
             case "Ping":
-                if (!player.isDead && player != null)
+                if (PlayerCheck())
                     player.transform.GetChild(3).gameObject.SetActive(true);
                 break;
             case "Depot":
-                if (!player.isDead && player != null)
+                if (PlayerCheck())
                 {
-                    player.playerAnimController.CancelAnimations(player);
+                    animController.CancelAnimations(animator);
                     player.CancelFarming();
                     player.GetComponent<GAgent>().beliefs.ModifyState("depot", 1);
                 }
                 break;
             case "Worldinv":
-                if (!player.isDead && player != null)
+                if (PlayerCheck())
                     HandleWorldInv(id, client, name);
                 break;
-            case "Inv" :
-                if (!player.isDead && player != null)
+            case "Inv":
+                if (PlayerCheck())
                     HandleInv(id, client, name);
                 break;
-            case "Place" :
-                if (!player.isDead && player != null)
+            case "Place":
+                if (PlayerCheck())
                     if (player.placeableItemManager.placeableItems.ContainsKey(arg[0]))
                         player.PlaceItem(arg[0]);
                 break;
-            case "Sit" :
-                if (!player.isDead && player != null && player.isStanding)
+            case "Sit":
+                if (PlayerCheck() && animController.isStanding)
                 {
-                    player.playerAnimController.CancelAnimations(player);
-                    player.SitDown();
+                    animController.CancelAnimations(animator);
+                    animController.SitDown();
                 }
                 break;
-            case "Stand" :
-                if (!player.isDead && player != null && !player.isStanding)
+            case "Stand":
+                if (PlayerCheck() && !animController.isStanding)
                 {
-                    player.playerAnimController.CancelAnimations(player);
-                    player.SitDown();
+                    animController.CancelAnimations(animator);
+                    animController.SitDown();
                 }
                 break;
-            case "Wave" :
-                if (!player.isDead && player != null && player.isStanding)
-                    player.WaveHello();
+            case "Wave":
+                if (PlayerCheck() && animController.isStanding)
+                    animController.WaveHello();
                 break;
-            case "Follow" :
-                if (!player.isDead && player != null)
+            case "Follow":
+                if (PlayerCheck())
                 {
-                    player.playerAnimController.CancelAnimations(player);
-                    player.isFollowing = !player.isFollowing;
+                    animController.CancelAnimations(animator);
+                    animController.isFollowing = !animController.isFollowing;
                 }
                 break;
             case "Cancel":
-               if (!player.isDead && player != null)
-                   player.CancelGoap();
+                if (PlayerCheck())
+                    player.GetComponent<GAgent>().CancelGoap();
                 break;
             case "Test":
                 HandleTest(name, id);
@@ -106,6 +112,11 @@ public class CommandManager : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    private bool PlayerCheck()
+    {
+        return !player.GetComponent<Health>().IsDead() && player != null;
     }
 
     private string StringFormatter(string command){

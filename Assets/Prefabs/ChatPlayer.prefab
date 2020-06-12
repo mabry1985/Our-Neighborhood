@@ -708,6 +708,7 @@ GameObject:
   - component: {fileID: 2371497864865790490}
   - component: {fileID: 2371497864865790491}
   - component: {fileID: 2371497864865790500}
+  - component: {fileID: 8705811290975924691}
   m_Layer: 0
   m_Name: ChatPlayer
   m_TagString: Player
@@ -801,9 +802,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerManager: {fileID: 0}
-  playerController: {fileID: 0}
   placeableItemManager: {fileID: 0}
   playerRenderer: {fileID: 0}
+  playerAnimController: {fileID: 0}
   navAgent: {fileID: 0}
   animator: {fileID: 3586919175006384026}
   playerGAgent: {fileID: 2371497864865790482}
@@ -818,11 +819,6 @@ MonoBehaviour:
   inventorySize: 20
   playerNameCanvas: {fileID: 4782835403976940974}
   playerNameText: {fileID: 4782835404893587300}
-  isDead: 0
-  isWorking: 0
-  isStanding: 1
-  isFollowing: 0
-  isChopping: 0
 --- !u!114 &1442785663011203667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -853,6 +849,8 @@ MonoBehaviour:
   destination: {x: 0, y: 0, z: 0}
   distanceToTarget: 0
   invoked: 0
+  timeSinceLastAttack: 0
+  timeBetweenAttack: 10
   material: 
   craftingItem: 
   senseDistance: 50
@@ -873,13 +871,14 @@ MonoBehaviour:
   target: {fileID: 0}
   targetTag: 
   duration: 5
+  range: 2
   preConditions:
   - key: isFarming
     value: 0
   afterEffects:
   - key: farm
     value: 0
-  agent: {fileID: 0}
+  navMeshAgent: {fileID: 0}
   running: 0
   gAgent: {fileID: 0}
   player: {fileID: 0}
@@ -901,13 +900,14 @@ MonoBehaviour:
   target: {fileID: 0}
   targetTag: Home
   duration: 10
+  range: 2
   preConditions:
   - key: inDanger
     value: 1
   afterEffects:
   - key: isSafe
     value: 5
-  agent: {fileID: 0}
+  navMeshAgent: {fileID: 0}
   running: 0
 --- !u!114 &2371497864865790495
 MonoBehaviour:
@@ -926,13 +926,14 @@ MonoBehaviour:
   target: {fileID: 0}
   targetTag: Warmth
   duration: 10
+  range: 2
   preConditions:
   - key: isCold
     value: 0
   afterEffects:
   - key: isWarm
     value: 0
-  agent: {fileID: 0}
+  navMeshAgent: {fileID: 0}
   running: 0
 --- !u!114 &2371497864865790488
 MonoBehaviour:
@@ -951,13 +952,14 @@ MonoBehaviour:
   target: {fileID: 0}
   targetTag: Streamer
   duration: 1
+  range: 2
   preConditions:
   - key: isLonely
     value: 0
   afterEffects:
   - key: hasFriend
     value: 0
-  agent: {fileID: 0}
+  navMeshAgent: {fileID: 0}
   running: 0
 --- !u!114 &2371497864865790489
 MonoBehaviour:
@@ -976,13 +978,14 @@ MonoBehaviour:
   target: {fileID: 0}
   targetTag: 
   duration: 5
+  range: 2
   preConditions:
   - key: depot
     value: 0
   afterEffects:
   - key: depotInventory
     value: 0
-  agent: {fileID: 0}
+  navMeshAgent: {fileID: 0}
   running: 0
 --- !u!114 &2371497864865790490
 MonoBehaviour:
@@ -1001,13 +1004,14 @@ MonoBehaviour:
   target: {fileID: 0}
   targetTag: Home
   duration: 5
+  range: 2
   preConditions:
   - key: isCrafting
     value: 0
   afterEffects:
   - key: hasMaterials
     value: 0
-  agent: {fileID: 0}
+  navMeshAgent: {fileID: 0}
   running: 0
 --- !u!114 &2371497864865790491
 MonoBehaviour:
@@ -1026,13 +1030,14 @@ MonoBehaviour:
   target: {fileID: 0}
   targetTag: Workshop
   duration: 5
+  range: 2
   preConditions:
   - key: hasMaterials
     value: 0
   afterEffects:
   - key: craftedItem
     value: 0
-  agent: {fileID: 0}
+  navMeshAgent: {fileID: 0}
   running: 0
 --- !u!136 &2371497864865790500
 CapsuleCollider:
@@ -1048,6 +1053,21 @@ CapsuleCollider:
   m_Height: 2.33
   m_Direction: 1
   m_Center: {x: 0, y: 0.73, z: 0}
+--- !u!114 &8705811290975924691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2371497864865790502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7df3ed99e49ea154387a37eee65506e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isStanding: 1
+  isFollowing: 0
+  isChopping: 0
 --- !u!1 &3095948077681563760
 GameObject:
   m_ObjectHideFlags: 0

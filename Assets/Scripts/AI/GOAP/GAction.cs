@@ -10,9 +10,10 @@ public abstract class GAction : MonoBehaviour
     public GameObject target;
     public string targetTag;
     public float duration = 0;
+    public float range = 2.0f;
     public WorldState[] preConditions;
     public WorldState[] afterEffects;
-    public NavMeshAgent agent;
+    public NavMeshAgent navMeshAgent;
 
     public Dictionary<string, int> preconditions;
     public Dictionary<string, int> effects;
@@ -24,14 +25,13 @@ public abstract class GAction : MonoBehaviour
     
     public bool running = false;
 
-
     public GAction() {
         preconditions = new Dictionary<string, int>();
         effects = new Dictionary<string, int>();
     }
 
     public void Awake() {
-        agent = this.GetComponent<NavMeshAgent>();
+        navMeshAgent = this.GetComponent<NavMeshAgent>();
         
         if(preConditions != null) {
             foreach(WorldState w in preConditions)
@@ -68,4 +68,14 @@ public abstract class GAction : MonoBehaviour
 
     public abstract bool PrePerform();
     public abstract bool PostPerform();
+
+    public static Vector3 RandomNavSphere(Vector3 origin, float dist, int layermask)
+    {
+        Vector3 randDirection = UnityEngine.Random.insideUnitSphere * dist;
+        randDirection += origin;
+        NavMeshHit navHit;
+        NavMesh.SamplePosition(randDirection, out navHit, dist, layermask);
+
+        return navHit.position;
+    }
 }

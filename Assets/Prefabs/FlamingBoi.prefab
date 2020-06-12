@@ -5601,13 +5601,19 @@ GameObject:
   - component: {fileID: 4774674003794969599}
   - component: {fileID: 4774674003794747270}
   - component: {fileID: 4774674003802139703}
-  - component: {fileID: 4774674003794747290}
   - component: {fileID: 4774674003794747292}
-  - component: {fileID: 4774674003794747264}
-  - component: {fileID: 4774674003794747288}
-  - component: {fileID: 4774674003794747268}
-  - component: {fileID: 4774674003794747266}
+  - component: {fileID: 741770648320904696}
+  - component: {fileID: 4774674003794747290}
+  - component: {fileID: 268271974103988731}
+  - component: {fileID: 7094158813169354328}
+  - component: {fileID: 5605444764855907819}
+  - component: {fileID: 555254637797248765}
   - component: {fileID: 4774674003794747278}
+  - component: {fileID: 4116697891630053585}
+  - component: {fileID: 8479916092079258802}
+  - component: {fileID: 410174852493131803}
+  - component: {fileID: 8229067102989433275}
+  - component: {fileID: 1808876815}
   m_Layer: 0
   m_Name: FlamingBoi
   m_TagString: Untagged
@@ -5630,6 +5636,7 @@ Transform:
   - {fileID: 4774674003794969597}
   - {fileID: 4774674003794969595}
   - {fileID: 3524856195919700013}
+  - {fileID: 5066747602064734485}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 123.76601, z: 0}
@@ -5643,11 +5650,11 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 15
-  m_Acceleration: 10
+  m_Speed: 8
+  m_Acceleration: 20
   avoidancePriority: 50
-  m_AngularSpeed: 1000
-  m_StoppingDistance: 0
+  m_AngularSpeed: 2000
+  m_StoppingDistance: 2
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -5674,6 +5681,31 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &4774674003794747292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4774674003794747295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 767a400028d49cf4a9fc09704efe7429, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &741770648320904696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4774674003794747295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aca5c26451d768a438d8f570463954bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thisAgent: {fileID: 5605444764855907819}
 --- !u!114 &4774674003794747290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5687,7 +5719,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 20
---- !u!114 &4774674003794747292
+  home: {fileID: 0}
+--- !u!114 &268271974103988731
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5696,10 +5729,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 4774674003794747295}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 767a400028d49cf4a9fc09704efe7429, type: 3}
+  m_Script: {fileID: 11500000, guid: 617c4ffb4ccfbc94c91691a8e60e39c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4774674003794747264
+  actionName: Attack
+  cost: 1
+  target: {fileID: 0}
+  targetTag: 
+  duration: 0
+  range: 2
+  preConditions:
+  - key: playerNear
+    value: 0
+  - key: hasMelee
+    value: 0
+  afterEffects:
+  - key: attackPlayer
+    value: 0
+  navMeshAgent: {fileID: 0}
+  running: 0
+--- !u!114 &7094158813169354328
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5708,18 +5757,30 @@ MonoBehaviour:
   m_GameObject: {fileID: 4774674003794747295}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2789961d40574794d94583242cc0f215, type: 3}
+  m_Script: {fileID: 11500000, guid: 72487fafade889d42b3d22dfc3f6aba4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponRange: 30
-  timeBetweenAttack: 5
-  timeBetweenAttackMin: 2
-  timeBetweenAttackMax: 5
-  weaponDamage: 30
+  actionName: ProjectileAttack
+  cost: 1
+  target: {fileID: 0}
+  targetTag: 
+  duration: 0
+  range: 40
+  preConditions:
+  - key: hasProjectile
+    value: 0
+  - key: inRange
+    value: 0
+  - key: canAttack
+    value: 0
+  afterEffects:
+  - key: attackPlayer
+    value: 0
+  navMeshAgent: {fileID: 0}
+  running: 0
   projectilePrefab: {fileID: 387192370330184006, guid: da62bc8d33dbcde42be22ab79d51808f,
     type: 3}
-  projectileSpawnPoint: {fileID: 3524856195919700013}
---- !u!114 &4774674003794747288
+--- !u!114 &5605444764855907819
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5728,10 +5789,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 4774674003794747295}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9840e242f4f6a6444a94876b09dc64ef, type: 3}
+  m_Script: {fileID: 11500000, guid: 1bdcfff3564f6b54ebc29aa53133756e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4774674003794747268
+  actions: []
+  currentAction: {fileID: 0}
+  destination: {x: 0, y: 0, z: 0}
+  distanceToTarget: 0
+  invoked: 0
+  timeSinceLastAttack: 0
+  timeBetweenAttack: 2
+  closestTargetDistance: 0
+  senseDistance: 100
+  tooCloseDistance: 2
+--- !u!114 &555254637797248765
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5740,25 +5811,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4774674003794747295}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ebd58fb375923d42b0ff6029af56dfa, type: 3}
+  m_Script: {fileID: 11500000, guid: b35a5118514fe1b48a02222503cb6f14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4774674003794747266
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4774674003794747295}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48c95217914ee184e896ce255b8578e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  chaseDistance: 80
-  suspicionTime: 15
-  wanderRadius: 80
-  wanderingPauseTime: 2
 --- !u!136 &4774674003794747278
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -5773,6 +5828,110 @@ CapsuleCollider:
   m_Height: 2.29
   m_Direction: 1
   m_Center: {x: 0, y: 0.88, z: 0}
+--- !u!114 &4116697891630053585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4774674003794747295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 703466aec79829443928bd97a0b43e6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: Chase
+  cost: 1
+  target: {fileID: 0}
+  targetTag: 
+  duration: 0
+  range: 30
+  preConditions:
+  - key: playerNear
+    value: 0
+  afterEffects:
+  - key: inRange
+    value: 0
+  navMeshAgent: {fileID: 0}
+  running: 0
+--- !u!114 &8479916092079258802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4774674003794747295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55d798c221bc5a445a3b7c847695bad5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: Wander
+  cost: 1
+  target: {fileID: 5474017158830077002}
+  targetTag: 
+  duration: 2
+  range: 2
+  preConditions:
+  - key: idle
+    value: 0
+  afterEffects:
+  - key: lookingForPlayer
+    value: 0
+  navMeshAgent: {fileID: 0}
+  running: 0
+  wanderRadius: 75
+--- !u!114 &410174852493131803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4774674003794747295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3914194fdc243344bab23dbaf87d282, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8229067102989433275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4774674003794747295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c83ab1c57bc2dac4b9c58ec30875a525, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: MakeSpace
+  cost: 1
+  target: {fileID: 5474017158830077002}
+  targetTag: 
+  duration: 1
+  range: 2
+  preConditions:
+  - key: tooClose
+    value: 0
+  afterEffects:
+  - key: keepSpace
+    value: 0
+  navMeshAgent: {fileID: 0}
+  running: 0
+  wanderRadius: 20
+--- !u!114 &1808876815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4774674003794747295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3914194fdc243344bab23dbaf87d282, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4774674003794747361
 GameObject:
   m_ObjectHideFlags: 0
@@ -6655,3 +6814,46 @@ Transform:
   m_Father: {fileID: 4774674003794969559}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5474017158830077002
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5066747602064734485}
+  - component: {fileID: 8565361933584935294}
+  m_Layer: 0
+  m_Name: TravelPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5066747602064734485
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5474017158830077002}
+  m_LocalRotation: {x: -0, y: -0.8819871, z: -0, w: 0.47127363}
+  m_LocalPosition: {x: -0.936, y: 0.429, z: 3.983}
+  m_LocalScale: {x: 0.37296873, y: 0.37296876, z: 0.37296873}
+  m_Children: []
+  m_Father: {fileID: 4774674003794969599}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8565361933584935294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5474017158830077002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b02dbf309fd3a644bf94798ac9856db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -1,10 +1,9 @@
-
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Mover : MonoBehaviour, IAction
+public class Enemy : MonoBehaviour, IAction
 {
 
     private NavMeshAgent navAgent;
@@ -22,12 +21,6 @@ public class Mover : MonoBehaviour, IAction
         UpdateAnimator();
     }
 
-    public void StartMoveAction(Vector3 destination)
-    {
-        GetComponent<ActionScheduler>().StartAction(this);
-        MoveTo(destination);
-
-    }
     public void MoveTo(Vector3 destination)
     {
         navAgent.isStopped = false;
