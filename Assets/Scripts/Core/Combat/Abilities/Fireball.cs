@@ -28,6 +28,7 @@ public class Fireball : MonoBehaviour
         Destroy(this.gameObject);
         Health targetHealth = col.transform.root.GetComponent<Health>();
         if (targetHealth == null) return;
+        
         targetHealth.TakeDamage(randomDamage);
         
     }
