@@ -7,17 +7,22 @@ public class EnemyGAgent : GAgent
     public float senseDistance = 100f;
     CapsuleCollider senseTrigger;
     List<GameObject> players = new List<GameObject>();
+    List<GameObject> friendsAndFoes = new List<GameObject>();
     ProjectileSpawnPoint projectileSpawnPoint;
+    int playerCount = 0;
+    [SerializeField] float tooCloseDistance = 2f;
 
     new void Start()
     {
         base.Start();
-        SubGoal s1 = new SubGoal("attackPlayer", 1, false);
-        goals.Add(s1, 4);
+        SubGoal s1 = new SubGoal("attackPlayer", 2, false);
+        goals.Add(s1, 2);
         SubGoal s2 = new SubGoal("isSafe", 1, false);
-        goals.Add(s2, 5);
-        SubGoal s3 = new SubGoal("lookingForPlayer", 1, false);
-        goals.Add(s3, 3);
+        goals.Add(s2, 1);
+        SubGoal s3 = new SubGoal("lookingForPlayer", 4, false);
+        goals.Add(s3, 4);
+        // SubGoal s4 = new SubGoal("keepSpace", 3, false);
+        // goals.Add(s4, 3);
 
         if (GetComponentInChildren<ProjectileSpawnPoint>() != null)
         {
@@ -34,6 +39,15 @@ public class EnemyGAgent : GAgent
             beliefs.ModifyState("canAttack", 1);
         }
 
+        if (closestTargetDistance < tooCloseDistance)
+        {
+            beliefs.ModifyState("tooClose", 1);
+        }
+        else
+        {
+            beliefs.RemoveState("tooClose");
+        }
+        
         IdleCheck();
 
     }
@@ -48,6 +62,8 @@ public class EnemyGAgent : GAgent
         if (Time.time > lastUpdate + updateInterval)
         {
             CheckSurroundings();
+            SetClosestDistance(friendsAndFoes);
+
             lastUpdate = Time.time;
         }
     }
@@ -68,26 +84,11 @@ public class EnemyGAgent : GAgent
     {
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, senseDistance);
         int i = 0;
-        int playerCount = 0;
+        playerCount = 0;
         while (i < hitColliders.Length)
         {
-            Player target = hitColliders[i].transform.root.GetComponent<Player>();
-            if (target != null)
-            {
-                if(DeathCheck(target))
-                {
-                    players.Remove(target.gameObject);
-                    break;
-                }
-            }
-            
-            if (target != null)
-            {
-
-                players.Add(target.gameObject);
-                beliefs.ModifyState("playerNear", 1);
-                playerCount++;
-            }
+            CheckForPlayers(hitColliders, i);
+            FriendsAndFoes(hitColliders, i);
             i++;
         }
         //print(playerCount);
@@ -103,18 +104,54 @@ public class EnemyGAgent : GAgent
 
         SetAttackTarget();
     }
+    
+    void CheckForPlayers(Collider[] hitColliders, int i)
+    {
+        Player target = hitColliders[i].transform.root.GetComponent<Player>();
+        if (target != null)
+        {
+            if (DeathCheck(target))
+            {
+                players.Remove(target.gameObject);
+                return;
+            }
+        }
+
+        if (target != null)
+        {
+            players.Add(target.gameObject);
+            beliefs.ModifyState("playerNear", 1);
+            playerCount++;
+        }
+    }
+
+    void FriendsAndFoes(Collider[] hitColliders, int i)
+    {
+        Health target = hitColliders[i].transform.root.GetComponent<Health>();
+        if (target != null)
+        {
+            if (target.IsDead())
+            {
+                friendsAndFoes.Remove(target.gameObject);
+                return;
+            }
+        }
+
+        if (target != null && target.GetComponent<EnemyGAgent>() != this)
+        {
+            
+            friendsAndFoes.Add(target.gameObject);
+        }
+    }
 
     private bool DeathCheck(Player target)
     {
-        if (target.GetComponent<Health>().IsDead())
-            return true;
-        else 
-            return false;
+        return target.GetComponent<Health>().IsDead();
     }      
 
     private void SetAttackTarget()
     {
-        GameObject target = GetComponent<EnemyController>().GetClosestEnemy(players).gameObject;
+        GameObject target = GetClosestTarget(players).gameObject;
         GetComponent<Attack>().target = target;
         GetComponent<ProjectileAttack>().target = target;
         GetComponent<Chase>().target = target;

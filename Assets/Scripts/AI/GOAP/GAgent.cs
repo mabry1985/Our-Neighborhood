@@ -33,6 +33,9 @@ public class GAgent : MonoBehaviour
     public float timeSinceLastAttack;
     public float timeBetweenAttack = 10f;
 
+    //set in get closest enemy function
+    public float closestTargetDistance;
+
     protected void Start()
     {
         GAction[] acts = this.GetComponents<GAction>();
@@ -65,6 +68,7 @@ public class GAgent : MonoBehaviour
                 //Debug.Log("Distance to Goal: " + currentAction.navMeshAgent.remainingDistance);
                 if (!invoked)
                 {
+                    // Placed HandlePlayer here instead of PlayerGAgent because not sure how to call it from a class that uses this as a base
                     HandlePlayer();
                     Invoke("CompleteAction", currentAction.duration);
                     invoked = true;
@@ -144,6 +148,44 @@ public class GAgent : MonoBehaviour
                 player.playerAnimController.FarmAnimHandler(player.animator, currentAction.targetTag);
             }
         }
+    }
+
+    public Transform GetClosestTarget(List<GameObject> targets)
+    {
+        Transform bestTarget = null;
+        float closestDistanceSqr = Mathf.Infinity;
+        Vector3 currentPosition = transform.position;
+        foreach (GameObject potentialTarget in targets)
+        {
+            Vector3 directionToTarget = potentialTarget.transform.position - currentPosition;
+            float dSqrToTarget = directionToTarget.sqrMagnitude;
+
+            if (dSqrToTarget < closestDistanceSqr)
+            {
+                closestTargetDistance = dSqrToTarget;
+                closestDistanceSqr = dSqrToTarget;
+                bestTarget = potentialTarget.transform;
+            }
+        }
+
+        return bestTarget;
+    }
+
+    public void SetClosestDistance(List<GameObject> friendsAndFoes)
+    {
+        float closestDistanceSqr = Mathf.Infinity;
+        Vector3 currentPosition = transform.position;
+        foreach (GameObject potentialTarget in friendsAndFoes)
+        {
+            Vector3 directionToTarget = potentialTarget.transform.position - currentPosition;
+            float dSqrToTarget = directionToTarget.sqrMagnitude;
+
+            if (dSqrToTarget < closestDistanceSqr)
+            {
+                closestTargetDistance = dSqrToTarget;
+            }
+        }
+
     }
 
     public void CancelGoap()

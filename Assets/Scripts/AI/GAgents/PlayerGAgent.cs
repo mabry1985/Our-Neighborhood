@@ -61,7 +61,7 @@ public class PlayerGAgent : GAgent
         while (i < hitColliders.Length)
         {
             CombatTarget target = hitColliders[i].transform.root.GetComponent<CombatTarget>();
-            print(hitColliders[i].transform.root.name);
+            //print(hitColliders[i].transform.root.name);
 
             if (target != null)
             {
