@@ -709,6 +709,7 @@ GameObject:
   - component: {fileID: 2371497864865790491}
   - component: {fileID: 2371497864865790500}
   - component: {fileID: 8705811290975924691}
+  - component: {fileID: 3727156433309403473}
   m_Layer: 0
   m_Name: ChatPlayer
   m_TagString: Player
@@ -832,6 +833,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 50
+  home: {fileID: 0}
 --- !u!114 &2371497864865790482
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -851,6 +853,7 @@ MonoBehaviour:
   invoked: 0
   timeSinceLastAttack: 0
   timeBetweenAttack: 10
+  closestTargetDistance: 0
   material: 
   craftingItem: 
   senseDistance: 50
@@ -1068,6 +1071,18 @@ MonoBehaviour:
   isStanding: 1
   isFollowing: 0
   isChopping: 0
+--- !u!114 &3727156433309403473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2371497864865790502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40c635ab6d05020488aa8efc9c5537ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3095948077681563760
 GameObject:
   m_ObjectHideFlags: 0
