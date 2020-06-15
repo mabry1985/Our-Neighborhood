@@ -10,11 +10,11 @@ public class GetMaterials : GAction
     private List<KeyValuePair<string, int>> craftingMaterials = new List<KeyValuePair<string, int>>();
     private string craftingItem;
     private bool hasMaterial;
-    private PlayerGAgent playerGAgent;
+    private ChatPlayerGAgent playerGAgent;
 
     public override bool PrePerform()
     {
-        playerGAgent = this.GetComponent<PlayerGAgent>();
+        playerGAgent = this.GetComponent<ChatPlayerGAgent>();
         craftingItem = playerGAgent.craftingItem;
         hasMaterial = false;
         player = this.GetComponent<ChatPlayerController>();

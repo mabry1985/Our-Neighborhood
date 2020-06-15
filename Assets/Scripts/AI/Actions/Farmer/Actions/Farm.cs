@@ -32,7 +32,7 @@ public class Farm : GAction
 
     public override bool PostPerform()
     {
-        var material = gameObject.GetComponent<PlayerGAgent>().material;
+        var material = gameObject.GetComponent<ChatPlayerGAgent>().material;
         print($"{player.playerName} is farming " + material);
         
         if (gAgent.distanceToTarget > 2f)
@@ -50,11 +50,6 @@ public class Farm : GAction
             inv = player.inventory;
             inv.invSpace -= 1;
         }
-        // else if (gameObject.transform.parent.parent.tag == "Bot")
-        // {
-        //     inv = bot.inventory;
-        //     inv.invSpace -= 1;
-        // }
 
         if (inv.items.ContainsKey(material))
             inv.items[material] = inv.items[material] += 1;

@@ -1,9 +1,9 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.AI;
 
-public class PlayerGAgent : GAgent
+public class ChatPlayerGAgent : GAgent
 {
     public string material = "";
     public string craftingItem = "";

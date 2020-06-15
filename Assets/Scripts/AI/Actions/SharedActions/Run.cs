@@ -19,7 +19,7 @@ public class Run : GAction
     public override bool PostPerform()
     {
         navMeshAgent.speed = originalSpeed;
-        this.GetComponent<PlayerGAgent>().RemoveFear();
+        this.GetComponent<ChatPlayerGAgent>().RemoveFear();
         return true;
     }
 }

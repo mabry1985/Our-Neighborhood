@@ -5,7 +5,7 @@ using UnityEngine;
 public class GoToWorkshop : GAction
 {
     private GInventory inv;
-    private PlayerGAgent gAgent;
+    private ChatPlayerGAgent gAgent;
     private ChatPlayerController player;
     private Bot bot;
     private List<KeyValuePair<string, int>> craftingMaterials = new List<KeyValuePair<string, int>>();
@@ -14,8 +14,7 @@ public class GoToWorkshop : GAction
     public override bool PrePerform()
     {
         player = this.GetComponent<ChatPlayerController>();
-        //bot = gameObject.transform.parent.parent.GetComponent<Bot>();
-        gAgent = this.GetComponent<PlayerGAgent>();
+        gAgent = this.GetComponent<ChatPlayerGAgent>();
         craftingItem = gAgent.craftingItem;
         var hasMaterial = false;
         craftingMaterials = CraftingRecipes.recipes[craftingItem];
@@ -24,10 +23,6 @@ public class GoToWorkshop : GAction
         {
             inv = player.inventory;
         }
-        // else if (gameObject.transform.parent.parent.tag == "Bot")
-        // {
-        //     inv = bot.inventory;
-        // }
 
         foreach (KeyValuePair<string, int> item in craftingMaterials)
         {
@@ -86,18 +81,7 @@ public class GoToWorkshop : GAction
             else
                 return false;
         }
-        // else if (gameObject.transform.parent.parent.tag == "Bot")
-        // {
-        //     int newAmount = amount - inv.items[material];
-        //     if (inv.invSpace >= newAmount)
-        //         inv.invSpace -= newAmount;
-        //     else
-        //         return false;
 
-        //     GWorld.worldInventory.items[material] -= newAmount;
-        // }
-
-        //player.ChangeJobs("Idle", null);
         return true;
 
     }

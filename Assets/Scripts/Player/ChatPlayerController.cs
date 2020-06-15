@@ -15,7 +15,7 @@ public class ChatPlayerController : MonoBehaviour
 
     public NavMeshAgent navAgent;
     public Animator animator;
-    public PlayerGAgent playerGAgent;
+    public ChatPlayerGAgent playerGAgent;
     public GInventory inventory;
     public GAction farm;
     public GAction depot;
@@ -36,6 +36,7 @@ public class ChatPlayerController : MonoBehaviour
 
     private Vector3 destination;
     private float distanceToTarget;
+    private bool invFull;
     
     private void Start() 
     {
@@ -44,7 +45,7 @@ public class ChatPlayerController : MonoBehaviour
         depot = GetComponent<Depot>(); 
         farm = GetComponent<Farm>();
         animator = GetComponent<Animator>();
-        playerGAgent = GetComponent<PlayerGAgent>();
+        playerGAgent = GetComponent<ChatPlayerGAgent>();
         depot.targetTag = "Home";
         home = playerManager.spawnPoint;
         playerManager.playerReferences[playerID] = this;
@@ -65,6 +66,14 @@ public class ChatPlayerController : MonoBehaviour
 
     private void Update() 
     {
+        if (inventory.items.Count <= inventorySize)
+        {
+            invFull = false;
+        }
+        {
+            invFull = true;
+        }
+
         UpdateAnimator();    
     }
 
