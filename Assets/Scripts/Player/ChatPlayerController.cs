@@ -17,6 +17,7 @@ public class ChatPlayerController : MonoBehaviour
     public Animator animator;
     public ChatPlayerGAgent playerGAgent;
     public GInventory inventory;
+    public bool invFull;
     public GAction farm;
     public GAction depot;
     public Slider progressBar;
@@ -36,7 +37,6 @@ public class ChatPlayerController : MonoBehaviour
 
     private Vector3 destination;
     private float distanceToTarget;
-    private bool invFull;
     
     private void Start() 
     {
@@ -66,7 +66,7 @@ public class ChatPlayerController : MonoBehaviour
 
     private void Update() 
     {
-        if (inventory.items.Count <= inventorySize)
+        if (inventory.items.Count < inventorySize)
         {
             invFull = false;
         }

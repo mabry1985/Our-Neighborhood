@@ -699,7 +699,6 @@ GameObject:
   - component: {fileID: 2188612738400063698}
   - component: {fileID: 2371497864865790481}
   - component: {fileID: 1442785663011203667}
-  - component: {fileID: 2371497864865790482}
   - component: {fileID: 2371497864865790493}
   - component: {fileID: 2371497864865790494}
   - component: {fileID: 2371497864865790495}
@@ -710,6 +709,7 @@ GameObject:
   - component: {fileID: 2371497864865790500}
   - component: {fileID: 8705811290975924691}
   - component: {fileID: 3727156433309403473}
+  - component: {fileID: 5286894877933905047}
   m_Layer: 0
   m_Name: ChatPlayer
   m_TagString: Player
@@ -789,7 +789,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aca5c26451d768a438d8f570463954bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thisAgent: {fileID: 2371497864865790482}
+  thisAgent: {fileID: 0}
 --- !u!114 &2371497864865790481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -808,7 +808,8 @@ MonoBehaviour:
   playerAnimController: {fileID: 0}
   navAgent: {fileID: 0}
   animator: {fileID: 3586919175006384026}
-  playerGAgent: {fileID: 2371497864865790482}
+  playerGAgent: {fileID: 0}
+  invFull: 0
   farm: {fileID: 0}
   depot: {fileID: 0}
   progressBar: {fileID: 433917170069146205}
@@ -834,29 +835,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 50
   home: {fileID: 0}
---- !u!114 &2371497864865790482
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2371497864865790502}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d308045e2a2fe04cb6f9728492c9c7e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  actions: []
-  currentAction: {fileID: 0}
-  destination: {x: 0, y: 0, z: 0}
-  distanceToTarget: 0
-  invoked: 0
-  timeSinceLastAttack: 0
-  timeBetweenAttack: 10
-  closestTargetDistance: 0
-  material: 
-  craftingItem: 
-  senseDistance: 50
 --- !u!114 &2371497864865790493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1083,6 +1061,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40c635ab6d05020488aa8efc9c5537ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5286894877933905047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2371497864865790502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8312f097058dad46a265b97fc83f3f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: Depot
+  cost: 1
+  target: {fileID: 0}
+  targetTag: 
+  duration: 5
+  range: 2
+  preConditions:
+  - key: invFull
+    value: 0
+  afterEffects:
+  - key: depotInventory
+    value: 0
+  navMeshAgent: {fileID: 0}
+  running: 0
 --- !u!1 &3095948077681563760
 GameObject:
   m_ObjectHideFlags: 0

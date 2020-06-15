@@ -37,6 +37,14 @@ public class ChatPlayerGAgent : GAgent
     {
         base.Update();
 
+        if (player.invFull)
+        {
+            beliefs.ModifyState("invFull", 1);
+        }
+        {
+            beliefs.RemoveState("invFull");
+        }
+
     }
 
     new void LateUpdate()
