@@ -33,6 +33,12 @@ public class PlayerGAgent : GAgent
     float lastUpdate;
     float updateInterval = 2.0f;
 
+    new private void Update() 
+    {
+        base.Update();
+
+    }
+
     new void LateUpdate()
     {
         base.LateUpdate();
