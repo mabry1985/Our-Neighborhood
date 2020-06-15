@@ -6,14 +6,14 @@ public class GoToWorkshop : GAction
 {
     private GInventory inv;
     private PlayerGAgent gAgent;
-    private Player player;
+    private ChatPlayerController player;
     private Bot bot;
     private List<KeyValuePair<string, int>> craftingMaterials = new List<KeyValuePair<string, int>>();
     private string craftingItem;
 
     public override bool PrePerform()
     {
-        player = this.GetComponent<Player>();
+        player = this.GetComponent<ChatPlayerController>();
         //bot = gameObject.transform.parent.parent.GetComponent<Bot>();
         gAgent = this.GetComponent<PlayerGAgent>();
         craftingItem = gAgent.craftingItem;

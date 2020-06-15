@@ -5,7 +5,7 @@ using UnityEngine;
 public class GetMaterials : GAction
 {
     private GInventory inv;
-    private Player player;
+    private ChatPlayerController player;
     private Bot bot;
     private List<KeyValuePair<string, int>> craftingMaterials = new List<KeyValuePair<string, int>>();
     private string craftingItem;
@@ -17,7 +17,7 @@ public class GetMaterials : GAction
         playerGAgent = this.GetComponent<PlayerGAgent>();
         craftingItem = playerGAgent.craftingItem;
         hasMaterial = false;
-        player = this.GetComponent<Player>();
+        player = this.GetComponent<ChatPlayerController>();
         bot = this.GetComponent<Bot>();
 
         craftingMaterials = CraftingRecipes.recipes[craftingItem];

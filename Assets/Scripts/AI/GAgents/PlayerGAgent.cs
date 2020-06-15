@@ -9,7 +9,7 @@ public class PlayerGAgent : GAgent
     public string craftingItem = "";
     public float senseDistance = 100f;
     CapsuleCollider senseTrigger;
-    Player player;
+    ChatPlayerController player;
 
     new void Start()
     {
@@ -27,7 +27,7 @@ public class PlayerGAgent : GAgent
         SubGoal s6 = new SubGoal("depotInventory", 1, false);
         goals.Add(s6, 4);
 
-        player = GetComponent<Player>();
+        player = GetComponent<ChatPlayerController>();
     }
 
     float lastUpdate;

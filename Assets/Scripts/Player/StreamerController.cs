@@ -115,7 +115,7 @@ public class StreamerController : MonoBehaviour
         foreach (var pawn in pawns)
         {
             if(pawn.gameObject != this.gameObject) 
-                pawn.GetComponent<Player>().InDanger();
+                pawn.GetComponent<ChatPlayerController>().InDanger();
         };
     }
 

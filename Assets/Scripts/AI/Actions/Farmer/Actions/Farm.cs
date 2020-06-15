@@ -7,12 +7,12 @@ public class Farm : GAction
 
     public GInventory inv;
     public GAgent gAgent;
-    public Player player;
+    public ChatPlayerController player;
     public Bot bot;
 
     public override bool PrePerform()
     {
-        player = this.GetComponent<Player>();
+        player = this.GetComponent<ChatPlayerController>();
         gAgent = gameObject.GetComponent<GAgent>();
 
         if (gameObject.tag == "Player")

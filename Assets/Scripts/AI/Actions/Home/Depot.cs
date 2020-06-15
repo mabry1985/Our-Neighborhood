@@ -12,7 +12,7 @@ public class Depot : GAction
     
     public override bool PostPerform()
     {
-        this.GetComponent<Player>().inventory.TransferToWorldInventory();
+        this.GetComponent<ChatPlayerController>().inventory.TransferToWorldInventory();
         beliefs.RemoveState("depot");
         print("Im home");
         return true;

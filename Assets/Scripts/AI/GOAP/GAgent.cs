@@ -136,7 +136,7 @@ public class GAgent : MonoBehaviour
 
     private void HandlePlayer()
     {
-        Player player = GetComponent<Player>();
+        ChatPlayerController player = GetComponent<ChatPlayerController>();
 
         if (player != null)
         {

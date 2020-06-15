@@ -107,7 +107,7 @@ public class EnemyGAgent : GAgent
     
     void CheckForPlayers(Collider[] hitColliders, int i)
     {
-        Player target = hitColliders[i].transform.root.GetComponent<Player>();
+        ChatPlayerController target = hitColliders[i].transform.root.GetComponent<ChatPlayerController>();
         if (target != null)
         {
             if (DeathCheck(target))
@@ -144,7 +144,7 @@ public class EnemyGAgent : GAgent
         }
     }
 
-    private bool DeathCheck(Player target)
+    private bool DeathCheck(ChatPlayerController target)
     {
         return target.GetComponent<Health>().IsDead();
     }      

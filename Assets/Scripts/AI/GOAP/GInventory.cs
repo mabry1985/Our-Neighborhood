@@ -17,7 +17,7 @@ public class GInventory
     
     public int invSpace;
 
-    public Player player;
+    public ChatPlayerController player;
 
     public void AddItem(GameObject i)
     {

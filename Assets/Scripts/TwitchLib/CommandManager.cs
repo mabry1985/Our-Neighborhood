@@ -8,7 +8,7 @@ public class CommandManager : MonoBehaviour
 {
     public PlayerManager playerManager;
     public BotManager botManager;
-    Player player;
+    ChatPlayerController player;
     Animator animator;
     AnimController animController;
 

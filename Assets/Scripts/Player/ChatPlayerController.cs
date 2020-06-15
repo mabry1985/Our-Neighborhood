@@ -6,7 +6,7 @@ using UnityEngine.AI;
 using UnityEngine.UI;
 
 
-public class Player : MonoBehaviour
+public class ChatPlayerController : MonoBehaviour
 {
     public PlayerManager playerManager;
     public PlaceableItemManager placeableItemManager;
@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
     public GameObject questionMark;
     public GameObject itemSpawnPoint;
 
-    public static Player instance;
+    public static ChatPlayerController instance;
    
     public int playerID;
     public string playerName;

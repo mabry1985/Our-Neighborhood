@@ -5,11 +5,11 @@ using UnityEngine.AI;
 
 public class GetWarm : GAction
 {
-    Player player;
+    ChatPlayerController player;
 
     public override bool PrePerform()
     {
-        player = transform.parent.GetComponentInParent<Player>();
+        player = transform.parent.GetComponentInParent<ChatPlayerController>();
         print("in get warm preperform");
         return true;
     }

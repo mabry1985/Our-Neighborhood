@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class Attack : GAction
 {
-    Player player;
+    ChatPlayerController player;
     float weaponDamage = 2f;
 
     public override bool PrePerform()
