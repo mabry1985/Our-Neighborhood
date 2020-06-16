@@ -51,7 +51,7 @@ public class BotManager : MonoBehaviour
         var botScript = go.GetComponent<Bot>();
         botName = go.GetComponentInChildren<Text>();
 
-        botScript.JobSwitch(bot.jobType, bot.material);
+        //botScript.JobSwitch(bot.jobType, bot.material);
         
         botScript.botID = bot.botID;
         botScript.botName = bot.botName;
