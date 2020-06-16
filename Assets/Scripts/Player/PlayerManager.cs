@@ -10,7 +10,7 @@ public class PlayerManager : MonoBehaviour
 
     public Dictionary<int, PlayerModel> players = new Dictionary<int, PlayerModel>();
     public List<int> spawnedPlayerList = new List<int>();
-    public Dictionary<int, Player> playerReferences = new Dictionary<int, Player>();
+    public Dictionary<int, ChatPlayerController> playerReferences = new Dictionary<int, ChatPlayerController>();
 
     private Text playerName;
 
@@ -50,7 +50,7 @@ public class PlayerManager : MonoBehaviour
 
     public void AddToPlayersDictionary(PlayerModel player) 
     {    
-        Player p = new Player();
+        ChatPlayerController p = new ChatPlayerController();
         players.Add(player.playerID, player);
         playerReferences.Add(player.playerID, p);
         
@@ -61,7 +61,7 @@ public class PlayerManager : MonoBehaviour
         var go = Instantiate(playerPrefab, spawnPoint.position, spawnPoint.rotation);
 
 
-        var playerScript = go.GetComponent<Player>();
+        var playerScript = go.GetComponent<ChatPlayerController>();
         playerScript.playerID = player.playerID;
         playerScript.playerName = player.playerName;
         playerName = go.GetComponentInChildren<Text>();

@@ -9,7 +9,7 @@ public class Health : MonoBehaviour
     float originalHealth;
 
     bool isDead = false;
-    Player player;
+    ChatPlayerController player;
     NavMeshAgent navMeshAgent;
     Animator animator;
     [SerializeField] Transform home; 
@@ -19,7 +19,7 @@ public class Health : MonoBehaviour
         originalHealth = health;
         navMeshAgent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
-        player = GetComponent<Player>();
+        player = GetComponent<ChatPlayerController>();
     }
 
     public bool IsDead()
