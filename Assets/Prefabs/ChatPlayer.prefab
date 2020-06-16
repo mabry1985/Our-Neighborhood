@@ -696,8 +696,9 @@ GameObject:
   - component: {fileID: 7929493600111258390}
   - component: {fileID: 3586919175006384026}
   - component: {fileID: 2371497864865790501}
-  - component: {fileID: 2188612738400063698}
+  - component: {fileID: -4934366093402565279}
   - component: {fileID: 2371497864865790481}
+  - component: {fileID: 2188612738400063698}
   - component: {fileID: 1442785663011203667}
   - component: {fileID: 2371497864865790493}
   - component: {fileID: 2371497864865790494}
@@ -777,7 +778,7 @@ NavMeshAgent:
   m_BaseOffset: 0.03
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &2188612738400063698
+--- !u!114 &-4934366093402565279
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -786,10 +787,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 2371497864865790502}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aca5c26451d768a438d8f570463954bf, type: 3}
+  m_Script: {fileID: 11500000, guid: 34424becd8a579249a01f21385b740c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thisAgent: {fileID: 0}
+  actions: []
+  currentAction: {fileID: 0}
+  destination: {x: 0, y: 0, z: 0}
+  distanceToTarget: 0
+  invoked: 0
+  timeSinceLastAttack: 0
+  timeBetweenAttack: 10
+  closestTargetDistance: 0
+  material: 
+  craftingItem: 
+  senseDistance: 100
 --- !u!114 &2371497864865790481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -821,6 +832,19 @@ MonoBehaviour:
   inventorySize: 20
   playerNameCanvas: {fileID: 4782835403976940974}
   playerNameText: {fileID: 4782835404893587300}
+--- !u!114 &2188612738400063698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2371497864865790502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aca5c26451d768a438d8f570463954bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thisAgent: {fileID: 0}
 --- !u!114 &1442785663011203667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -957,7 +981,7 @@ MonoBehaviour:
   actionName: Depot
   cost: 1
   target: {fileID: 0}
-  targetTag: 
+  targetTag: Home
   duration: 5
   range: 2
   preConditions:
@@ -1076,7 +1100,7 @@ MonoBehaviour:
   actionName: Depot
   cost: 1
   target: {fileID: 0}
-  targetTag: 
+  targetTag: Home
   duration: 5
   range: 2
   preConditions:

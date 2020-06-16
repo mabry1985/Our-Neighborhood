@@ -66,12 +66,13 @@ public class ChatPlayerController : MonoBehaviour
 
     private void Update() 
     {
-        if (inventory.items.Count < inventorySize)
-        {
-            invFull = false;
-        }
+        if (inventory.invSpace == 0) 
         {
             invFull = true;
+        }
+        else
+        {
+            invFull = false;
         }
 
         UpdateAnimator();    

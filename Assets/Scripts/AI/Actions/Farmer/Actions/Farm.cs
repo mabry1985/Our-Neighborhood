@@ -21,7 +21,6 @@ public class Farm : GAction
             if (inv.invSpace == 0) 
             {
                 player.playerAnimController.CancelAnimations(player.GetComponent<Animator>());
-                print("inventory is full");
                 beliefs.RemoveState("isFarming");
                 return false;
             }

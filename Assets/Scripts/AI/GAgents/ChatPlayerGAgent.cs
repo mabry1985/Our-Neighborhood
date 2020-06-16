@@ -36,11 +36,12 @@ public class ChatPlayerGAgent : GAgent
     new private void Update() 
     {
         base.Update();
-
         if (player.invFull)
         {
+            print("inventory is full");
             beliefs.ModifyState("invFull", 1);
         }
+        else
         {
             beliefs.RemoveState("invFull");
         }
