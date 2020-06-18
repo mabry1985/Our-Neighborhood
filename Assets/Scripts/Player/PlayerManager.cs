@@ -60,7 +60,6 @@ public class PlayerManager : MonoBehaviour
     {
         var go = Instantiate(playerPrefab, spawnPoint.position, spawnPoint.rotation);
 
-
         var playerScript = go.GetComponent<ChatPlayerController>();
         playerScript.playerID = player.playerID;
         playerScript.playerName = player.playerName;
@@ -88,10 +87,24 @@ public class PlayerManager : MonoBehaviour
 
     public IEnumerator CheckForPlayerSpawn() 
     {
+        bool fullPopulation = spawnedPlayerList.Count == GWorld.worldInventory.items["Population"];
+
+        if (fullPopulation)
+        {
+            print("pop full");
+            yield break;
+        } 
 
         if (spawnedPlayerList.Count < players.Count) {
             foreach (KeyValuePair<int, PlayerModel> player in players) {          
                 if (!spawnedPlayerList.Contains((player.Key))) {
+
+                    if (fullPopulation)
+                    {
+                        print("pop full");
+                        yield break;
+                    }
+
                     yield return new WaitForSeconds(2);
                     PlayerSpawn(player.Value);
                 }

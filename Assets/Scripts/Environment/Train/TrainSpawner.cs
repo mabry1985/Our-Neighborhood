@@ -14,8 +14,11 @@ public class TrainSpawner : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
+        if (playerManager.spawnedPlayerList.Count == GWorld.worldInventory.items["Population"]) 
+            return;
+
         if (playerManager.spawnedPlayerList.Count < playerManager.players.Count && this.trainInstance == null)
         {
             Instantiate(trainPrefab, transform.position, transform.rotation);

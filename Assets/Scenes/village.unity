@@ -12547,7 +12547,7 @@ PrefabInstance:
     - target: {fileID: 234475042562217727, guid: 32dd54bc195ff4d45a76e6ce86180c8a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.27
+      value: -0.84
       objectReference: {fileID: 0}
     - target: {fileID: 234475043094739060, guid: 32dd54bc195ff4d45a76e6ce86180c8a,
         type: 3}
@@ -12618,6 +12618,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 234475043688240048, guid: 32dd54bc195ff4d45a76e6ce86180c8a,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 234475043688240050, guid: 32dd54bc195ff4d45a76e6ce86180c8a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.747
+      objectReference: {fileID: 0}
+    - target: {fileID: 234475043688240050, guid: 32dd54bc195ff4d45a76e6ce86180c8a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.362
       objectReference: {fileID: 0}
     - target: {fileID: 234475043688240051, guid: 32dd54bc195ff4d45a76e6ce86180c8a,
         type: 3}
@@ -14035,22 +14050,22 @@ PrefabInstance:
     - target: {fileID: 2014046765964218335, guid: a4cb356af74bf384e8078ffd547248eb,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.00024173778
+      value: -0.00024187565
       objectReference: {fileID: 0}
     - target: {fileID: 2014046765964218335, guid: a4cb356af74bf384e8078ffd547248eb,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.05420866
+      value: -0.05420865
       objectReference: {fileID: 0}
     - target: {fileID: 2014046765964218335, guid: a4cb356af74bf384e8078ffd547248eb,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.99851966
+      value: 0.9985197
       objectReference: {fileID: 0}
     - target: {fileID: 2014046765964218335, guid: a4cb356af74bf384e8078ffd547248eb,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.0044559236
+      value: -0.0044559985
       objectReference: {fileID: 0}
     - target: {fileID: 2014046765964218335, guid: a4cb356af74bf384e8078ffd547248eb,
         type: 3}
