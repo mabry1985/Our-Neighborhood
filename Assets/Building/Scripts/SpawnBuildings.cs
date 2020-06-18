@@ -94,7 +94,7 @@ public class SpawnBuildings : MonoBehaviour
         GameObject instance = currentSpawnedBuilding;
         currentSpawnedBuilding = null;
 
-        RaycastHit hitTerrain;
+        //RaycastHit hitTerrain;
         // if (PlacementHelpers.RaycastFromMouse(out hitTerrain, terrainLayer))
         //     pos = hitTerrain.point;
 
@@ -102,6 +102,7 @@ public class SpawnBuildings : MonoBehaviour
 
         yield return new WaitForSeconds(buildingToPlace.currentBuilding.buildTime);
         Debug.Log("waited " + buildingToPlace.currentBuilding.buildTime + " seconds to build " + buildingToPlace.currentBuilding.name);
+        instance.SendMessage("OnPlacement");
         //PlacementHelpers.ToggleRenderers(instance, true);
         Destroy(go);
     }

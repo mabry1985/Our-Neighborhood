@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class House : MonoBehaviour
 {
-    void Start()
+
+    private void OnDestroy() 
     {
         GWorld.worldInventory.items["Population"] += 1;
     }
 
-    private void OnDestroy() 
+    public void OnPlacement()
     {
         GWorld.worldInventory.items["Population"] += 1;
     }
