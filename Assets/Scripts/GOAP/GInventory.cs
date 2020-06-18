@@ -73,20 +73,6 @@ public class GInventory
             invSpace += items[key];
             items.Remove(key);
         }
-            
-        // foreach(KeyValuePair<string, int> item in itemsCopy)
-        // {
-        //     Debug.Log(item.Key);
-        //     if (homeInventory.ContainsKey(item.Key)) {
-        //         homeInventory[item.Key] = homeInventory[item.Key] += item.Value;
-        //     }
-        //     else
-        //     {
-        //         homeInventory.Add(item.Key, item.Value);
-        //     }
-        //         items.Remove(item.Key);
-        //         invSpace += item.Value;
-        // }
     }
 
     public string ListWorldInventory()

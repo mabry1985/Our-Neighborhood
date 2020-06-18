@@ -26,6 +26,7 @@ public class ShowBuildProgress : MonoBehaviour
         GUI.BeginGroup(new Rect(guiPosition, new Vector2(width, height)));
         GUI.DrawTexture(new Rect(0, 0, width, height), background);
 
+        GUI.color = Color.green;
         GUI.BeginGroup(new Rect(0, 0, width * Mathf.Clamp01((Time.time - startTime) / buildTime), height));
         GUI.DrawTexture(new Rect(0, 0, width, height), fillTexture);
 
@@ -34,6 +35,6 @@ public class ShowBuildProgress : MonoBehaviour
 
         GUI.contentColor = Color.black;
         int remaining = (int) Mathf.Ceil(buildTime - Time.time + startTime);
-        GUI.Label(new Rect(guiPosition.x + width/2, guiPosition.y - height/2, width, 75), remaining.ToString());
+        // GUI.Label(new Rect(guiPosition.x + width/2, guiPosition.y - height/2, width, 75), remaining.ToString());
     }
 }

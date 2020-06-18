@@ -64,7 +64,7 @@ public sealed class GWorld
     {
         world = new WorldStates();
         worldInventory.items.Add("Money", 0);
-        worldInventory.items.Add("Population", 10);
+        worldInventory.items.Add("Population", 0);
         worldInventory.items.Add("Food", 0);
         worldInventory.items.Add("Water", 0);
         worldInventory.items.Add("Wheat", 0);

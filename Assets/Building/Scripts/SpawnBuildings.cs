@@ -37,7 +37,6 @@ public class SpawnBuildings : MonoBehaviour
             Debug.Log("GraphicRaycaster not found! Will place objects on button click");
 	}
 
-
     void Update()
     {
         if (currentSpawnedBuilding)
@@ -47,7 +46,7 @@ public class SpawnBuildings : MonoBehaviour
                 if (!PlacementHelpers.RaycastFromMouse(out hit, terrainLayer))
                     return;
 
-                currentSpawnedBuilding.transform.position = hit.point;
+                //currentSpawnedBuilding.transform.position = hit.point;
 
                 if(CanPlaceBuilding())
                     PlaceBuilding();
@@ -57,14 +56,12 @@ public class SpawnBuildings : MonoBehaviour
         }
     }
 
-
     void FixedUpdate()
     {
         if(currentSpawnedBuilding)
             if(PlacementHelpers.RaycastFromMouse(out hit, terrainLayer))
                 currentSpawnedBuilding.transform.position = new Vector3(hit.point.x, hit.point.y, hit.point.z);
     }
-
 
     bool CanPlaceBuilding()
     {
@@ -98,13 +95,14 @@ public class SpawnBuildings : MonoBehaviour
         currentSpawnedBuilding = null;
 
         RaycastHit hitTerrain;
-        if (PlacementHelpers.RaycastFromMouse(out hitTerrain, terrainLayer))
-            pos = hitTerrain.point;
+        // if (PlacementHelpers.RaycastFromMouse(out hitTerrain, terrainLayer))
+        //     pos = hitTerrain.point;
 
         GameObject go = Instantiate(underConstructionGO, pos, Quaternion.identity);
+
         yield return new WaitForSeconds(buildingToPlace.currentBuilding.buildTime);
         Debug.Log("waited " + buildingToPlace.currentBuilding.buildTime + " seconds to build " + buildingToPlace.currentBuilding.name);
-        PlacementHelpers.ToggleRenderers(instance, true);
+        //PlacementHelpers.ToggleRenderers(instance, true);
         Destroy(go);
     }
 
@@ -145,8 +143,9 @@ public class SpawnBuildings : MonoBehaviour
             return;
 
         currentSpawnedBuilding = Instantiate(building.buildingPrefab);
+        GetComponent<Grid>().structure = currentSpawnedBuilding;
         buildingToPlace.currentBuilding = building;
-        PlacementHelpers.ToggleRenderers(currentSpawnedBuilding, false);
+        //PlacementHelpers.ToggleRenderers(currentSpawnedBuilding, false);
         Collider[] cols = currentSpawnedBuilding.GetComponentsInChildren<Collider>();
         if(cols.Length > 0)
             FillRectWithTiles(cols[0]);
