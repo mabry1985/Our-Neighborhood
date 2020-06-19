@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c5aca4dea86736f45904c0d10502538b, type: 3}
-  m_Name: Cylinder
+  m_Name: Windmill
   m_EditorClassIdentifier: 
-  objectName: Cylinder
-  buildingPrefab: {fileID: 5328152217255517313, guid: 67f73ce9f3b0c4d5b950f722dd123443,
+  objectName: Windmill
+  buildingPrefab: {fileID: 7181071022262743554, guid: dc391b843a9e6ec4282d98e36145e0df,
     type: 3}
   buildTime: 5
   cost: 0

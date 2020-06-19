@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c5aca4dea86736f45904c0d10502538b, type: 3}
-  m_Name: Sphere
+  m_Name: Factory
   m_EditorClassIdentifier: 
-  objectName: Sphere
-  buildingPrefab: {fileID: 7015777558592496285, guid: c4a026939d3a546ffbc29d98257acd41,
+  objectName: Factory
+  buildingPrefab: {fileID: 5328152217255517313, guid: 67f73ce9f3b0c4d5b950f722dd123443,
     type: 3}
-  buildTime: 2
+  buildTime: 5
   cost: 0
