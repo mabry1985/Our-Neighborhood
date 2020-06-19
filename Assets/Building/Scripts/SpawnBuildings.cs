@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.UI;
+using UnityEngine.AI;
 
 public class SpawnBuildings : MonoBehaviour
 {
@@ -109,6 +110,7 @@ public class SpawnBuildings : MonoBehaviour
         yield return new WaitForSeconds(buildingToPlace.currentBuilding.buildTime);
         Debug.Log("waited " + buildingToPlace.currentBuilding.buildTime + " seconds to build " + buildingToPlace.currentBuilding.name);
         instance.SendMessage("OnPlacement");
+        instance.GetComponent<NavMeshObstacle>().enabled = true;
         //PlacementHelpers.ToggleRenderers(instance, true);
         Destroy(go);
     }
@@ -154,8 +156,10 @@ public class SpawnBuildings : MonoBehaviour
         currentSpawnedBuilding = Instantiate(building.buildingPrefab);
         GetComponent<Grid>().structure = currentSpawnedBuilding;
         buildingToPlace.currentBuilding = building;
+        currentSpawnedBuilding.GetComponent<NavMeshObstacle>().enabled = false;
         //PlacementHelpers.ToggleRenderers(currentSpawnedBuilding, false);
         Collider[] cols = currentSpawnedBuilding.GetComponentsInChildren<Collider>();
+        print("Colliders count = " + cols.Length);
         if(cols.Length > 0)
             FillRectWithTiles(cols[0]);
         else
