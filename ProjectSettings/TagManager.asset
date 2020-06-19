@@ -38,6 +38,8 @@ TagManager:
   - Warmth
   - Projectile Spawn
   - Game Manager
+  - Berries
+  - Apples
   layers:
   - Default
   - TransparentFX
