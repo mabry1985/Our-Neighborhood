@@ -37,6 +37,7 @@ TagManager:
   - Campfire
   - Warmth
   - Projectile Spawn
+  - Game Manager
   layers:
   - Default
   - TransparentFX

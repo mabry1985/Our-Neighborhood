@@ -28,8 +28,11 @@ public class SpawnBuildings : MonoBehaviour
     GameObject activeTilesParent;
     #endregion
 
+    private CursorManager cursorManager;
+
     void Start ()
     {
+        cursorManager = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<GameManager>().cursorManager;
         activeTiles = new List<ProductionTile>();
         if (!productionTile)
             Debug.LogError("Production Tile is NULL");
@@ -46,12 +49,13 @@ public class SpawnBuildings : MonoBehaviour
                 if (!PlacementHelpers.RaycastFromMouse(out hit, terrainLayer))
                     return;
 
-                //currentSpawnedBuilding.transform.position = hit.point;
+                cursorManager.cursorVisible = false;
+
 
                 if(CanPlaceBuilding())
                     PlaceBuilding();
             }
-            if (Input.GetMouseButtonDown(1))
+            if (Input.GetKeyDown(KeyCode.Escape))
                 Destroy(currentSpawnedBuilding);
         }
     }
@@ -76,6 +80,7 @@ public class SpawnBuildings : MonoBehaviour
 
     void PlaceBuilding()
     {
+        cursorManager.cursorVisible = true;
         ClearGrid();
         StartCoroutine(BeginBuilding());
     }
@@ -90,11 +95,12 @@ public class SpawnBuildings : MonoBehaviour
 
     IEnumerator BeginBuilding()
     {
+        Cursor.visible = true;
         Vector3 pos = currentSpawnedBuilding.transform.position;
         GameObject instance = currentSpawnedBuilding;
         currentSpawnedBuilding = null;
 
-        //RaycastHit hitTerrain;
+        // RaycastHit hitTerrain;
         // if (PlacementHelpers.RaycastFromMouse(out hitTerrain, terrainLayer))
         //     pos = hitTerrain.point;
 
@@ -139,6 +145,8 @@ public class SpawnBuildings : MonoBehaviour
 
     public void SpawnBuilding(BuildingSO building)
     {
+        cursorManager.cursorVisible = false;
+
         // if haven't placed the spawned building, then return
         if (currentSpawnedBuilding)
             return;
@@ -152,5 +160,6 @@ public class SpawnBuildings : MonoBehaviour
             FillRectWithTiles(cols[0]);
         else
             Debug.LogError("Building has no colliders");
+
     }
 }

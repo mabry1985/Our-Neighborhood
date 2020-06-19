@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public PlayerManager playerManager;
     public PlaceableItemManager placeableItemManager;
     public BotManager botManager;
+    public CursorManager cursorManager;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +20,6 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

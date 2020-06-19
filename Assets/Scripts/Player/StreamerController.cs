@@ -3,6 +3,7 @@ using UnityEngine.AI;
 
 public class StreamerController : MonoBehaviour
 {
+    private CursorManager cursorManager;
     private NavMeshAgent navAgent;
     public Camera cam;
     private Cinemachine.CinemachineBrain brain;
@@ -21,6 +22,8 @@ public class StreamerController : MonoBehaviour
         navAgent = GetComponent<NavMeshAgent>();
         brain = cam.GetComponent<Cinemachine.CinemachineBrain>();
         vcam = brain.GetComponent<Cinemachine.CinemachineFreeLook>();
+
+        cursorManager = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<GameManager>().cursorManager;
     }
 
     private void Update()
@@ -88,14 +91,12 @@ public class StreamerController : MonoBehaviour
 
         if (freeCamToggle)
         {
-            Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
             vcam.m_XAxis.m_InputAxisName = "Mouse X";
             vcam.m_YAxis.m_InputAxisName = "Mouse Y";
         }
         else
         {
-            Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             vcam.m_XAxis.m_InputAxisName = "";
             vcam.m_YAxis.m_InputAxisName = "";
@@ -104,6 +105,7 @@ public class StreamerController : MonoBehaviour
 
     private void ToggleFreeCam()
     {
+        cursorManager.cursorVisible = freeCamToggle;
         showResourceCanvas = !showResourceCanvas;
         freeCamToggle = !freeCamToggle;
     }
