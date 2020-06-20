@@ -8,6 +8,9 @@ public class BuildingSO : ScriptableObject
     public string objectName = "Building Name";
     public GameObject buildingPrefab;
     public float buildTime;
-    public float cost;
+    public int wood;
+    public int stone;
+    public int iron;
+
     //public Icon icon;
 }

@@ -30,6 +30,7 @@ public class SpawnBuildings : MonoBehaviour
     #endregion
 
     private CursorManager cursorManager;
+    private float mouseWheelRotation = 0f;
 
     void Start ()
     {
@@ -64,8 +65,17 @@ public class SpawnBuildings : MonoBehaviour
     void FixedUpdate()
     {
         if(currentSpawnedBuilding)
+        {
             if(PlacementHelpers.RaycastFromMouse(out hit, terrainLayer))
+            {
+
                 currentSpawnedBuilding.transform.position = new Vector3(hit.point.x, hit.point.y, hit.point.z);
+
+                mouseWheelRotation += Input.mouseScrollDelta.y * 90f;
+                currentSpawnedBuilding.transform.Rotate(0, mouseWheelRotation, 0);
+            }
+        }
+        
     }
 
     bool CanPlaceBuilding()
