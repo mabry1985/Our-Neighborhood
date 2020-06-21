@@ -37,6 +37,8 @@ TagManager:
   - Campfire
   - Warmth
   - Projectile Spawn
+  - Inventory
+  - Testing
   layers:
   - Default
   - TransparentFX
