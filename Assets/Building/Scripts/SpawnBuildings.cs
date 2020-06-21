@@ -31,6 +31,7 @@ public class SpawnBuildings : MonoBehaviour
 
     private CursorManager cursorManager;
     private float mouseWheelRotation = 0f;
+    private List<KeyValuePair<string, int>> bCosts;
 
     void Start ()
     {
@@ -58,7 +59,10 @@ public class SpawnBuildings : MonoBehaviour
                     PlaceBuilding();
             }
             if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                BuildingCostHelpers.ReturnBuildingCostsToInv(bCosts);
                 Destroy(currentSpawnedBuilding);
+            }
         }
     }
 
@@ -75,7 +79,7 @@ public class SpawnBuildings : MonoBehaviour
                 currentSpawnedBuilding.transform.Rotate(0, mouseWheelRotation, 0);
             }
         }
-        
+
     }
 
     bool CanPlaceBuilding()
@@ -157,7 +161,10 @@ public class SpawnBuildings : MonoBehaviour
 
     public void SpawnBuilding(BuildingSO building)
     {
+        bCosts = BuildingCostHelpers.BuildCostList(building);
         cursorManager.cursorVisible = false;
+
+        BuildingCostHelpers.RemoveBuildingCostsFromInv(bCosts);
 
         // if haven't placed the spawned building, then return
         if (currentSpawnedBuilding)

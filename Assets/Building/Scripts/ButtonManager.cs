@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BuildingCost : MonoBehaviour
+public class ButtonManager : MonoBehaviour
 {
     [SerializeField] BuildingSO building;
     public bool canBuild;
@@ -12,7 +12,7 @@ public class BuildingCost : MonoBehaviour
 
     private void Start() 
     {
-        bCosts = BuildCostList();
+        bCosts = BuildingCostHelpers.BuildCostList(building);
         button = GetComponent<Button>();    
     }
 
@@ -20,7 +20,7 @@ public class BuildingCost : MonoBehaviour
     {
         canBuild = CanBuild();
         print(canBuild);
-        
+
         button.interactable = canBuild;
         
     }
@@ -30,7 +30,7 @@ public class BuildingCost : MonoBehaviour
         bool hasMats = false;
         foreach (KeyValuePair<string, int> item in bCosts)
         {
-            print("material required " + item.Key + "|" + item.Value);
+            
             if (item.Value == 0) break;
 
             if (GWorld.worldInventory.items[item.Key] >= item.Value)
@@ -44,20 +44,5 @@ public class BuildingCost : MonoBehaviour
         }
         return hasMats;
     }
-
-    private List<KeyValuePair<string, int>> BuildCostList()
-    {
-        List<KeyValuePair<string, int>> tempList = new List<KeyValuePair<string, int>>()
-        {
-            new KeyValuePair<string, int>("Wood", building.wood),
-            new KeyValuePair<string, int>("Stone", building.stone),
-            new KeyValuePair<string, int>("Iron", building.iron),
-
-        };
-
-        return tempList;
-  
-    }
-
 
 }
