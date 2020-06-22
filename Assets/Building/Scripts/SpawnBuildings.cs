@@ -30,7 +30,6 @@ public class SpawnBuildings : MonoBehaviour
     #endregion
 
     private CursorManager cursorManager;
-    private float mouseWheelRotation = 0f;
     private List<KeyValuePair<string, int>> bCosts;
 
     void Start ()
@@ -54,15 +53,20 @@ public class SpawnBuildings : MonoBehaviour
 
                 cursorManager.cursorVisible = false;
 
-
                 if(CanPlaceBuilding())
                     PlaceBuilding();
             }
+        
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 BuildingCostHelpers.ReturnBuildingCostsToInv(bCosts);
                 Destroy(currentSpawnedBuilding);
             }
+
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                currentSpawnedBuilding.transform.Rotate(0, 90, 0);
+            }    
         }
     }
 
@@ -72,11 +76,8 @@ public class SpawnBuildings : MonoBehaviour
         {
             if(PlacementHelpers.RaycastFromMouse(out hit, terrainLayer))
             {
-
                 currentSpawnedBuilding.transform.position = new Vector3(hit.point.x, hit.point.y, hit.point.z);
-
-                mouseWheelRotation += Input.mouseScrollDelta.y * 90f;
-                currentSpawnedBuilding.transform.Rotate(0, mouseWheelRotation, 0);
+                
             }
         }
 

@@ -2,11 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Well : MonoBehaviour
+public class Well : PlaceableBuildingBase
 {
 
-    public void OnPlacement()
-    {
-
-    }
 }

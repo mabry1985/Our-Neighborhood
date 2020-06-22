@@ -16,7 +16,7 @@ public class ButtonManager : MonoBehaviour
         button = GetComponent<Button>();    
     }
 
-    private void Update() 
+    private void FixedUpdate() 
     {
         canBuild = CanBuild();
         print(canBuild);
@@ -31,7 +31,7 @@ public class ButtonManager : MonoBehaviour
         foreach (KeyValuePair<string, int> item in bCosts)
         {
             
-            if (item.Value == 0) break;
+            if (item.Value == 0) continue;
 
             if (GWorld.worldInventory.items[item.Key] >= item.Value)
             {

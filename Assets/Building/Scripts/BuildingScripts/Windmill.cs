@@ -2,15 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Windmill : MonoBehaviour
+public class Windmill : PlaceableBuildingBase
 {
-    private void Start() 
-    {
 
-    }
-
-    public void OnPlacement()
+    new public void OnPlacement()
     {
+        base.OnPlacement();
         transform.GetChild(0).gameObject.SetActive(true);
     }
 }

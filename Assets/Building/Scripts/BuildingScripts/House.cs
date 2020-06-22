@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class House : MonoBehaviour
+public class House : PlaceableBuildingBase
 {
 
     private void OnDestroy() 
@@ -10,8 +10,9 @@ public class House : MonoBehaviour
         GWorld.worldInventory.items["Population"] += 1;
     }
 
-    public void OnPlacement()
+    new public void OnPlacement()
     {
+        base.OnPlacement();
         GWorld.worldInventory.items["Population"] += 1;
     }
 }

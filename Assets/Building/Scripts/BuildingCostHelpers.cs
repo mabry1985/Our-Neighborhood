@@ -29,10 +29,11 @@ public static class BuildingCostHelpers
             new KeyValuePair<string, int>("Wood", building.wood),
             new KeyValuePair<string, int>("Stone", building.stone),
             new KeyValuePair<string, int>("Seeds", building.seeds),
-            new KeyValuePair<string, int>("Iron", building.iron),
+            new KeyValuePair<string, int>("Iron", building.iron)
 
         };
 
+        Debug.Log("buidcost iron is :" + building.iron);
         return tempList;
 
     }
