@@ -33,7 +33,6 @@ public static class BuildingCostHelpers
 
         };
 
-        Debug.Log("buidcost iron is :" + building.iron);
         return tempList;
 
     }

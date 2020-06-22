@@ -84,10 +84,10 @@ public class StreamerController : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (showResourceCanvas)
-            resourceOverlayCanvas.SetActive(true);
-        else
-            resourceOverlayCanvas.SetActive(false);
+        // if (showResourceCanvas)
+        //     resourceOverlayCanvas.SetActive(true);
+        // else
+        //     resourceOverlayCanvas.SetActive(false);
 
         if (freeCamToggle)
         {

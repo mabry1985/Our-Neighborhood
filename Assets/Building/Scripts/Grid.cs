@@ -5,7 +5,7 @@ using UnityEngine;
 public class Grid : MonoBehaviour
 {
     public GameObject structure;
-    Vector3 truePos;
+    public Vector3 truePos;
     public float gridSize;
 
     void LateUpdate()

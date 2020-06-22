@@ -112,7 +112,7 @@ public class SpawnBuildings : MonoBehaviour
     IEnumerator BeginBuilding()
     {
         Cursor.visible = true;
-        Vector3 pos = currentSpawnedBuilding.transform.position;
+        Vector3 pos = GetComponent<Grid>().truePos;
         GameObject instance = currentSpawnedBuilding;
         currentSpawnedBuilding = null;
 

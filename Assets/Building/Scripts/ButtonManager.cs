@@ -19,7 +19,6 @@ public class ButtonManager : MonoBehaviour
     private void FixedUpdate() 
     {
         canBuild = CanBuild();
-        print(canBuild);
 
         button.interactable = canBuild;
         
