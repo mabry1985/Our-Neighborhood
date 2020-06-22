@@ -31,6 +31,7 @@ public class SpawnBuildings : MonoBehaviour
 
     private CursorManager cursorManager;
     private List<KeyValuePair<string, int>> bCosts;
+    private List<Vector3> spawnedBuildingLocations = new List<Vector3>();
 
     void Start ()
     {
@@ -96,6 +97,9 @@ public class SpawnBuildings : MonoBehaviour
 
     void PlaceBuilding()
     {
+        Vector3 pos = GetComponent<Grid>().truePos;
+        if (spawnedBuildingLocations.Contains(pos)) return;
+
         cursorManager.cursorVisible = true;
         ClearGrid();
         StartCoroutine(BeginBuilding());
@@ -111,8 +115,11 @@ public class SpawnBuildings : MonoBehaviour
 
     IEnumerator BeginBuilding()
     {
-        Cursor.visible = true;
         Vector3 pos = GetComponent<Grid>().truePos;
+
+        Cursor.visible = true;
+        spawnedBuildingLocations.Add(pos);
+
         GameObject instance = currentSpawnedBuilding;
         currentSpawnedBuilding = null;
 
@@ -162,6 +169,8 @@ public class SpawnBuildings : MonoBehaviour
 
     public void SpawnBuilding(BuildingSO building)
     {
+        Vector3 pos = GetComponent<Grid>().truePos;
+
         bCosts = BuildingCostHelpers.BuildCostList(building);
         cursorManager.cursorVisible = false;
 
@@ -171,13 +180,14 @@ public class SpawnBuildings : MonoBehaviour
         if (currentSpawnedBuilding)
             return;
 
+        print(pos);
+
         currentSpawnedBuilding = Instantiate(building.buildingPrefab);
         GetComponent<Grid>().structure = currentSpawnedBuilding;
         buildingToPlace.currentBuilding = building;
         currentSpawnedBuilding.GetComponent<NavMeshObstacle>().enabled = false;
         //PlacementHelpers.ToggleRenderers(currentSpawnedBuilding, false);
         Collider[] cols = currentSpawnedBuilding.GetComponentsInChildren<Collider>();
-        print("Colliders count = " + cols.Length);
         if(cols.Length > 0)
             FillRectWithTiles(cols[0]);
         else
