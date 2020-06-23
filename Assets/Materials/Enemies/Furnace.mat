@@ -7,9 +7,9 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Purple
+  m_Name: Furnace
   m_Shader: {fileID: 4800000, guid: bee44b4a58655ee4cbff107302a3e131, type: 3}
-  m_ShaderKeywords: DR_CEL_EXTRA_ON _CELPRIMARYMODE_STEPS _TEXTUREBLENDINGMODE_MULTIPLY
+  m_ShaderKeywords: DR_CEL_EXTRA_ON DR_RIM_ON _CELPRIMARYMODE_STEPS _TEXTUREBLENDINGMODE_MULTIPLY
     _UNITYSHADOWMODE_NONE
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -67,7 +67,7 @@ Material:
     m_Floats:
     - _BumpScale: 1
     - _CelExtraEnabled: 1
-    - _CelNumSteps: 5
+    - _CelNumSteps: 3
     - _CelPrimaryMode: 2
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
@@ -78,9 +78,9 @@ Material:
     - _FlatSpecularEdgeSmoothness: 0
     - _FlatSpecularSize: 0.1
     - _Flatness: 1
-    - _FlatnessExtra: 0.525
+    - _FlatnessExtra: 1
     - _GlossMapScale: 1
-    - _Glossiness: 0
+    - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _GradientAngle: 0
     - _GradientCenterX: 0
@@ -92,11 +92,11 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _RimEnabled: 0
+    - _RimEnabled: 1
     - _SelfShadingSize: 0.5
-    - _SelfShadingSizeExtra: 0.641
+    - _SelfShadingSizeExtra: 0.6
     - _ShadowEdgeSize: 0.05
-    - _ShadowEdgeSizeExtra: 0.08
+    - _ShadowEdgeSizeExtra: 0.05
     - _SmoothnessTextureChannel: 0
     - _SpecularEnabled: 0
     - _SpecularHighlights: 1
@@ -110,13 +110,13 @@ Material:
     - _VertexColorsEnabled: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.8643213, g: 0.48584908, b: 1, a: 1}
-    - _ColorDim: {r: 0.74509805, g: 0.32941177, b: 0.8941177, a: 1}
+    - _Color: {r: 0.9622642, g: 0.6745426, b: 0.040850822, a: 1}
+    - _ColorDim: {r: 1, g: 1, b: 1, a: 1}
     - _ColorDimCurve: {r: 0.85023, g: 0.85034, b: 0.85045, a: 0.85056}
-    - _ColorDimExtra: {r: 0.4128462, g: 0.25142398, b: 0.4716981, a: 1}
-    - _ColorDimSteps: {r: 0.67354214, g: 0.3215112, b: 0.8018868, a: 1}
+    - _ColorDimExtra: {r: 0.754717, g: 0.08387243, b: 0.06051977, a: 1}
+    - _ColorDimSteps: {r: 0.8396226, g: 0.4479287, b: 0.011881431, a: 1}
     - _ColorGradient: {r: 0.85023, g: 0.85034, b: 0.85045, a: 0.85056}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _FlatRimColor: {r: 0.74509805, g: 0.32941177, b: 0.8941177, a: 1}
-    - _FlatSpecularColor: {r: 0.85023, g: 0.85034, b: 0.85045, a: 0.85056}
+    - _FlatRimColor: {r: 0.7647059, g: 0.045378413, b: 0, a: 1}
+    - _FlatSpecularColor: {r: 0.9622642, g: 0.6745426, b: 0.040850822, a: 1}
     - _UnityShadowColor: {r: 0.85023, g: 0.85034, b: 0.85045, a: 0.85056}

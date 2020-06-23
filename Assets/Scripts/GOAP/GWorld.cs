@@ -71,7 +71,7 @@ public sealed class GWorld
         worldInventory.items.Add("Grain", 0);
         worldInventory.items.Add("Wood", 1000);
         worldInventory.items.Add("Stone", 1000);
-        worldInventory.items.Add("Iron", 0);
+        worldInventory.items.Add("Iron", 1000);
 
         // money = new ResourceQueue("", "", world);
         // resources.Add("money", money);

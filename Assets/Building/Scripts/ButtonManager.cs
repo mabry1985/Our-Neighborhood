@@ -31,16 +31,18 @@ public class ButtonManager : MonoBehaviour
         {
             
             if (item.Value == 0) continue;
-
+            //print(item.Key + " " + item.Value);
+            print(GWorld.worldInventory.items[item.Key] >= item.Value);
             if (GWorld.worldInventory.items[item.Key] >= item.Value)
             {
                 hasMats = true;
             }
             else
             {
-                hasMats = false;
+                return false;
             }
         }
+        print(hasMats);
         return hasMats;
     }
 

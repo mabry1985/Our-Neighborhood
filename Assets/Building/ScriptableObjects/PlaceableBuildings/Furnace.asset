@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c5aca4dea86736f45904c0d10502538b, type: 3}
-  m_Name: Factory
+  m_Name: Furnace
   m_EditorClassIdentifier: 
-  objectName: Factory
-  buildingPrefab: {fileID: 620623511027599131, guid: beed0c34d6cb17b43b0df200e6b186fd,
+  objectName: Building Name
+  buildingPrefab: {fileID: 8920204295838423821, guid: af9458a4144afeb43bc63109da7022d4,
     type: 3}
   buildTime: 5
-  wood: 1000
-  stone: 1000
-  iron: 1000
+  wood: 100
+  stone: 100
+  iron: 0
   seeds: 0

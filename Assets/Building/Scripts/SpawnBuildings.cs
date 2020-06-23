@@ -180,8 +180,6 @@ public class SpawnBuildings : MonoBehaviour
         if (currentSpawnedBuilding)
             return;
 
-        print(pos);
-
         currentSpawnedBuilding = Instantiate(building.buildingPrefab);
         GetComponent<Grid>().structure = currentSpawnedBuilding;
         buildingToPlace.currentBuilding = building;

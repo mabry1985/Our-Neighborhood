@@ -40,6 +40,8 @@ TagManager:
   - Game Manager
   - Berries
   - Apples
+  - Inventory
+  - Furnace
   layers:
   - Default
   - TransparentFX
