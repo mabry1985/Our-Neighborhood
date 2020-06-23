@@ -132,7 +132,13 @@ public class SpawnBuildings : MonoBehaviour
         yield return new WaitForSeconds(buildingToPlace.currentBuilding.buildTime);
         Debug.Log("waited " + buildingToPlace.currentBuilding.buildTime + " seconds to build " + buildingToPlace.currentBuilding.name);
         instance.SendMessage("OnPlacement");
-        instance.GetComponent<NavMeshObstacle>().enabled = true;
+        
+        NavMeshObstacle navMeshObstacle = instance.GetComponent<NavMeshObstacle>();
+        if (navMeshObstacle != null)
+        {
+            Debug.LogWarning("Building does not contain a NavMeshObstacle, is this what you want?");
+            navMeshObstacle.enabled = true;
+        }
         //PlacementHelpers.ToggleRenderers(instance, true);
         Destroy(go);
     }

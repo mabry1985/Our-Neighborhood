@@ -5,6 +5,8 @@ using UnityEngine;
 public class Furnace : PlaceableBuildingBase
 {
     ParticleSystem smoke;
+    Material litMaterial;
+    Material unlitMaterial;
 
     private void Awake() 
     {
@@ -21,6 +23,5 @@ public class Furnace : PlaceableBuildingBase
     {
         base.OnPlacement();
         smoke.Play();
-        
     }
 }

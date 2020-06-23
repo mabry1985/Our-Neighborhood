@@ -16,6 +16,7 @@ MonoBehaviour:
   buildingPrefab: {fileID: 5007188608546975140, guid: 350fa26f136608c4691ae03b94a89164,
     type: 3}
   buildTime: 4
-  wood: 500
-  stone: 500
+  wood: 200
+  stone: 200
   iron: 0
+  seeds: 0

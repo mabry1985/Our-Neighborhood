@@ -11,6 +11,7 @@ public class ResourceUIManager : MonoBehaviour
     public TMPro.TextMeshProUGUI food;
     public TMPro.TextMeshProUGUI water;
     public TMPro.TextMeshProUGUI grain;
+    public TMPro.TextMeshProUGUI seed;
     public TMPro.TextMeshProUGUI wood;
     public TMPro.TextMeshProUGUI stone;
     public TMPro.TextMeshProUGUI iron;
@@ -37,6 +38,7 @@ public class ResourceUIManager : MonoBehaviour
         food.text = $"Food: {worldInventory["Food"]}";
         water.text = $"Water: {worldInventory["Water"]}";
         grain.text = $"Wheat: {worldInventory["Grain"]}";
+        grain.text = $"Seeds: {worldInventory["Seeds"]}";
         wood.text = $"Wood: {worldInventory["Wood"]}";
         stone.text = $"Stone: {worldInventory["Stone"]}";
         iron.text = $"Iron: {worldInventory["Iron"]}";
