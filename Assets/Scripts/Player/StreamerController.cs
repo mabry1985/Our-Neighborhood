@@ -11,6 +11,8 @@ public class StreamerController : MonoBehaviour
 
     public GameObject resourceOverlayCanvas;
 
+    public GameObject cannon;
+
     Health health;
     private bool freeCamToggle = false;
     private bool showResourceCanvas = true;
