@@ -7,22 +7,30 @@ public class Wander : GAction
 {
     [SerializeField] float wanderRadius = 50f;
 
+
+    private void Start() 
+    {
+        target = GetComponentInChildren<TravelPoint>().gameObject;
+    }
+
     public override bool PrePerform()
     {
+        print("in wandering pre perform" + target);
         return true;
     }
 
     public override bool PostPerform()
     {
         Wandering();
+        print("in wandering post perform");
         return true;
     }
 
     private void Wandering()
     {
-        Vector3 travelPoint = GetComponentInChildren<TravelPoint>().transform.position;
-        Vector3 newPos = RandomNavSphere(transform.position, wanderRadius, -1);
-        GetComponentInChildren<TravelPoint>().transform.position = newPos;
+        Vector3 travelPoint = target.transform.position;
+        Vector3 newPos = RandomNavSphere(travelPoint, wanderRadius, -1);
+        travelPoint = newPos;
     }
 
     private void OnDrawGizmosSelected()

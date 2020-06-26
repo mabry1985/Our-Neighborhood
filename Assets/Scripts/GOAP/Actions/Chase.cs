@@ -22,8 +22,11 @@ public class Chase : GAction
         else
         {
             gAgent.CancelGoap();
-            navMeshAgent.ResetPath();
-            gAgent.beliefs.ModifyState("inRange", 1);
+
+            if (navMeshAgent.enabled == true)
+                navMeshAgent.ResetPath();
+            
+            //gAgent.beliefs.ModifyState("inRange", 1);
         }
     }
 

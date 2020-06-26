@@ -33,7 +33,7 @@ public class GAgent : MonoBehaviour
     public float timeSinceLastAttack;
     public float timeBetweenAttack = 10f;
 
-    //set in get closest enemy function
+    //set in GetClosestEnemy()
     public float closestTargetDistance;
 
     protected void Start()
@@ -65,7 +65,7 @@ public class GAgent : MonoBehaviour
             //Debug.Log(currentAction.navMeshAgent.hasPath + "   " + distanceToTarget);
             if (distanceToTarget < currentAction.range)
             {
-                //Debug.Log("Distance to Goal: " + currentAction.navMeshAgent.remainingDistance);
+                Debug.Log("Distance to Goal: " + currentAction.navMeshAgent.remainingDistance);
                 if (!invoked)
                 {
                     // Placed HandlePlayer here instead of PlayerGAgent because not sure how to call it from a class that uses this as a base

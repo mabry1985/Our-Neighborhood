@@ -5648,7 +5648,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 8
+  m_Speed: 12
   m_Acceleration: 20
   avoidancePriority: 50
   m_AngularSpeed: 2000
@@ -6787,7 +6787,7 @@ GameObject:
   - component: {fileID: 6711335367589366676}
   m_Layer: 9
   m_Name: TravelPoint
-  m_TagString: Untagged
+  m_TagString: Travel Point
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6799,8 +6799,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5474017158830077002}
-  m_LocalRotation: {x: -0, y: -0.8819871, z: -0, w: 0.47127363}
-  m_LocalPosition: {x: -2.062, y: 0.798, z: 3.23}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.043, y: 0.5, z: 3.202}
   m_LocalScale: {x: 45.460316, y: 45.460323, z: 45.460316}
   m_Children: []
   m_Father: {fileID: 4774674003794969599}

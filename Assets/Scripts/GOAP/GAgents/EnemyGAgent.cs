@@ -11,6 +11,7 @@ public class EnemyGAgent : GAgent
     ProjectileSpawnPoint projectileSpawnPoint;
     int playerCount = 0;
     [SerializeField] float tooCloseDistance = 2f;
+    GameObject travelPoint;
 
     new void Start()
     {
@@ -28,6 +29,10 @@ public class EnemyGAgent : GAgent
         {
             beliefs.ModifyState("hasProjectile", 1);
         }
+
+        //travelPoint = GetComponentInChildren<TravelPoint>().gameObject;
+        //travelPoint.transform.parent = null;
+        //this.GetComponent<Wander>().target = travelPoint;
     }
 
     new private void Update()
@@ -39,15 +44,15 @@ public class EnemyGAgent : GAgent
             beliefs.ModifyState("canAttack", 1);
         }
 
-        if (closestTargetDistance < tooCloseDistance)
-        {
-            beliefs.ModifyState("tooClose", 1);
-        }
-        else
-        {
-            beliefs.RemoveState("tooClose");
-        }
-        
+        // if (closestTargetDistance < tooCloseDistance)
+        // {
+        //     beliefs.ModifyState("tooClose", 1);
+        // }
+        // else
+        // {
+        //     beliefs.RemoveState("tooClose");
+        // }
+
         IdleCheck();
 
     }
@@ -62,7 +67,7 @@ public class EnemyGAgent : GAgent
         if (Time.time > lastUpdate + updateInterval)
         {
             CheckSurroundings();
-            SetClosestDistance(friendsAndFoes);
+            //SetClosestDistance(friendsAndFoes);
 
             lastUpdate = Time.time;
         }
@@ -88,11 +93,11 @@ public class EnemyGAgent : GAgent
         while (i < hitColliders.Length)
         {
             CheckForPlayers(hitColliders, i);
-            FriendsAndFoes(hitColliders, i);
+            //FriendsAndFoes(hitColliders, i);
             i++;
         }
         //print(playerCount);
-        if (playerCount == 0) 
+        if (playerCount == 0)
         {
             beliefs.RemoveState("playerNear");
             beliefs.ModifyState("idle", 1);
@@ -104,7 +109,7 @@ public class EnemyGAgent : GAgent
 
         SetAttackTarget();
     }
-    
+
     void CheckForPlayers(Collider[] hitColliders, int i)
     {
         ChatPlayerController target = hitColliders[i].transform.root.GetComponent<ChatPlayerController>();
@@ -139,7 +144,7 @@ public class EnemyGAgent : GAgent
 
         if (target != null && target.GetComponent<EnemyGAgent>() != this)
         {
-            
+
             friendsAndFoes.Add(target.gameObject);
         }
     }
@@ -147,7 +152,7 @@ public class EnemyGAgent : GAgent
     private bool DeathCheck(ChatPlayerController target)
     {
         return target.GetComponent<Health>().IsDead();
-    }      
+    }
 
     private void SetAttackTarget()
     {
