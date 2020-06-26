@@ -30,9 +30,9 @@ public class EnemyGAgent : GAgent
             beliefs.ModifyState("hasProjectile", 1);
         }
 
-        //travelPoint = GetComponentInChildren<TravelPoint>().gameObject;
+        travelPoint = GetComponentInChildren<TravelPoint>().gameObject;
         //travelPoint.transform.parent = null;
-        //this.GetComponent<Wander>().target = travelPoint;
+        this.GetComponent<Wander>().target = travelPoint;
     }
 
     new private void Update()

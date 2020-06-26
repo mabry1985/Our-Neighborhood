@@ -59,13 +59,15 @@ public class GAgent : MonoBehaviour
 
     protected void LateUpdate()
     {
+        print(gameObject.name);
+        print(currentAction != null);
         if (currentAction != null && currentAction.running)
         {
             distanceToTarget = Vector3.Distance(destination, this.transform.position);
             //Debug.Log(currentAction.navMeshAgent.hasPath + "   " + distanceToTarget);
             if (distanceToTarget < currentAction.range)
             {
-                Debug.Log("Distance to Goal: " + currentAction.navMeshAgent.remainingDistance);
+                //Debug.Log("Distance to Goal: " + currentAction.navMeshAgent.remainingDistance);
                 if (!invoked)
                 {
                     // Placed HandlePlayer here instead of PlayerGAgent because not sure how to call it from a class that uses this as a base
@@ -112,7 +114,7 @@ public class GAgent : MonoBehaviour
                 if (currentAction.target == null && currentAction.targetTag != "")
                     currentAction.target = GameObject.FindWithTag(currentAction.targetTag);
 
-                //print(currentAction.target + " is the current action target");
+                print(currentAction.target + " is the current action target");
                 if (currentAction.target != null)
                 {
                     currentAction.running = true;

@@ -21,8 +21,9 @@ public class Wander : GAction
 
     public override bool PostPerform()
     {
-        Wandering();
         print("in wandering post perform");
+        Wandering();
+        duration = Random.Range(2f, 10f);
         return true;
     }
 

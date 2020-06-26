@@ -14,20 +14,20 @@ public class Chase : GAction
 
     private void Update() 
     {
-        if(target != null && Vector3.Distance(transform.position, target.transform.position) > this.range)
-        {
-            print(target.name);
-            navMeshAgent.SetDestination(target.transform.position);
-        }
-        else
-        {
-            gAgent.CancelGoap();
+        // if(target != null && Vector3.Distance(transform.position, target.transform.position) > this.range)
+        // {
+        //     print(target.name);
+        //     navMeshAgent.SetDestination(target.transform.position);
+        // }
+        // else
+        // {
+        //     gAgent.CancelGoap();
 
-            if (navMeshAgent.enabled == true)
-                navMeshAgent.ResetPath();
+        //     if (navMeshAgent.enabled == true)
+        //         navMeshAgent.ResetPath();
             
-            //gAgent.beliefs.ModifyState("inRange", 1);
-        }
+        //     //gAgent.beliefs.ModifyState("inRange", 1);
+        // }
     }
 
     public override bool PrePerform()
